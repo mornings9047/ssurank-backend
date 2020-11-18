@@ -7,4 +7,5 @@ import org.springframework.stereotype.Repository
 @Repository
 interface CourseRepository : JpaRepository<Course, Int>{
     fun existsByCode(Code: String): Boolean
+    fun findByTitleContains(Ttile: String): List<Course>
 }

@@ -23,16 +23,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="bea4ad9f-4693-492f-8624-8add40e49711" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/api/src/main/kotlin/com/yourssu/ssurank/api/repository/model/dataAccess/ssurank/lecture/CourseRepository.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/api/src/main/kotlin/com/yourssu/ssurank/api/repository/model/dataAccess/ssurank/professor/ProfessorRepository.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/jarRepositories.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/ssurank-backend.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/src/main/kotlin/com/yourssu/ssurank/api/repository/model/dataAccess/ssurank/.gitkeep" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/src/main/kotlin/com/yourssu/ssurank/api/repository/model/dataAccess/ssurank/lecture/CourseRepository.kt" beforeDir="false" afterPath="$PROJECT_DIR$/api/src/main/kotlin/com/yourssu/ssurank/api/repository/model/dataAccess/ssurank/lecture/CourseRepository.kt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
