@@ -1,14 +1,15 @@
 package com.yourssu.ssurank.api.repository.model.entity.ssurank.dto
 
-import com.yourssu.ssurank.api.repository.model.entity.ssurank.entity.*
+import com.yourssu.ssurank.api.repository.model.entity.ssurank.entity.Grade
+import com.yourssu.ssurank.api.repository.model.entity.ssurank.entity.Semester
 
-class CourseCreateDto(
-    val classification: Classification,
-    val title: String,
-    val professor: CourseProfessor,
-    val code: String,
-    val semester: Semester,
-    //val credit:
-    val grade: Grade,
-    //val rating: Float
+data class CourseCreateDto(
+        val title: String,
+        val year:Int,
+        val classification: String,
+        val code: String,
+        val grade: Grade,
+        val semester: Semester,
+        val target: String,
+        val rating: Float
 )
