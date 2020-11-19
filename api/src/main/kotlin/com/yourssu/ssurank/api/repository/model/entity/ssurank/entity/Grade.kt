@@ -1,4 +1,4 @@
-package com.yourssu.ssurank.api.repository.model.entity.ssurank
+package com.yourssu.ssurank.api.repository.model.entity.ssurank.entity
 
 enum class Grade(bitfield: Int) {
     FIRST(1),
