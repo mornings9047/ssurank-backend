@@ -1,11 +1,11 @@
 package com.yourssu.ssurank.api.service
+import com.yourssu.ssurank.api.repository.model.dataAccess.ssurank.courseprofessor.CourseProfessorRepository
 import org.apache.poi.ss.usermodel.CellType
 import com.yourssu.ssurank.api.repository.model.dataAccess.ssurank.lecture.CourseRepository
-import com.yourssu.ssurank.api.repository.model.dataAccess.ssurank.professor.ProfessorRepository
-import com.yourssu.ssurank.api.repository.model.entity.ssurank.dto.CourseCreateDto
-import com.yourssu.ssurank.api.repository.model.entity.ssurank.entity.Classification
+import com.yourssu.ssurank.api.repository.model.dataTransfer.ssurank.CourseCreateDto
+import com.yourssu.ssurank.api.repository.model.dataTransfer.ssurank.CourseProfessorCreateDto
 import com.yourssu.ssurank.api.repository.model.entity.ssurank.entity.Course
-import com.yourssu.ssurank.api.repository.model.entity.ssurank.entity.Grade
+import com.yourssu.ssurank.api.repository.model.entity.ssurank.entity.CourseProfessor
 import com.yourssu.ssurank.api.repository.model.entity.ssurank.entity.Semester
 import org.apache.poi.hssf.usermodel.HSSFRow
 import org.apache.poi.hssf.usermodel.HSSFWorkbook
@@ -16,10 +16,10 @@ import java.io.FileInputStream
 
 
 @Service
-class CourseService @Autowired constructor(val courseRepository: CourseRepository){
+class CourseService @Autowired constructor(val courseRepository: CourseRepository, val courseProfessorRepository: CourseProfessorRepository){
 
     fun getFileList() : List<String>{
-        val path = "Lecture_Excel/"
+        val path = "TimeTable_Excel/"
         val dir = File(path)
         val fileList = dir.listFiles()
         val fileNames = arrayListOf<String>()
@@ -31,21 +31,24 @@ class CourseService @Autowired constructor(val courseRepository: CourseRepositor
     }
 
     fun courseSave(courseCreateDto: CourseCreateDto){
-        if(!courseRepository.existsByCode(courseCreateDto.code))
-            courseRepository.save(Course(
-                    title = courseCreateDto.title,
-                    year = courseCreateDto.year,
-                    classification = courseCreateDto.classification,
-                    code = courseCreateDto.code,
-                    semester = courseCreateDto.semester,
-                    target = courseCreateDto.target,
-                    rating = courseCreateDto.rating
-            ))
+        var professor = listOf<CourseProfessor>()
+
+        if(!courseRepository.existsByCode(courseCreateDto.code)) {
+
+            val course = courseRepository.save(Course(
+                    title = courseCreateDto.title, year = courseCreateDto.year, classification = courseCreateDto.classification,
+                    code = courseCreateDto.code, semester = courseCreateDto.semester, target = courseCreateDto.target,
+                    rating = courseCreateDto.rating, major = courseCreateDto.major, professor = professor))
+        }
     }
 
     fun readExcel(){
-        for(path in getFileList())
-            readSheet(path)
+        for(path in getFileList()){
+            if(path.contains("Score"))
+                readScore(path)
+            else readSheet(path)
+        }
+
     }
 
     fun readSheet(path: String){
@@ -73,7 +76,6 @@ class CourseService @Autowired constructor(val courseRepository: CourseRepositor
             if(cell.stringCellValue == "이수구분(주전공)") classifications = readRow("classifications", path, sheetAt)
             else if (cell.stringCellValue == "과목번호") courseCodes = readRow("courseCodes", path, sheetAt)
             else if (cell.stringCellValue == "과목명") courseNames = readRow("courseNames", path, sheetAt)
-            else if (cell.stringCellValue == "교수명") professors = readRow("professors", path, sheetAt)
             else if (cell.stringCellValue == "개설학과") majors = readRow("majors", path, sheetAt)
             else if (cell.stringCellValue == "수강대상"){
                 targets = readRow("targets", path, sheetAt)
@@ -84,7 +86,7 @@ class CourseService @Autowired constructor(val courseRepository: CourseRepositor
         for (i in 0 until rows - 1) {
             if (!courseRepository.existsByCode(courseCodes[i])) {
                 courseSave(CourseCreateDto(courseNames[i], 2020, classifications[i], courseCodes[i],
-                        Semester.SECOND, targets[i], 0.0F))
+                        Semester.FIRST, targets[i], 0.0F, majors[i]))
             }
         }
     }
@@ -141,6 +143,13 @@ class CourseService @Autowired constructor(val courseRepository: CourseRepositor
         return result
     }
 
+    fun readScore(path: String){
+        val filePath = FileInputStream(path)
+        var columnIndex = 5
+        val sheet = HSSFWorkbook(filePath).getSheetAt(0)
+        val rows = sheet.physicalNumberOfRows
+        val row: HSSFRow = sheet.getRow(0)
 
+    }
 
 }

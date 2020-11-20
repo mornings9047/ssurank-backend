@@ -11,13 +11,16 @@ data class Course(
         @GeneratedValue(strategy = GenerationType.IDENTITY)
         override val id: Int? = null,
 
-        @Column(nullable = false, length = 75)
+        @Column(nullable = false)
         val title: String,
-        /*
+
+        @Column(nullable = false)
+        val major: String,
+
         @OneToMany
         @JoinColumn(name = "professorId")
-        val professor: Collection<CourseProfessor>,
-        */
+        val professor: Collection<CourseProfessor>?,
+
         @Column(nullable = false)
         val year: Int,
 

@@ -1,4 +1,4 @@
-package com.yourssu.ssurank.api.repository.model.entity.ssurank.dto
+package com.yourssu.ssurank.api.repository.model.dataTransfer.ssurank
 
 import com.yourssu.ssurank.api.repository.model.entity.ssurank.entity.Grade
 import com.yourssu.ssurank.api.repository.model.entity.ssurank.entity.Semester
@@ -11,5 +11,7 @@ data class CourseCreateDto(
         //val grade: String,
         val semester: Semester,
         val target: String,
-        val rating: Float
+        val rating: Float,
+        val major: String
 )
+

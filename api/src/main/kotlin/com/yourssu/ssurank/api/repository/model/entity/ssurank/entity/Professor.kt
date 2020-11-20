@@ -9,18 +9,24 @@ import javax.persistence.*
 data class Professor(
         @field:Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)
-        override val id: Int?,
+        override val id: Int? = null,
 
-        @Column(length = 20, nullable = false)
+        @Column(length = 30, nullable = false)
         val name: String,
 
         @Column(length = 20, nullable = true)
-        val department: String?,
+        val college: String,
+
+        @Column(length = 20, nullable = true)
+        val department: String,
+
+        @Column(length = 20, nullable = true)
+        val position: String,
 
         @Column(nullable = false)
         val rating: Float,
 
         @OneToMany
         @JoinColumn(name = "courseId")
-        val courses: Collection<CourseProfessor>
+        val courses: Collection<CourseProfessor>?
 ) : SuperEntity<Int>

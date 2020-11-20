@@ -8,13 +8,13 @@ import javax.persistence.*
 data class CourseProfessor(
         @field:Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)
-        override val id: Int?,
+        override val id: Int? = null,
 
         @ManyToOne
         @JoinColumn(name = "courseId")
-        val course: Course,
+        val course: Course?,
 
         @ManyToOne
         @JoinColumn(name = "professorId")
-        val professor: Professor
+        val professor: Professor?
 ) : SuperEntity<Int>
