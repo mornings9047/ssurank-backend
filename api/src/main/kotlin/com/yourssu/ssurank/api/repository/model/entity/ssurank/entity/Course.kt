@@ -35,9 +35,10 @@ data class Course(
         @Column(nullable = false)
         val classification: String,
 
-        @Column(nullable = false)
-        val grade: Grade?,
         /*
+        @Column(nullable = false)
+        val grade: Grade,
+
         @ManyToOne(fetch = FetchType.LAZY)
         @JoinColumn(name = "categoryId", nullable = false)
         val category: CourseCategory?,

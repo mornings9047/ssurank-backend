@@ -8,7 +8,7 @@ data class CourseCreateDto(
         val year:Int,
         val classification: String,
         val code: String,
-        val grade: Grade,
+        //val grade: String,
         val semester: Semester,
         val target: String,
         val rating: Float

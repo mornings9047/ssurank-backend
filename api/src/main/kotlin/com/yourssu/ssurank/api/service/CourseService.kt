@@ -37,12 +37,12 @@ class CourseService @Autowired constructor(val courseRepository: CourseRepositor
                     year = courseCreateDto.year,
                     classification = courseCreateDto.classification,
                     code = courseCreateDto.code,
-                    grade = courseCreateDto.grade,
                     semester = courseCreateDto.semester,
                     target = courseCreateDto.target,
                     rating = courseCreateDto.rating
             ))
     }
+
     fun readExcel(){
         for(path in getFileList())
             readSheet(path)
@@ -74,8 +74,9 @@ class CourseService @Autowired constructor(val courseRepository: CourseRepositor
             else if (cell.stringCellValue == "과목번호") courseCodes = readRow("courseCodes", path, sheetAt)
             else if (cell.stringCellValue == "과목명") courseNames = readRow("courseNames", path, sheetAt)
             else if (cell.stringCellValue == "교수명") professors = readRow("professors", path, sheetAt)
-            else if (cell.stringCellValue == "개설학과") {
-                majors = readRow("majors", path, sheetAt)
+            else if (cell.stringCellValue == "개설학과") majors = readRow("majors", path, sheetAt)
+            else if (cell.stringCellValue == "수강대상"){
+                targets = readRow("targets", path, sheetAt)
                 break
             }
         }
@@ -83,7 +84,7 @@ class CourseService @Autowired constructor(val courseRepository: CourseRepositor
         for (i in 0 until rows - 1) {
             if (!courseRepository.existsByCode(courseCodes[i])) {
                 courseSave(CourseCreateDto(courseNames[i], 2020, classifications[i], courseCodes[i],
-                            Grade.THIRD, Semester.FIRST, "3학년", 10.1F))
+                        Semester.SECOND, targets[i], 0.0F))
             }
         }
     }
@@ -123,6 +124,10 @@ class CourseService @Autowired constructor(val courseRepository: CourseRepositor
                 for (i in 1 until sheet.physicalNumberOfRows)
                     result.add(sheet.getRow(i).getCell(9).stringCellValue)
             }
+            "targets" ->{
+                for (i in 1 until sheet.physicalNumberOfRows)
+                    result.add(sheet.getRow(i).getCell(14).stringCellValue)
+            }
         }
         return result
     }
@@ -136,16 +141,6 @@ class CourseService @Autowired constructor(val courseRepository: CourseRepositor
         return result
     }
 
-    fun test(){
-        courseRepository.save(Course(
-                title = "Hello",
-                year = 2020,
-                classification = "Major",
-                code = "ABCD",
-                grade = Grade.SECOND,
-                semester = Semester.FIRST,
-                target = "3학년",
-                rating = 10.1F
-        ))
-    }
+
+
 }
