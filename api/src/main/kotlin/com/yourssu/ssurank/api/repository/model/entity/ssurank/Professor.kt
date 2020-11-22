@@ -14,7 +14,7 @@ data class Professor(
         val name: String,
 
         @Column(length = 20, nullable = true)
-        val department: String?,
+        val department: String,
 
         @Column(nullable = false)
         val rating: Float,
