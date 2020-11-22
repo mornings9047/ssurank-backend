@@ -1,9 +1,8 @@
-package com.yourssu.ssurank.api.service
+package com.yourssu.ssurank.api.admin.service
 import com.yourssu.ssurank.api.repository.model.dataAccess.ssurank.courseprofessor.CourseProfessorRepository
 import org.apache.poi.ss.usermodel.CellType
 import com.yourssu.ssurank.api.repository.model.dataAccess.ssurank.lecture.CourseRepository
 import com.yourssu.ssurank.api.repository.model.dataTransfer.ssurank.CourseCreateDto
-import com.yourssu.ssurank.api.repository.model.dataTransfer.ssurank.CourseProfessorCreateDto
 import com.yourssu.ssurank.api.repository.model.entity.ssurank.entity.Course
 import com.yourssu.ssurank.api.repository.model.entity.ssurank.entity.CourseProfessor
 import com.yourssu.ssurank.api.repository.model.entity.ssurank.entity.Semester
@@ -106,8 +105,8 @@ class CourseService @Autowired constructor(val courseRepository: CourseRepositor
             "courseCodes" -> {
                 for (i in 1 until sheet.physicalNumberOfRows) {
                     when (sheet.getRow(i).getCell(5).cellType) {
-                        CellType.STRING -> result.add(sheet.getRow(i).getCell(5).stringCellValue)
-                        CellType.NUMERIC -> result.add(sheet.getRow(i).getCell(5).numericCellValue.toLong().toString())
+                        CellType.STRING -> result.add(sheet.getRow(i).getCell(5).stringCellValue.slice(0..7))
+                        CellType.NUMERIC -> result.add(sheet.getRow(i).getCell(5).numericCellValue.toLong().toString().slice(0..7))
                         else -> result.add("")
                     }
                 }

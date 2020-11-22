@@ -1,18 +1,15 @@
-package com.yourssu.ssurank.api.service
+package com.yourssu.ssurank.api.admin.service
 
 import com.yourssu.ssurank.api.repository.model.dataAccess.ssurank.courseprofessor.CourseProfessorRepository
 import com.yourssu.ssurank.api.repository.model.dataAccess.ssurank.lecture.CourseRepository
 import com.yourssu.ssurank.api.repository.model.dataAccess.ssurank.professor.ProfessorRepository
-import com.yourssu.ssurank.api.repository.model.dataTransfer.ssurank.CourseCreateDto
 import com.yourssu.ssurank.api.repository.model.dataTransfer.ssurank.CourseProfessorCreateDto
 import com.yourssu.ssurank.api.repository.model.dataTransfer.ssurank.ProfessorCreateDto
 import com.yourssu.ssurank.api.repository.model.entity.ssurank.entity.Course
 import com.yourssu.ssurank.api.repository.model.entity.ssurank.entity.CourseProfessor
 import com.yourssu.ssurank.api.repository.model.entity.ssurank.entity.Professor
-import com.yourssu.ssurank.api.repository.model.entity.ssurank.entity.Semester
 import org.apache.poi.hssf.usermodel.HSSFRow
 import org.apache.poi.hssf.usermodel.HSSFWorkbook
-import org.apache.poi.ss.usermodel.CellType
 import org.springframework.stereotype.Service
 import java.io.File
 import java.io.FileInputStream
@@ -87,7 +84,7 @@ class ProfessorService(val professorRepository: ProfessorRepository, val courseP
                         position = positions[i], score = scores[i].toFloat()))
 
                 if(courseRepository.existsByCode(courseCodes[i])) {
-                    val course: Course? = courseRepository.findByCodeContains(courseCodes[i])
+                    val course = courseRepository.findByCodeContains(courseCodes[i])
                     connectTable(course, professorRepository.findByNameAndCollegeAndDepartmentAndPosition(professors[i], colleges[i], departments[i], positions[i]))
                 }
             }
@@ -102,7 +99,7 @@ class ProfessorService(val professorRepository: ProfessorRepository, val courseP
         when (fieldName) {
             "courseCodes" -> {
                 for (i in 1 until sheet.physicalNumberOfRows){
-                    result.add(sheet.getRow(i).getCell(1).numericCellValue.toLong().toString())
+                    result.add(sheet.getRow(i).getCell(1).numericCellValue.toLong().toString().slice(0..7))
                 }
             }
             "professors" -> {
@@ -135,8 +132,12 @@ class ProfessorService(val professorRepository: ProfessorRepository, val courseP
         return result
     }
 
-    fun connectTable(course: Course?, professor: Professor){
+    fun connectTable(course: Course, professor: Professor){
         val courseProfessorCreateDto = CourseProfessorCreateDto(course, professor)
         courseProfessorRepository.save(CourseProfessor(course = courseProfessorCreateDto.course, professor = courseProfessorCreateDto.professor))
+    }
+
+    fun connectCourse(){
+        
     }
 }
