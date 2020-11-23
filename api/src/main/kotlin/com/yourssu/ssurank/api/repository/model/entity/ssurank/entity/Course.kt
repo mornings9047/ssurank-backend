@@ -19,18 +19,18 @@ data class Course(
 
         @OneToMany
         @JoinColumn(name = "professorId")
-        val professor: Collection<CourseProfessor>?,
+        var professor: Collection<CourseProfessor>?,
 
         @Column(nullable = false)
         val year: Int,
 
         @Column(nullable = false)
         val semester: Semester,
-        /*
+
         @Column(nullable = false)
         @ColumnDefault("0")
-        val credit: Int?,
-        */
+        val lectureGrade: Int?,
+
         @Column(nullable = false, length = 15)
         @ColumnDefault("0")
         val code: String?,

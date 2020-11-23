@@ -28,5 +28,5 @@ data class Professor(
 
         @OneToMany
         @JoinColumn(name = "courseId")
-        val courses: Collection<CourseProfessor>?
+        var courses: Collection<CourseProfessor>?
 ) : SuperEntity<Int>

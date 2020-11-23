@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController
 @RestController
 @RequestMapping("/course")
 class CourseController @Autowired constructor(val courseService: CourseService){
+
     @GetMapping("/read")
     @ResponseStatus(HttpStatus.OK)
     fun courseRead(){
