@@ -1,7 +1,6 @@
 package com.yourssu.ssurank.api.repository.model.entity.ssurank.entity
 
 import com.yourssu.ssurank.api.repository.model.entity.common.SuperEntity
-import com.yourssu.ssurank.api.repository.model.entity.ssurank.entity.CourseProfessor
 import javax.persistence.*
 
 @Entity
@@ -26,7 +25,7 @@ data class Professor(
         @Column(nullable = false)
         val rating: Float,
 
-        @OneToMany
-        @JoinColumn(name = "courseId")
-        var courses: Collection<CourseProfessor>?
+        @OneToMany(mappedBy = "professor")
+        var courses: Collection<Course>?
+
 ) : SuperEntity<Int>

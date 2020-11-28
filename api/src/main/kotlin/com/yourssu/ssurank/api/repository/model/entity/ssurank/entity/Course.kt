@@ -17,9 +17,9 @@ data class Course(
         @Column(nullable = false)
         val major: String,
 
-        @OneToMany
+        @ManyToOne
         @JoinColumn(name = "professorId")
-        var professor: Collection<CourseProfessor>?,
+        var professor: Professor?,
 
         @Column(nullable = false)
         val year: Int,
@@ -38,23 +38,9 @@ data class Course(
         @Column(nullable = false)
         val classification: String,
 
-        /*
-        @Column(nullable = false)
-        val grade: Grade,
-
-        @ManyToOne(fetch = FetchType.LAZY)
-        @JoinColumn(name = "categoryId", nullable = false)
-        val category: CourseCategory?,
-        */
         @Column(nullable = false)
         val target: String,
-        /*
-        @Column(nullable = false)
-        val maximum: String?,
 
-        @Column(nullable = false)
-        val unitTime: Int?,
-        */
         @Column(nullable = false)
         val rating: Float?
 ) : SuperEntity<Int>

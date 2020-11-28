@@ -1,6 +1,7 @@
 package com.yourssu.ssurank.api.admin.controller
 
 import com.yourssu.ssurank.api.admin.service.ProfessorService
+import com.yourssu.ssurank.api.repository.model.entity.ssurank.entity.Professor
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpStatus
 import org.springframework.web.bind.annotation.GetMapping
@@ -14,6 +15,6 @@ class ProfessorController@Autowired constructor(val professorService: ProfessorS
     @GetMapping("/read")
     @ResponseStatus(HttpStatus.OK)
     fun professorRead(){
-        return professorService.readExcel()
+        return professorService.readProfessor()
     }
 }
