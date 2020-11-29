@@ -1,4 +1,4 @@
-package com.yourssu.ssurank.api.repository.model.dataAccess.ssurank.course
+package com.yourssu.ssurank.api.repository.model.dataAccess.ssurank
 
 import com.yourssu.ssurank.api.repository.model.entity.ssurank.entity.Course
 import com.yourssu.ssurank.api.repository.model.entity.ssurank.entity.Professor

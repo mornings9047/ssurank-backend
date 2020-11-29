@@ -1,12 +1,11 @@
 package com.yourssu.ssurank.api.admin.service.function
 
-import com.yourssu.ssurank.api.repository.model.dataAccess.ssurank.course.CourseRepository
-import com.yourssu.ssurank.api.repository.model.dataAccess.ssurank.professor.ProfessorRepository
+import com.yourssu.ssurank.api.repository.model.dataAccess.ssurank.CourseRepository
+import com.yourssu.ssurank.api.repository.model.dataAccess.ssurank.ProfessorRepository
 import com.yourssu.ssurank.api.repository.model.dataTransfer.ssurank.ProfessorCreateDto
 import com.yourssu.ssurank.api.repository.model.entity.ssurank.entity.Professor
 import org.apache.poi.hssf.usermodel.HSSFRow
 import org.apache.poi.hssf.usermodel.HSSFWorkbook
-import java.io.File
 import java.io.FileInputStream
 
 class ReadProfessorFunction(val professorRepository: ProfessorRepository, val courseRepository: CourseRepository){

@@ -1,7 +1,7 @@
 package com.yourssu.ssurank.api.admin.service.function
 
-import com.yourssu.ssurank.api.repository.model.dataAccess.ssurank.course.CourseRepository
-import com.yourssu.ssurank.api.repository.model.dataAccess.ssurank.professor.ProfessorRepository
+import com.yourssu.ssurank.api.repository.model.dataAccess.ssurank.CourseRepository
+import com.yourssu.ssurank.api.repository.model.dataAccess.ssurank.ProfessorRepository
 import com.yourssu.ssurank.api.repository.model.dataTransfer.ssurank.CourseCreateDto
 import com.yourssu.ssurank.api.repository.model.entity.ssurank.entity.Course
 import com.yourssu.ssurank.api.repository.model.entity.ssurank.entity.Semester
