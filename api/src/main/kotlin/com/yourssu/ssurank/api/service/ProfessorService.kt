@@ -16,3 +16,4 @@ class ProfessorService(
         return searchProfessorFunction.searchProfessor(professorName)
     }
 }
+

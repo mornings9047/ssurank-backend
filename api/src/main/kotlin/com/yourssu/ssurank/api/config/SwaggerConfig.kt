@@ -24,3 +24,5 @@ open class SwaggerConfig {
                 .genericModelSubstitutes(Optional::class.java, Flux::class.java, Mono::class.java)
     }
 }
+
+

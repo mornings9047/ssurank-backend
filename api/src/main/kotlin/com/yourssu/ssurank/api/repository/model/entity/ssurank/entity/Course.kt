@@ -1,4 +1,4 @@
-package com.yourssu.ssurank.api.repository.model.entity.ssurank
+package com.yourssu.ssurank.api.repository.model.entity.ssurank.entity
 
 import com.yourssu.ssurank.api.repository.model.entity.common.SuperEntity
 import org.hibernate.annotations.ColumnDefault
@@ -9,14 +9,17 @@ import javax.persistence.*
 data class Course(
         @field:Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)
-        override val id: Int?,
+        override val id: Int? = null,
 
-        @Column(nullable = false, length = 75)
+        @Column(nullable = false)
         val title: String,
 
-        @OneToMany
+        @Column(nullable = false)
+        val major: String,
+
+        @ManyToOne
         @JoinColumn(name = "professorId")
-        val professor: Collection<CourseProfessor>,
+        var professor: Professor?,
 
         @Column(nullable = false)
         val year: Int,
@@ -26,31 +29,18 @@ data class Course(
 
         @Column(nullable = false)
         @ColumnDefault("0")
-        val credit: Int,
+        val lectureGrade: Int?,
 
         @Column(nullable = false, length = 15)
         @ColumnDefault("0")
-        val code: String,
+        val code: String?,
 
         @Column(nullable = false)
-        val classification: Classification,
-
-        @Column(nullable = false)
-        val grade: Grade,
-
-        @ManyToOne(fetch = FetchType.LAZY)
-        @JoinColumn(name = "categoryId", nullable = false)
-        val category: CourseCategory,
+        val classification: String,
 
         @Column(nullable = false)
         val target: String,
 
         @Column(nullable = false)
-        val maximum: String,
-
-        @Column(nullable = false)
-        val unitTime: Int,
-
-        @Column(nullable = false)
-        val rating: Float
+        val rating: Float?
 ) : SuperEntity<Int>
