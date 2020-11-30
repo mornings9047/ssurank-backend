@@ -8,5 +8,6 @@ import org.springframework.stereotype.Repository
 interface ProfessorRepository : JpaRepository<Professor, Int>{
     fun existsByNameAndCollegeAndDepartmentAndPosition(Name: String, Colleage: String, Department: String, Position: String): Boolean
     fun findByNameAndCollegeAndDepartmentAndPosition(Name: String, Colleage: String, Department: String, Position: String): Professor
+    fun findAllByName(Name: String): List<Professor>
     fun findByNameContains(Name: String) : List<Professor>
 }

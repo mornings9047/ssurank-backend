@@ -2,12 +2,12 @@ package com.yourssu.ssurank.api.controller
 
 import com.yourssu.ssurank.api.config.baseUrl
 import com.yourssu.ssurank.api.response.GetProfessorsResponse
-import com.yourssu.ssurank.api.service.ProfessorService
+//import com.yourssu.ssurank.api.service.ProfessorService
 import io.swagger.annotations.ApiOperation
 import org.springframework.http.HttpStatus
 import org.springframework.web.bind.annotation.*
 import reactor.core.publisher.Mono
-
+/*
 @RestController
 @RequestMapping("$baseUrl/professor")
 class ProfessorController(
@@ -38,4 +38,4 @@ class ProfessorController(
         }
     }
 }
-
+ */

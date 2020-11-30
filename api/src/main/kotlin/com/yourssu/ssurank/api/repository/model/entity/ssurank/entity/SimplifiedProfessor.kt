@@ -1,5 +1,7 @@
 package com.yourssu.ssurank.api.repository.model.entity.ssurank
 
+import com.yourssu.ssurank.api.repository.model.entity.ssurank.entity.Professor
+
 data class SimplifiedProfessor(
         val id: Int?,
         val name: String,

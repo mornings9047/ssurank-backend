@@ -14,7 +14,7 @@ data class Course(
         @Column(nullable = false)
         val title: String,
 
-        @Column(nullable = false)
+        @Column(nullable = true)
         val major: String?,
 
         @ManyToOne
@@ -35,10 +35,10 @@ data class Course(
         @ColumnDefault("0")
         val code: String?,
 
-        @Column(nullable = false)
+        @Column(nullable = true)
         val classification: String?,
 
-        @Column(nullable = false)
+        @Column(nullable = true)
         val target: String?,
 
         @Column(nullable = false)

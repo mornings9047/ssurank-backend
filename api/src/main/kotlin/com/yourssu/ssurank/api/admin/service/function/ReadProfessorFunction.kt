@@ -36,10 +36,11 @@ class ReadProfessorFunction(val professorRepository: ProfessorRepository, val co
         val filePath = FileInputStream(path)
         val sheetCount = HSSFWorkbook(filePath).numberOfSheets
 
-        for(i in 0 until sheetCount) readRecord(filePath,i)
+        for(i in 0 until sheetCount) readRecord(path,i)
     }
 
-    fun readRecord(filePath: FileInputStream, sheetAt: Int) {
+    fun readRecord(path: String, sheetAt: Int) {
+        val filePath = FileInputStream(path)
         val columnIndex = 0
         var rowIndex = 1
         val sheet = HSSFWorkbook(filePath).getSheetAt(sheetAt)

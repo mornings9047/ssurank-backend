@@ -1,5 +1,5 @@
 package com.yourssu.ssurank.api.service
-
+/*
 import com.yourssu.ssurank.api.repository.model.dataAccess.ssurank.ProfessorDataAccessor
 import com.yourssu.ssurank.api.repository.model.entity.ssurank.SimplifiedProfessor
 import com.yourssu.ssurank.api.repository.model.function.ssurank.SearchProfessorFunction
@@ -16,4 +16,4 @@ class ProfessorService(
         return searchProfessorFunction.searchProfessor(professorName)
     }
 }
-
+ */

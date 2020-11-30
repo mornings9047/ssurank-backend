@@ -4,6 +4,7 @@ import reactor.core.publisher.Mono
 import reactor.core.scheduler.Scheduler
 import reactor.core.scheduler.Schedulers
 
+/*
 abstract class DataAccessor<Key, Entity> {
     protected open var scheduler: Scheduler = Schedulers.boundedElastic()
 
@@ -12,3 +13,4 @@ abstract class DataAccessor<Key, Entity> {
                 .subscribeOn(scheduler)
     }
 }
+ */
