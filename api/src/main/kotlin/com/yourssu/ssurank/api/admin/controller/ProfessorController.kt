@@ -13,7 +13,7 @@ class ProfessorController(val professorService: ProfessorService) {
 
     @GetMapping("/read")
     @ResponseStatus(HttpStatus.OK)
-    fun readProfessor(){
+    fun readProfessor() {
         return professorService.readProfessor()
     }
 }

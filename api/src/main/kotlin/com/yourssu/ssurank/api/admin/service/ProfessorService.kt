@@ -8,9 +8,9 @@ import org.springframework.stereotype.Service
 @Service
 class ProfessorService(professorRepository: ProfessorRepository, courseRepository: CourseRepository) {
 
-    private val readProssorFunction = ReadProfessorFunction(professorRepository, courseRepository)
+    private val readProfessorFunction = ReadProfessorFunction(professorRepository, courseRepository)
 
-    fun readProfessor(){
-        readProssorFunction.readExcel()
+    fun readProfessor() {
+        readProfessorFunction.readExcel()
     }
 }
