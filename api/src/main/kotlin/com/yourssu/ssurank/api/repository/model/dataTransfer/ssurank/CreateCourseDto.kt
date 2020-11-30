@@ -2,7 +2,7 @@ package com.yourssu.ssurank.api.repository.model.dataTransfer.ssurank
 
 import com.yourssu.ssurank.api.repository.model.entity.ssurank.entity.Semester
 
-data class CourseCreateDto(
+data class CreateCourseDto(
         val code: String,
         val year:Int,
         val semester: Semester,
@@ -14,9 +14,9 @@ data class CourseCreateDto(
         val position: String,
         var rating: Float,
 
-        val classification: String,
-        val target: String,
-        val major: String
+        val classification: String?,
+        val target: String?,
+        val major: String?
 
 )
 

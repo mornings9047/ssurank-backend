@@ -1,6 +1,6 @@
 package com.yourssu.ssurank.api.repository.model.dataTransfer.ssurank
 
-data class ProfessorCreateDto(
+data class CreateProfessorDto(
         val name: String,
         val college: String,
         val department: String,

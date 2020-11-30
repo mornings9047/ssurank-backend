@@ -2,7 +2,7 @@ package com.yourssu.ssurank.api.admin.service.function
 
 import java.io.File
 
-class FileListFunction(){
+class GetFileListFunction{
     fun getFileList(): List<String> {
         val path = "Evaluate_Excel/"
         val dir = File(path)

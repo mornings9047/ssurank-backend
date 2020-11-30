@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController
 
 @RestController
 @RequestMapping("/admin/course")
-class CourseController(val courseService: CourseService, val professorService: ProfessorService){
+class CourseController(val courseService: CourseService){
 
     @GetMapping("/read")
     @ResponseStatus(HttpStatus.OK)
