@@ -18,15 +18,13 @@ class ReadProfessorFunction(val professorRepository: ProfessorRepository, val co
         }
     }
 
-    fun connCourses(){
+    fun connectCourseAndProfessor(){
         val professors = professorRepository.findAll()
 
-        if(professors != null) {
-            for (professor in professors) {
-                    val courses = courseRepository.findByProfessor(professor)
-                    professor.courses = courses
-                    professorRepository.save(professor)
-            }
+        for (professor in professors) {
+            val courses = courseRepository.findByProfessor(professor)
+            professor.courses = courses
+            professorRepository.save(professor)
         }
     }
 
@@ -37,8 +35,8 @@ class ReadProfessorFunction(val professorRepository: ProfessorRepository, val co
     fun readSheet(path: String){
         val filePath = FileInputStream(path)
         val sheetCount = HSSFWorkbook(filePath).numberOfSheets
-        for(i in 0 until sheetCount)
-            readRecord(filePath,i)
+
+        for(i in 0 until sheetCount) readRecord(filePath,i)
     }
 
     fun readRecord(filePath: FileInputStream, sheetAt: Int) {
@@ -46,7 +44,6 @@ class ReadProfessorFunction(val professorRepository: ProfessorRepository, val co
         var rowIndex = 1
         val sheet = HSSFWorkbook(filePath).getSheetAt(sheetAt)
         val rows = sheet.physicalNumberOfRows
-
         var professors = arrayListOf<CreateProfessorDto>()
 
         while (rowIndex < rows - 1) {
@@ -56,12 +53,10 @@ class ReadProfessorFunction(val professorRepository: ProfessorRepository, val co
             val department = row.getCell(columnIndex + 8).stringCellValue.toString()
             val position = row.getCell(columnIndex + 9).stringCellValue.toString()
 
-            var professorCreateDto = CreateProfessorDto(name = name, college = college, department = department, position = position, score = 0.0F)
-
-            professors.add(professorCreateDto)
+            var createProfessorDto = CreateProfessorDto(name = name, college = college, department = department, position = position, score = 0.0F)
+            professors.add(createProfessorDto)
         }
 
-        for(professor in professors)
-            saveProfessor(professor)
+        for(professor in professors) saveProfessor(professor)
     }
 }

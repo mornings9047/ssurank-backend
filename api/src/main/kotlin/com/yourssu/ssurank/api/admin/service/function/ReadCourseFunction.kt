@@ -14,16 +14,14 @@ class ReadCourseFunction(val courseRepository: CourseRepository, val professorRe
     private val getFileListFunction = GetFileListFunction()
 
     fun readExcel() {
-        for (path in getFileListFunction.getFileList()) {
-            readSheet(path)
-        }
+        for (path in getFileListFunction.getFileList()) readSheet(path)
     }
 
     fun readSheet(path: String) {
         val filePath = FileInputStream(path)
         val sheetCount = HSSFWorkbook(filePath).numberOfSheets
-        for (i in 0 until sheetCount)
-            readRecord(filePath, i)
+
+        for (i in 0 until sheetCount) readRecord(filePath, i)
     }
 
     fun readRecord(filePath: FileInputStream, sheetAt: Int) {
@@ -31,7 +29,6 @@ class ReadCourseFunction(val courseRepository: CourseRepository, val professorRe
         var rowIndex = 1
         val sheet = HSSFWorkbook(filePath).getSheetAt(sheetAt)
         val rows = sheet.physicalNumberOfRows
-
         var courses = arrayListOf<CreateCourseDto>()
 
         while (rowIndex < rows - 1) {
@@ -54,14 +51,11 @@ class ReadCourseFunction(val courseRepository: CourseRepository, val professorRe
             courses.add(createCourseDto)
         }
 
-        for(course in courses)
-            saveCourse(course)
+        for(course in courses) saveCourse(course)
     }
 
-    fun transSemester(semester: Int) : Semester {
-        if(semester % 2 == 1)
-            return Semester.FIRST
-
+    fun parseSemester(semester: Int) : Semester {
+        if(semester % 2 == 1) return Semester.FIRST
         else return Semester.SECOND
     }
 
