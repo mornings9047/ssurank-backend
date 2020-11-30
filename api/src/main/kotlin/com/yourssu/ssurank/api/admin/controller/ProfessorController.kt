@@ -10,11 +10,12 @@ import org.springframework.web.bind.annotation.ResponseStatus
 import org.springframework.web.bind.annotation.RestController
 
 @RestController
-@RequestMapping("/professor")
-class ProfessorController@Autowired constructor(val professorService: ProfessorService) {
+@RequestMapping("/admin/professor")
+class ProfessorController(val professorService: ProfessorService) {
+
     @GetMapping("/read")
     @ResponseStatus(HttpStatus.OK)
-    fun professorRead(){
+    fun readProfessor(){
         return professorService.readProfessor()
     }
 }
