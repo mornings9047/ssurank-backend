@@ -2,38 +2,34 @@ package com.yourssu.ssurank.api.admin.service.function
 
 import com.yourssu.ssurank.api.repository.model.dataAccess.ssurank.CourseRepository
 import com.yourssu.ssurank.api.repository.model.dataAccess.ssurank.ProfessorRepository
-import com.yourssu.ssurank.api.repository.model.dataTransfer.ssurank.CourseCreateDto
+import com.yourssu.ssurank.api.repository.model.dataTransfer.ssurank.CreateCourseDto
 import com.yourssu.ssurank.api.repository.model.entity.ssurank.entity.Course
 import com.yourssu.ssurank.api.repository.model.entity.ssurank.entity.Semester
 import org.apache.poi.hssf.usermodel.HSSFRow
 import org.apache.poi.hssf.usermodel.HSSFWorkbook
 import java.io.FileInputStream
 
-class ReadCourseFunction(private val courseRepository: CourseRepository, private val professorRepository: ProfessorRepository){
+class ReadCourseFunction(val courseRepository: CourseRepository, val professorRepository: ProfessorRepository){
 
-    private val fileFunction = FileListFunction()
+    private val getFileListFunction = GetFileListFunction()
 
     fun readExcel() {
-        for (path in fileFunction.getFileList()) {
-            readSheet(path)
-        }
+        for (path in getFileListFunction.getFileList()) readSheet(path)
     }
 
     fun readSheet(path: String) {
         val filePath = FileInputStream(path)
         val sheetCount = HSSFWorkbook(filePath).numberOfSheets
-        for (i in 0 until sheetCount)
-            readRecord(path, i)
+
+        for (i in 0 until sheetCount) readRecord(filePath, i)
     }
 
-    fun readRecord(path: String, sheetAt: Int) {
-        val filePath = FileInputStream(path)
+    fun readRecord(filePath: FileInputStream, sheetAt: Int) {
         var columnIndex = 0
         var rowIndex = 1
         val sheet = HSSFWorkbook(filePath).getSheetAt(sheetAt)
         val rows = sheet.physicalNumberOfRows
-
-        var courses = arrayListOf<CourseCreateDto>()
+        var courses = arrayListOf<CreateCourseDto>()
 
         while (rowIndex < rows - 1) {
             var row: HSSFRow = sheet.getRow(rowIndex++)
@@ -48,31 +44,28 @@ class ReadCourseFunction(private val courseRepository: CourseRepository, private
             val position = row.getCell(columnIndex + 9).stringCellValue.toString()
             val rating = row.getCell(columnIndex + 10).numericCellValue.toFloat()
 
-            var courseCreateDto = CourseCreateDto(code = code, year = year, semester = transSemester(semester),
+            val createCourseDto = CreateCourseDto(code = code, year = year, semester = transSemester(semester),
                     title = title, lectureGrade = lectureGrade, professor = professor, college = college,
-                    department = department, position = position, rating = rating, classification = " ", major = " ", target = " ")
+                    department = department, position = position, rating = rating, classification = null, major = null, target = null)
 
-            courses.add(courseCreateDto)
+            courses.add(createCourseDto)
         }
 
-        for(course in courses)
-            courseSave(course)
+        for(course in courses) saveCourse(course)
     }
 
-    fun transSemester(semester: Int) : Semester {
-        if(semester % 2 == 1)
-            return Semester.FIRST
-
+    fun parseSemester(semester: Int) : Semester {
+        if(semester % 2 == 1) return Semester.FIRST
         else return Semester.SECOND
     }
 
-    fun courseSave(courseCreateDto: CourseCreateDto) {
-        val course = courseRepository.save(Course(title = courseCreateDto.title, year = courseCreateDto.year, classification = courseCreateDto.classification,
-                code = courseCreateDto.code, semester = courseCreateDto.semester, target = courseCreateDto.target,
-                rating = courseCreateDto.rating, major = courseCreateDto.major, lectureGrade = courseCreateDto.lectureGrade,professor = null))
+    private fun saveCourse(createCourseDto: CreateCourseDto) {
+        val course = courseRepository.save(Course(title = createCourseDto.title, year = createCourseDto.year, classification = createCourseDto.classification,
+                code = createCourseDto.code, semester = createCourseDto.semester, target = createCourseDto.target,
+                rating = createCourseDto.rating, major = createCourseDto.major, lectureGrade = createCourseDto.lectureGrade,professor = null))
 
-        if(professorRepository.existsByNameAndCollegeAndDepartmentAndPosition(courseCreateDto.professor, courseCreateDto.college, courseCreateDto.department, courseCreateDto.position)){
-            course.professor = professorRepository.findByNameAndCollegeAndDepartmentAndPosition(courseCreateDto.professor, courseCreateDto.college, courseCreateDto.department, courseCreateDto.position)
+        if(professorRepository.existsByNameAndCollegeAndDepartmentAndPosition(createCourseDto.professor, createCourseDto.college, createCourseDto.department, createCourseDto.position)){
+            course.professor = professorRepository.findByNameAndCollegeAndDepartmentAndPosition(createCourseDto.professor, createCourseDto.college, createCourseDto.department, createCourseDto.position)
             courseRepository.save(course)
         }
 

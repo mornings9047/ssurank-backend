@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service
 
 
 @Service
-class CourseService @Autowired constructor(val courseRepository: CourseRepository, val professorRepository: ProfessorRepository) {
+class CourseService(courseRepository: CourseRepository, professorRepository: ProfessorRepository) {
 
     private val readCourseFunction = ReadCourseFunction(courseRepository, professorRepository)
     private val readProfessorFunction = ReadProfessorFunction(professorRepository, courseRepository)

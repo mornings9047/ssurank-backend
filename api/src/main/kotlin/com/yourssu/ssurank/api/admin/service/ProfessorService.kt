@@ -6,7 +6,7 @@ import com.yourssu.ssurank.api.repository.model.dataAccess.ssurank.ProfessorRepo
 import org.springframework.stereotype.Service
 
 @Service
-class ProfessorService(val professorRepository: ProfessorRepository, val courseRepository: CourseRepository) {
+class ProfessorService(professorRepository: ProfessorRepository, courseRepository: CourseRepository) {
 
     private val readProssorFunction = ReadProfessorFunction(professorRepository, courseRepository)
 

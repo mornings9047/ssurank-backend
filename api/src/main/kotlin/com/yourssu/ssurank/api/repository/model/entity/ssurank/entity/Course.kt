@@ -15,7 +15,7 @@ data class Course(
         val title: String,
 
         @Column(nullable = false)
-        val major: String,
+        val major: String?,
 
         @ManyToOne
         @JoinColumn(name = "professorId")
@@ -36,10 +36,10 @@ data class Course(
         val code: String?,
 
         @Column(nullable = false)
-        val classification: String,
+        val classification: String?,
 
         @Column(nullable = false)
-        val target: String,
+        val target: String?,
 
         @Column(nullable = false)
         val rating: Float?
