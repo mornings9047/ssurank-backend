@@ -15,7 +15,7 @@ class CourseService(courseRepository: CourseRepository, professorRepository: Pro
 
     fun readCourse(){
         readCourseFunction.readExcel()
-        readProfessorFunction.connCourses()
+        readProfessorFunction.connectCourseAndProfessor()
     }
 }
 

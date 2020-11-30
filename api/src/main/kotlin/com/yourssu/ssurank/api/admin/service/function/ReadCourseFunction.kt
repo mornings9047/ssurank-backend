@@ -44,7 +44,7 @@ class ReadCourseFunction(val courseRepository: CourseRepository, val professorRe
             val position = row.getCell(columnIndex + 9).stringCellValue.toString()
             val rating = row.getCell(columnIndex + 10).numericCellValue.toFloat()
 
-            val createCourseDto = CreateCourseDto(code = code, year = year, semester = transSemester(semester),
+            val createCourseDto = CreateCourseDto(code = code, year = year, semester = parseSemester(semester),
                     title = title, lectureGrade = lectureGrade, professor = professor, college = college,
                     department = department, position = position, rating = rating, classification = null, major = null, target = null)
 
