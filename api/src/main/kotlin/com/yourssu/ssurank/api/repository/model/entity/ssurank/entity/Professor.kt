@@ -23,7 +23,7 @@ data class Professor(
         val position: String,
 
         @Column(nullable = false)
-        val rating: Float,
+        var rating: Float,
 
         @OneToMany(mappedBy = "professor")
         var courses: Collection<Course>?
