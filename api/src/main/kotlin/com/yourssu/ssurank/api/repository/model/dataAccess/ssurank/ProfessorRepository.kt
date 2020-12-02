@@ -5,9 +5,9 @@ import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.stereotype.Repository
 
 @Repository
-interface ProfessorRepository : JpaRepository<Professor, Int>{
-    fun existsByNameAndCollegeAndDepartmentAndPosition(Name: String, Colleage: String, Department: String, Position: String): Boolean
-    fun findByNameAndCollegeAndDepartmentAndPosition(Name: String, Colleage: String, Department: String, Position: String): Professor
+interface ProfessorRepository : ExtendedRepository<Int, Professor> {
+    fun existsByNameAndCollegeAndDepartmentAndPosition(Name: String, College: String, Department: String, Position: String): Boolean
+    fun findByNameAndCollegeAndDepartmentAndPosition(Name: String, College: String, Department: String, Position: String): Professor
     fun findAllByName(Name: String): List<Professor>
-    fun findByNameContains(Name: String) : List<Professor>
+    fun findByNameContains(Name: String): List<Professor>
 }
