@@ -1,12 +1,13 @@
 package com.yourssu.ssurank.api.admin.service
 
 import com.yourssu.ssurank.api.admin.service.function.ReadProfessorFunction
-import com.yourssu.ssurank.api.admin.service.function.UpdateProfessorRatingsFunction
+import com.yourssu.ssurank.api.admin.service.function.UpdateProfessorRatingsAndGradesFunction
 import com.yourssu.ssurank.api.repository.model.dataAccess.ssurank.CourseDataAccessor
 import com.yourssu.ssurank.api.repository.model.dataAccess.ssurank.CourseRepository
 import com.yourssu.ssurank.api.repository.model.dataAccess.ssurank.ProfessorDataAccessor
 import com.yourssu.ssurank.api.repository.model.dataAccess.ssurank.ProfessorRepository
 import org.springframework.stereotype.Service
+import org.springframework.transaction.annotation.Transactional
 import reactor.core.publisher.Mono
 
 @Service
@@ -17,13 +18,13 @@ class ProfessorService(
         courseDataAccessor: CourseDataAccessor
 ) {
     private val readProfessorFunction = ReadProfessorFunction(professorRepository, courseRepository)
-    private val updateProfessorRatingsFunction = UpdateProfessorRatingsFunction(professorDataAccessor, courseDataAccessor)
+    private val updateProfessorRatingsAndGradesFunction = UpdateProfessorRatingsAndGradesFunction(professorDataAccessor, courseDataAccessor)
 
     fun readProfessor() {
         readProfessorFunction.readExcel()
     }
 
-    fun updateProfessorRatings(): Mono<Unit> {
-        return updateProfessorRatingsFunction.updateProfessorRatings()
+    fun updateProfessorRatingsAndGrades(): Mono<Unit> {
+        return updateProfessorRatingsAndGradesFunction.updateProfessorRatingsAndGrades()
     }
 }

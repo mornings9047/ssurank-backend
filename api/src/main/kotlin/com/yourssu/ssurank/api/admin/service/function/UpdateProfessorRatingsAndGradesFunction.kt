@@ -2,16 +2,22 @@ package com.yourssu.ssurank.api.admin.service.function
 
 import com.yourssu.ssurank.api.repository.model.dataAccess.ssurank.CourseDataAccessor
 import com.yourssu.ssurank.api.repository.model.dataAccess.ssurank.ProfessorDataAccessor
+import org.springframework.transaction.annotation.Transactional
 import reactor.core.publisher.Mono
 
-class UpdateProfessorRatingsFunction(
+class UpdateProfessorRatingsAndGradesFunction(
         private val professorDataAccessor: ProfessorDataAccessor,
         private val courseDataAccessor: CourseDataAccessor
 ) {
-    fun updateProfessorRatings(): Mono<Unit> {
+    private val getProfessorRankingFunction = GetProfessorRankingFunction(courseDataAccessor)
+
+    fun updateProfessorRatingsAndGrades(): Mono<Unit> {
         return professorDataAccessor.findAll().flatMap { professor ->
             courseDataAccessor.calculateProfessorRatings(professor.id!!).map {
                 professor.rating = it
+                professor
+            }.map {
+                professor.ranking = getProfessorRankingFunction.getProfessorRanking(it)
                 professor
             }.flatMap {
                 professorDataAccessor.save(it)

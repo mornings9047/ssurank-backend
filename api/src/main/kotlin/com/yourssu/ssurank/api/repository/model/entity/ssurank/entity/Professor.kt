@@ -25,7 +25,10 @@ data class Professor(
         @Column(nullable = false)
         var rating: Float,
 
-        @OneToMany(mappedBy = "professor")
+        @Column(length = 2, nullable = true)
+        var ranking: String = "U",
+
+        @OneToMany(mappedBy = "professor", fetch = FetchType.EAGER)
         var courses: Collection<Course>?
 
 ) : SuperEntity<Int>

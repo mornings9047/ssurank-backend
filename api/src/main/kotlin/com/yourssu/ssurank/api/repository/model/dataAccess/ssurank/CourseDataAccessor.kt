@@ -13,4 +13,8 @@ open class CourseDataAccessor(
     fun calculateProfessorRatings(id: Int): Mono<Float> {
         return monoFromCallableWithScheduler { repository.calculateProfessorRatings(id) }
     }
+
+    fun getPercentRank(rating: Float): Float {
+        return repository.getPercentRank(rating)
+    }
 }
