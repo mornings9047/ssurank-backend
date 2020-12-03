@@ -27,7 +27,9 @@ class ProfessorController(
     @GetMapping("/honor")
     @ResponseStatus(HttpStatus.OK)
     fun getHonorProfessors(): Mono<List<GetHonorProfessorResponse>> {
-        return professorService.getHonorProfessors()
+        return professorService.getHonorProfessors().map {
+            GetHonorProfessorResponse(it)
+        }.collectList()
     }
 
 //    @ApiOperation("교수 검색하기")

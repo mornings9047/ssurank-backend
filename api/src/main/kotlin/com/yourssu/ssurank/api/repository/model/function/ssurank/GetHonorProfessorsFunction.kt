@@ -4,14 +4,13 @@ import com.yourssu.ssurank.api.repository.model.dataAccess.ssurank.ProfessorData
 import com.yourssu.ssurank.api.repository.model.dataAccess.ssurank.ProfessorRepository
 import com.yourssu.ssurank.api.repository.model.projection.ssurank.ProfessorTransporter
 import com.yourssu.ssurank.api.response.GetHonorProfessorResponse
+import reactor.core.publisher.Flux
 import reactor.core.publisher.Mono
 
 class GetHonorProfessorsFunction(
         private val professorDataAccessor: ProfessorDataAccessor
 ) {
-    fun getHonorProfessors(): Mono<List<GetHonorProfessorResponse>> {
-        return professorDataAccessor.getTop10Honors().map {
-            GetHonorProfessorResponse(it)
-        }.collectList()
+    fun getHonorProfessors(): Flux<ProfessorTransporter> {
+        return professorDataAccessor.getTop10Honors()
     }
 }
