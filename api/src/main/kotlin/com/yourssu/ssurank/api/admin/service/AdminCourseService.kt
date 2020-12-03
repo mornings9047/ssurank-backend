@@ -7,7 +7,7 @@ import com.yourssu.ssurank.api.repository.model.dataAccess.ssurank.ProfessorRepo
 import org.springframework.stereotype.Service
 
 @Service
-class CourseService(
+class AdminCourseService(
         courseRepository: CourseRepository,
         professorRepository: ProfessorRepository
 ) {
