@@ -11,7 +11,7 @@ open class ProfessorDataAccessor(
         @Autowired override var repository: ProfessorRepository
 ) : DataAccessorAdapterRepository<Int, Professor, ProfessorRepository>() {
 
-    fun save(professor: Professor): Mono<Unit> {
+    fun save(professor: Professor): Mono<Professor> {
         return monoFromCallableWithScheduler { repository.save(professor) }
     }
 
