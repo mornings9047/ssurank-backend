@@ -12,8 +12,8 @@ interface ProfessorRepository : ExtendedRepository<Int, Professor> {
     fun existsByNameAndCollegeAndDepartmentAndPosition(Name: String, College: String, Department: String, Position: String): Boolean
     fun findByNameAndCollegeAndDepartmentAndPosition(Name: String, College: String, Department: String, Position: String): Professor
 
-    fun findAllByNameContains(name: String, page: Pageable): List<SearchProfessorTransporter>
+    fun findAllByNameContainsOrderByRatingDesc(name: String, page: Pageable): List<SearchProfessorTransporter>
 
-    @Query("select p from Professor p where p.courses.size>=10 order by p.rating asc")
+    @Query("select p from Professor p where p.courses.size>=10 order by p.rating desc")
     fun getProfessorsHavingCoursesOverTen(): List<ProfessorTransporter>
 }

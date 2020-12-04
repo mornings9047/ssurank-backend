@@ -11,17 +11,17 @@ class GetProfessorRankingFunction(
             return "U"
         val ratings = courseDataAccessor.getPercentRank(professor.rating)
         return when {
-            ratings >= 90 -> "A+"
-            ratings >= 80 -> "A0"
-            ratings >= 70 -> "A-"
-            ratings >= 60 -> "B+"
-            ratings >= 40 -> "B0"
-            ratings >= 30 -> "B-"
-            ratings >= 25 -> "C+"
-            ratings >= 20 -> "C0"
-            ratings >= 15 -> "C-"
-            ratings >= 10 -> "D+"
-            ratings >= 5 -> "D0"
+            ratings <= 10 -> "A+"
+            ratings <= 20 -> "A0"
+            ratings <= 30 -> "A-"
+            ratings <= 40 -> "B+"
+            ratings <= 60 -> "B0"
+            ratings <= 70 -> "B-"
+            ratings <= 75 -> "C+"
+            ratings <= 80 -> "C0"
+            ratings <= 85 -> "C-"
+            ratings <= 90 -> "D+"
+            ratings <= 95 -> "D0"
             else -> "D-"
         }
     }

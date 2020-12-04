@@ -10,7 +10,7 @@ class SearchProfessorFunction(
         private val professorDataAccessor: ProfessorDataAccessor
 ) {
     fun searchProfessor(name: String, page: Int): Flux<SearchProfessorDto> {
-        val requestedPage = PageRequest.of(page - 1, 10, Sort.by("ranking", "name"))
+        val requestedPage = PageRequest.of(page - 1, 10, Sort.by("name"))
         return professorDataAccessor.findAllByProfessorName(name, requestedPage).map {
             SearchProfessorDto(it)
         }

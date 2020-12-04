@@ -29,7 +29,7 @@ open class ProfessorDataAccessor(
     }
 
     fun findAllByProfessorName(name: String, page: Pageable): Flux<SearchProfessorTransporter> {
-        return monoFromCallableWithScheduler { repository.findAllByNameContains(name, page) }
+        return monoFromCallableWithScheduler { repository.findAllByNameContainsOrderByRatingDesc(name, page) }
                 .flatMapMany { Flux.fromIterable(it) }
     }
 }

@@ -1,7 +1,7 @@
 package com.yourssu.ssurank.api.controller
 
 import com.yourssu.ssurank.api.config.baseUrl
-import com.yourssu.ssurank.api.response.GetHonorProfessorResponse
+import com.yourssu.ssurank.api.response.HonorProfessorResponse
 import com.yourssu.ssurank.api.response.SearchProfessorResponse
 import com.yourssu.ssurank.api.service.ProfessorService
 import io.swagger.annotations.ApiOperation
@@ -24,10 +24,10 @@ class ProfessorController(
     @ApiOperation("명예의 전당 가져오기")
     @GetMapping("/honor")
     @ResponseStatus(HttpStatus.OK)
-    fun getHonorProfessors(): Mono<List<GetHonorProfessorResponse>> {
-        return professorService.getHonorProfessors().map {
-            GetHonorProfessorResponse(it)
-        }.collectList()
+    fun getHonorProfessors(): Mono<HonorProfessorResponse> {
+        return professorService.getHonorProfessors()
+                .collectList()
+                .map { HonorProfessorResponse(it) }
     }
 
     @ApiOperation("교수 검색하기")
@@ -39,8 +39,6 @@ class ProfessorController(
     ): Mono<SearchProfessorResponse> {
         return professorService.searchProfessor(name, page)
                 .collectList()
-                .map {
-                    SearchProfessorResponse(it)
-                }
+                .map { SearchProfessorResponse(it) }
     }
 }
