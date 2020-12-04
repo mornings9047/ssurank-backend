@@ -1,6 +1,6 @@
 package com.yourssu.ssurank.api.admin.controller
 
-import com.yourssu.ssurank.api.admin.service.CourseService
+import com.yourssu.ssurank.api.admin.service.AdminCourseService
 import org.springframework.http.HttpStatus
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RequestMapping
@@ -9,11 +9,11 @@ import org.springframework.web.bind.annotation.RestController
 
 @RestController
 @RequestMapping("/admin/course")
-class CourseController(val courseService: CourseService) {
+class AdminCourseController(val adminCourseService: AdminCourseService) {
 
     @GetMapping("/read")
     @ResponseStatus(HttpStatus.OK)
     fun readCourse() {
-        courseService.readCourse()
+        adminCourseService.readCourse()
     }
 }

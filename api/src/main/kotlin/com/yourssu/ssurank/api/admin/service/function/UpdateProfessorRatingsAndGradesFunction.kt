@@ -2,7 +2,6 @@ package com.yourssu.ssurank.api.admin.service.function
 
 import com.yourssu.ssurank.api.repository.model.dataAccess.ssurank.CourseDataAccessor
 import com.yourssu.ssurank.api.repository.model.dataAccess.ssurank.ProfessorDataAccessor
-import org.springframework.transaction.annotation.Transactional
 import reactor.core.publisher.Mono
 
 class UpdateProfessorRatingsAndGradesFunction(

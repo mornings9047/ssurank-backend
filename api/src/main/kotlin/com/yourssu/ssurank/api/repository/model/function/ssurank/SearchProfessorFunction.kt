@@ -1,16 +1,15 @@
 package com.yourssu.ssurank.api.repository.model.function.ssurank
 
+import com.yourssu.ssurank.api.repository.model.dataAccess.ssurank.ProfessorDataAccessor
 import com.yourssu.ssurank.api.repository.model.entity.ssurank.SimplifiedProfessor
 import reactor.core.publisher.Mono
-/*
-class SearchProfessorFunction(
 
-       private val professorDataAccessor: ProfessorDataAccessor
+class SearchProfessorFunction(
+        private val professorDataAccessor: ProfessorDataAccessor
 ) {
-   fun searchProfessor(professorName: String): Mono<List<SimplifiedProfessor>> {
-       return professorDataAccessor.findAllByProfessorName(professorName)
-               .map { SimplifiedProfessor(it) }
-               .collectList()
-   }
+    fun searchProfessor(professorName: String): Mono<List<SimplifiedProfessor>> {
+        return professorDataAccessor.findAllByProfessorName(professorName)
+                .map { SimplifiedProfessor(it) }
+                .collectList()
+    }
 }
-*/

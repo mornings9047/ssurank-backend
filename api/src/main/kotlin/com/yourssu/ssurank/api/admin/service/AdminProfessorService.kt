@@ -7,11 +7,10 @@ import com.yourssu.ssurank.api.repository.model.dataAccess.ssurank.CourseReposit
 import com.yourssu.ssurank.api.repository.model.dataAccess.ssurank.ProfessorDataAccessor
 import com.yourssu.ssurank.api.repository.model.dataAccess.ssurank.ProfessorRepository
 import org.springframework.stereotype.Service
-import org.springframework.transaction.annotation.Transactional
 import reactor.core.publisher.Mono
 
 @Service
-class ProfessorService(
+class AdminProfessorService(
         professorRepository: ProfessorRepository,
         courseRepository: CourseRepository,
         professorDataAccessor: ProfessorDataAccessor,
