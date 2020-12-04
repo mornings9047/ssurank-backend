@@ -1,7 +1,7 @@
 package com.yourssu.ssurank.api.admin.service.function
 
 import com.yourssu.ssurank.api.repository.model.dataAccess.ssurank.CourseDataAccessor
-import com.yourssu.ssurank.api.repository.model.entity.ssurank.entity.Professor
+import com.yourssu.ssurank.api.repository.model.entity.ssurank.Professor
 
 class GetProfessorRankingFunction(
         private val courseDataAccessor: CourseDataAccessor

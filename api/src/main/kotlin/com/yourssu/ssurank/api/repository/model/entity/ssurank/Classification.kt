@@ -1,4 +1,4 @@
-package com.yourssu.ssurank.api.repository.model.entity.ssurank.entity
+package com.yourssu.ssurank.api.repository.model.entity.ssurank
 
 enum class Classification(val className: String) {
     MAJOR_BASIC("전공기초"),

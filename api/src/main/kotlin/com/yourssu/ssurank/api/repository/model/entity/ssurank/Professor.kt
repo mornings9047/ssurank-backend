@@ -1,4 +1,4 @@
-package com.yourssu.ssurank.api.repository.model.entity.ssurank.entity
+package com.yourssu.ssurank.api.repository.model.entity.ssurank
 
 import com.yourssu.ssurank.api.repository.model.entity.common.SuperEntity
 import javax.persistence.*

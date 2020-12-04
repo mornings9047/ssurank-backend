@@ -1,6 +1,6 @@
 package com.yourssu.ssurank.api.repository.model.dataTransfer.ssurank
 
-import com.yourssu.ssurank.api.repository.model.entity.ssurank.entity.Semester
+import com.yourssu.ssurank.api.repository.model.entity.ssurank.Semester
 
 data class CreateCourseDto(
         val code: String,
