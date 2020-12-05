@@ -2,6 +2,7 @@ package com.yourssu.ssurank.api.repository.model.function.ssurank
 
 import com.yourssu.ssurank.api.repository.model.dataAccess.ssurank.ProfessorDataAccessor
 import com.yourssu.ssurank.api.repository.model.dataTransfer.ssurank.SearchProfessorDto
+import com.yourssu.ssurank.api.repository.model.entity.common.Page
 import org.springframework.data.domain.PageRequest
 import org.springframework.data.domain.Sort
 import reactor.core.publisher.Flux
@@ -12,9 +13,9 @@ class SearchProfessorFunction(
 
     fun getProfessorsByDept(department: String, page: Int): Flux<SearchProfessorDto> {
         val requestedPage = if (page < 1)
-            PageRequest.of(0, 10, Sort.by("name"))
+            Page(0, 10, "name")
         else
-            PageRequest.of(page - 1, 10, Sort.by("name"))
+            Page(-1, 10, "name")
         return professorDataAccessor.getProfessorsByDept(department, requestedPage).map {
             SearchProfessorDto(it)
         }
