@@ -18,13 +18,18 @@ open class ProfessorDataAccessor(
         return monoFromCallableWithScheduler { repository.save(professor) }
     }
 
-    fun getTop10Honors(): Flux<ProfessorTransporter> {
-        return monoFromCallableWithScheduler { repository.getProfessorsHavingCoursesOverTen().subList(0, 10) }
+    fun findAll(): Flux<Professor> {
+        return monoFromCallableWithScheduler { repository.findAll() }
                 .flatMapMany { Flux.fromIterable(it) }
     }
 
-    fun findAll(): Flux<Professor> {
-        return monoFromCallableWithScheduler { repository.findAll() }
+    fun getProfessorsByDept(department: String, page: Pageable): Flux<SearchProfessorTransporter> {
+        return monoFromCallableWithScheduler { repository.getProfessorsByDepartmentOrderByRatingDesc(department, page) }
+                .flatMapMany { Flux.fromIterable(it) }
+    }
+
+    fun getTop10Honors(): Flux<ProfessorTransporter> {
+        return monoFromCallableWithScheduler { repository.getProfessorsHavingCoursesOverTen().subList(0, 10) }
                 .flatMapMany { Flux.fromIterable(it) }
     }
 
