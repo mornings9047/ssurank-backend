@@ -1,6 +1,6 @@
 package com.yourssu.ssurank.api.repository.model.dataAccess.ssurank
 
-import com.yourssu.ssurank.api.repository.model.entity.ssurank.entity.Course
+import com.yourssu.ssurank.api.repository.model.entity.ssurank.Course
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Repository
 import reactor.core.publisher.Mono

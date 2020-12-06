@@ -16,8 +16,8 @@ class UpdateProfessorRatingsAndGradesFunction(
                 professor.rating = it
                 professor
             }.map {
-                professor.ranking = getProfessorRankingFunction.getProfessorRanking(it)
-                professor
+                it.ranking = getProfessorRankingFunction.getProfessorRanking(it)
+                it
             }.flatMap {
                 professorDataAccessor.save(it)
             }

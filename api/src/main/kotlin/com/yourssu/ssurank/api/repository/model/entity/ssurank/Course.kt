@@ -1,5 +1,6 @@
-package com.yourssu.ssurank.api.repository.model.entity.ssurank.entity
+package com.yourssu.ssurank.api.repository.model.entity.ssurank
 
+import com.fasterxml.jackson.annotation.JsonBackReference
 import com.yourssu.ssurank.api.repository.model.entity.common.SuperEntity
 import org.hibernate.annotations.ColumnDefault
 import javax.persistence.*
@@ -17,6 +18,7 @@ data class Course(
         @Column(nullable = true)
         val major: String?,
 
+        @JsonBackReference
         @ManyToOne
         @JoinColumn(name = "professorId")
         var professor: Professor?,

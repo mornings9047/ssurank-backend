@@ -1,7 +1,7 @@
 package com.yourssu.ssurank.api.repository.model.dataAccess.ssurank
 
-import com.yourssu.ssurank.api.repository.model.entity.ssurank.entity.Course
-import com.yourssu.ssurank.api.repository.model.entity.ssurank.entity.Professor
+import com.yourssu.ssurank.api.repository.model.entity.ssurank.Course
+import com.yourssu.ssurank.api.repository.model.entity.ssurank.Professor
 import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.data.jpa.repository.Modifying
 import org.springframework.data.jpa.repository.Query
