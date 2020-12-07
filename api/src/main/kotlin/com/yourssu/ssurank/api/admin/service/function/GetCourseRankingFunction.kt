@@ -1,15 +1,15 @@
 package com.yourssu.ssurank.api.admin.service.function
 
 import com.yourssu.ssurank.api.repository.model.dataAccess.ssurank.CourseDataAccessor
+import com.yourssu.ssurank.api.repository.model.dataAccess.ssurank.ProfessorDataAccessor
+import com.yourssu.ssurank.api.repository.model.entity.ssurank.Course
 import com.yourssu.ssurank.api.repository.model.entity.ssurank.Professor
 
-class GetProfessorRankingFunction(
-        private val courseDataAccessor: CourseDataAccessor
-) {
-    fun getProfessorRanking(professor: Professor): String {
-        if (professor.courses!!.size < 5)
-            return "U"
-        val ratings = courseDataAccessor.getProfessorPercentRank(professor.rating)
+class GetCourseRankingFunction(
+        private val courseDataAccessor: CourseDataAccessor,
+){
+    fun getCourseRanking(course: Course): String {
+        val ratings = courseDataAccessor.getProfessorPercentRank(course.rating)
         return when {
             ratings <= 10 -> "A+"
             ratings <= 20 -> "A0"

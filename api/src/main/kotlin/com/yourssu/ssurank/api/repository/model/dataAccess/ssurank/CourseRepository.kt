@@ -2,14 +2,10 @@ package com.yourssu.ssurank.api.repository.model.dataAccess.ssurank
 
 import com.yourssu.ssurank.api.repository.model.entity.ssurank.Course
 import com.yourssu.ssurank.api.repository.model.entity.ssurank.Professor
-import com.yourssu.ssurank.api.repository.model.projection.ssurank.CourseTransporter
 import com.yourssu.ssurank.api.repository.model.projection.ssurank.SearchCourseTransporter
-import org.springframework.data.jpa.repository.JpaRepository
-import org.springframework.data.jpa.repository.Modifying
 import org.springframework.data.jpa.repository.Query
 import org.springframework.data.repository.query.Param
 import org.springframework.stereotype.Repository
-import java.awt.print.Pageable
 
 @Repository
 interface CourseRepository : ExtendedRepository<Int, Course> {
@@ -19,8 +15,12 @@ interface CourseRepository : ExtendedRepository<Int, Course> {
     fun calculateProfessorRatings(@Param("id") id: Int): Float
 
     @Query("select (select count(*) from professors where rating >= :rating) * 100 / count(*) AS PERCENT from professors", nativeQuery = true)
-    fun getPercentRank(rating: Float): Float
+    fun getProfessorPercentRank(rating: Float): Float
 
-    @Query("select a from Course a where a.title = :title order by year desc, semester desc")
-    fun searchCourseByTtile(@Param("title") title: String): List<SearchCourseTransporter>
+    @Query("select (select count(*) from courses where rating >= :rating) * 100 / count(*) AS PERCENT from courses", nativeQuery = true)
+    fun getCoursePercentRank(rating: Float): Float
+
+    @Query("select a from Course a where a.title like %:title% order by year desc, semester desc, rating desc, title desc")
+    fun searchCourseByTtile(@Param("title") title: String, page: org.springframework.data.domain.Pageable): List<SearchCourseTransporter>
+
 }

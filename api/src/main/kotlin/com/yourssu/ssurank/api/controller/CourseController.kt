@@ -15,12 +15,13 @@ class CourseController(
         val courseService: CourseService
 ){
     @ApiOperation("강의 검색하기")
-    @GetMapping("/search/{title}")
+    @GetMapping("/search/{title}/{page}")
     @ResponseStatus(HttpStatus.OK)
     fun searchCourse(
-            @PathVariable title:String
+            @PathVariable title:String,
+            @PathVariable page: Int
     ): Mono<SearchCourseResponse> {
-        return courseService.searchCourse(title)
+        return courseService.searchCourse(title, page)
                 .collectList()
                 .map { SearchCourseResponse(it) }
     }
