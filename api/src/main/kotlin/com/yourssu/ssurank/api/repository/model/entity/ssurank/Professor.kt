@@ -26,7 +26,7 @@ data class Professor(
         var rating: Float,
 
         @Column(length = 2, nullable = true)
-        var ranking: String = "U",
+        var ranking: Ranking = Ranking.U,
 
         @OneToMany(mappedBy = "professor", fetch = FetchType.EAGER)
         var courses: Collection<Course>?
