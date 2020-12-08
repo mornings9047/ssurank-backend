@@ -9,8 +9,8 @@ import org.springframework.stereotype.Repository
 
 @Repository
 interface ProfessorRepository : ExtendedRepository<Int, Professor> {
-    fun existsByNameAndCollegeAndDepartmentAndPosition(Name: String, College: String, Department: String, Position: String): Boolean
-    fun findByNameAndCollegeAndDepartmentAndPosition(Name: String, College: String, Department: String, Position: String): Professor
+    fun existsByNameAndCollegeAndDepartmentAndPosition(name: String, college: String, department: String, position: String): Boolean
+    fun findByNameAndCollegeAndDepartmentAndPosition(name: String, college: String, department: String, position: String): Professor
 
     fun getProfessorsByDepartmentOrderByRatingDesc(department: String, page: Pageable): List<SearchProfessorTransporter>
 

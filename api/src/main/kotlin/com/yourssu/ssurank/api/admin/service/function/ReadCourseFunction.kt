@@ -64,7 +64,7 @@ class ReadCourseFunction(
     private fun saveCourse(createCourseDto: CreateCourseDto) {
         val course = courseRepository.save(Course(title = createCourseDto.title, year = createCourseDto.year, classification = createCourseDto.classification,
                 code = createCourseDto.code, semester = createCourseDto.semester, target = createCourseDto.target,
-                rating = createCourseDto.rating, major = createCourseDto.major, lectureGrade = createCourseDto.lectureGrade, raking = "U", professor = null))
+                rating = createCourseDto.rating, major = createCourseDto.major, lectureGrade = createCourseDto.lectureGrade, professor = null))
 
         if (professorRepository.existsByNameAndCollegeAndDepartmentAndPosition(createCourseDto.professor, createCourseDto.college, createCourseDto.department, createCourseDto.position)) {
             course.professor = professorRepository.findByNameAndCollegeAndDepartmentAndPosition(createCourseDto.professor, createCourseDto.college, createCourseDto.department, createCourseDto.position)

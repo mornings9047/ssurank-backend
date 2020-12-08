@@ -21,14 +21,14 @@ class AdminCourseService(
 ) {
     private val readCourseFunction = ReadCourseFunction(courseRepository, professorRepository)
     private val readProfessorFunction = ReadProfessorFunction(professorRepository, courseRepository)
-    private val updateCourseRankingFunction = UpdateCourseRankingFunction(professorDataAccessor, courseDataAccessor)
+    private val updateCourseRankingFunction = UpdateCourseRankingFunction(courseDataAccessor)
 
     fun readCourse() {
         readCourseFunction.readExcel()
         readProfessorFunction.connectCourseAndProfessor()
     }
 
-    fun updateCourseRanking(): Flux<Course> {
+    fun updateCourseRanking(): Mono<Unit> {
         return updateCourseRankingFunction.updateCourseRanking()
     }
 }

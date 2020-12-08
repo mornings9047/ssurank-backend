@@ -17,11 +17,11 @@ class CourseController(
     @ApiOperation("강의 검색하기")
     @GetMapping("/search/{title}/{page}")
     @ResponseStatus(HttpStatus.OK)
-    fun searchCourse(
+    fun searchCourseByTitle(
             @PathVariable title:String,
             @PathVariable page: Int
     ): Mono<SearchCourseResponse> {
-        return courseService.searchCourse(title, page)
+        return courseService.searchCourseByTitle(title,page)
                 .collectList()
                 .map { SearchCourseResponse(it) }
     }

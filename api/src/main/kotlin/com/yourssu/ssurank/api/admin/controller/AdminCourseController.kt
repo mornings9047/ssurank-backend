@@ -22,7 +22,7 @@ class AdminCourseController(val adminCourseService: AdminCourseService) {
 
     @GetMapping("/update")
     @ResponseStatus(HttpStatus.OK)
-    fun updateCourseRatingsAndGrades(): Flux<Course> {
+    fun updateCourseRatingsAndGrades(): Mono<Unit> {
         return adminCourseService.updateCourseRanking()
     }
 }

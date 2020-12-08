@@ -1,10 +1,10 @@
 package com.yourssu.ssurank.api.repository.model.dataAccess.ssurank
 
+import com.yourssu.ssurank.api.repository.model.entity.common.Page
 import com.yourssu.ssurank.api.repository.model.entity.ssurank.Course
-import com.yourssu.ssurank.api.repository.model.entity.ssurank.Professor
 import com.yourssu.ssurank.api.repository.model.projection.ssurank.SearchCourseTransporter
+import kotlinx.coroutines.reactor.mono
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.data.domain.Pageable
 import org.springframework.stereotype.Repository
 import reactor.core.publisher.Flux
 import reactor.core.publisher.Mono
@@ -18,16 +18,28 @@ open class CourseDataAccessor(
         return monoFromCallableWithScheduler { repository.calculateProfessorRatings(id) }
     }
 
-    fun getProfessorPercentRank(rating: Float): Float {
-        return repository.getProfessorPercentRank(rating)
+    fun getProfessorPercentRank(rating: Float): Mono<Float> {
+        return monoFromCallableWithScheduler{ repository.getProfessorPercentRank(rating) }
     }
 
-    fun getCoursePercentRank(rating: Float): Float {
-        return repository.getCoursePercentRank(rating)
+    fun getCoursePercentRank(rating: Float): Mono<Float> {
+        return monoFromCallableWithScheduler { repository.getCoursePercentRank(rating) }
     }
 
-    fun searchCourse(title: String, page: Pageable): Flux<SearchCourseTransporter> {
-        return monoFromCallableWithScheduler { repository.searchCourseByTtile(title, page) }.flatMapMany { Flux.fromIterable(it) }
+    fun searchCourseByTitle(title: String, page: Page): Flux<SearchCourseTransporter> {
+        return monoFromCallableWithScheduler {
+            repository.searchCourseByTitle(title, page)
+        }.flatMapMany {
+            Flux.fromIterable(it)
+        }
+    }
+
+    fun searchCourseByTitleAndProfessorId(title: String, id: Int, page: Page): Flux<SearchCourseTransporter>{
+        return monoFromCallableWithScheduler {
+          repository.searchCourseByTitleAndProfessorId(title, id, page)
+        }.flatMapMany {
+            Flux.fromIterable(it)
+        }
     }
 
     fun findAll(): Flux<Course> {

@@ -47,6 +47,6 @@ data class Course(
         val rating: Float = 0.0F,
 
         @Column(length = 2, nullable = true)
-        var raking: String
+        var ranking: Ranking = Ranking.D0,
 
 ) : SuperEntity<Int>

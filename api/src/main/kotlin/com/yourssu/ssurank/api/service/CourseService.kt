@@ -13,7 +13,11 @@ class CourseService(
 ){
     private val searchCourseFunction = SearchCourseFunction(courseDataAccessor)
 
-    fun searchCourse(title: String, page: Int): Flux<SearchCourseDto> {
-        return searchCourseFunction.searchCourse(title, page)
+    fun searchCourseByTitle(title: String, page: Int): Flux<SearchCourseDto> {
+        return searchCourseFunction.searchCourseByTitle(title, page)
+    }
+
+    fun searchCourseByTitleAndProfessorId(title: String, id: Int, page: Int): Flux<SearchCourseDto> {
+        return searchCourseFunction.searchCourseByTitleAndProfessorId(title, id, page)
     }
 }
