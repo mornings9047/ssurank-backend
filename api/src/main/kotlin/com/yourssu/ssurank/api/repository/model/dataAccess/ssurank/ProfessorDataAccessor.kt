@@ -24,7 +24,7 @@ open class ProfessorDataAccessor(
     }
 
     fun getProfessorsByDept(department: String, page: Pageable): Flux<SearchProfessorTransporter> {
-        return monoFromCallableWithScheduler { repository.getProfessorsByDepartmentOrderByRatingDesc(department, page) }
+        return monoFromCallableWithScheduler { repository.getProfessorsByDepartmentOrderByRankingAscRatingDesc(department, page) }
                 .flatMapMany { Flux.fromIterable(it) }
     }
 
@@ -34,7 +34,7 @@ open class ProfessorDataAccessor(
     }
 
     fun findAllByProfessorName(name: String, page: Pageable): Flux<SearchProfessorTransporter> {
-        return monoFromCallableWithScheduler { repository.findAllByNameContainsOrderByRatingDesc(name, page) }
+        return monoFromCallableWithScheduler { repository.findAllByNameContainsOrderByRankingAscRatingDesc(name, page) }
                 .flatMapMany { Flux.fromIterable(it) }
     }
 }
