@@ -1,7 +1,7 @@
 package com.yourssu.ssurank.api.admin.service
 
 import com.yourssu.ssurank.api.admin.service.function.ReadProfessorFunction
-import com.yourssu.ssurank.api.admin.service.function.UpdateProfessorRatingsAndGradesFunction
+import com.yourssu.ssurank.api.admin.service.function.UpdateProfessorRatingsAndRankingsFunction
 import com.yourssu.ssurank.api.repository.model.dataAccess.ssurank.CourseDataAccessor
 import com.yourssu.ssurank.api.repository.model.dataAccess.ssurank.CourseRepository
 import com.yourssu.ssurank.api.repository.model.dataAccess.ssurank.ProfessorDataAccessor
@@ -17,7 +17,7 @@ class AdminProfessorService(
         courseDataAccessor: CourseDataAccessor
 ) {
     private val readProfessorFunction = ReadProfessorFunction(professorRepository, courseRepository)
-    private val updateProfessorRatingsAndGradesFunction = UpdateProfessorRatingsAndGradesFunction(professorDataAccessor, courseDataAccessor)
+    private val updateProfessorRatingsAndGradesFunction = UpdateProfessorRatingsAndRankingsFunction(professorDataAccessor, courseDataAccessor)
 
     fun readProfessor() {
         readProfessorFunction.readExcel()

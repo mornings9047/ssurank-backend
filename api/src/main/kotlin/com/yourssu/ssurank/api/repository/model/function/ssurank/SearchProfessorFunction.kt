@@ -15,7 +15,7 @@ class SearchProfessorFunction(
         val requestedPage = if (page < 1)
             Page(0, 10, "name")
         else
-            Page(-1, 10, "name")
+            Page(page - 1, 10, "name")
         return professorDataAccessor.getProfessorsByDept(department, requestedPage).map {
             SearchProfessorDto(it)
         }
