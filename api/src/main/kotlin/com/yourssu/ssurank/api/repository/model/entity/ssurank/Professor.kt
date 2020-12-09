@@ -1,4 +1,4 @@
-package com.yourssu.ssurank.api.repository.model.entity.ssurank.entity
+package com.yourssu.ssurank.api.repository.model.entity.ssurank
 
 import com.yourssu.ssurank.api.repository.model.entity.common.SuperEntity
 import javax.persistence.*
@@ -23,9 +23,12 @@ data class Professor(
         val position: String,
 
         @Column(nullable = false)
-        val rating: Float,
+        var rating: Float,
 
-        @OneToMany(mappedBy = "professor")
+        @Column(length = 2, nullable = true)
+        var ranking: Ranking = Ranking.U,
+
+        @OneToMany(mappedBy = "professor", fetch = FetchType.EAGER)
         var courses: Collection<Course>?
 
 ) : SuperEntity<Int>

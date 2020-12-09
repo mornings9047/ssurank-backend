@@ -3,7 +3,7 @@ package com.yourssu.ssurank.api.admin.service.function
 import com.yourssu.ssurank.api.repository.model.dataAccess.ssurank.CourseRepository
 import com.yourssu.ssurank.api.repository.model.dataAccess.ssurank.ProfessorRepository
 import com.yourssu.ssurank.api.repository.model.dataTransfer.ssurank.CreateProfessorDto
-import com.yourssu.ssurank.api.repository.model.entity.ssurank.entity.Professor
+import com.yourssu.ssurank.api.repository.model.entity.ssurank.Professor
 import org.apache.poi.hssf.usermodel.HSSFRow
 import org.apache.poi.hssf.usermodel.HSSFWorkbook
 import java.io.FileInputStream
