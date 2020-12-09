@@ -6,11 +6,11 @@ import com.yourssu.ssurank.api.repository.model.entity.ssurank.Ranking
 import reactor.core.publisher.Mono
 
 class GetCourseRankingFunction(
-        private val courseDataAccessor: CourseDataAccessor,
+        private val courseDataAccessor: CourseDataAccessor
 ) {
-    fun getCourseRanking(course: Course): Mono<Course>{
-        return courseDataAccessor.getCoursePercentRank(course.rating).map{
-            course.ranking = when{
+    fun getCourseRanking(course: Course): Mono<Course> {
+        return courseDataAccessor.getCoursePercentRank(course.rating).map {
+            course.ranking = when {
                 it <= 30 -> Ranking.A0
                 it <= 70 -> Ranking.B0
                 it <= 85 -> Ranking.C0

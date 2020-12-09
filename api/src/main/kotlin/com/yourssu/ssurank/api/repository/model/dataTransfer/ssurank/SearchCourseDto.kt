@@ -6,5 +6,6 @@ class SearchCourseDto(searchCourseTransporter: SearchCourseTransporter, professo
     val title = searchCourseTransporter.title
     val year = searchCourseTransporter.year
     val semester = searchCourseTransporter.semester
+    val ranking = searchCourseTransporter.ranking
     var professor = professorName
 }

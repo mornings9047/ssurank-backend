@@ -22,11 +22,6 @@ interface CourseRepository : ExtendedRepository<Int, Course> {
     @Query("select (select count(*) from courses where rating >= :rating and ranking <> 17) * 100 / count(*) AS PERCENT from courses where ranking <> 17", nativeQuery = true)
     fun getCoursePercentRank(rating: Float): Float
 
-    @Query("select * from courses where (code, title, year, professor_id) = (select code, title, year, professor_id from courses where professor_id = :id and title like '%:title%' order by year desc limit 1)", nativeQuery = true)
-    fun searchCourseByTitleAndProfessorId(@Param("title") title: String, @Param("id") id: Int, page: Pageable): List<SearchCourseTransporter>
-
-    @Query("select a from Course a where a.title like %:title% order by year desc, semester desc, rating desc, title desc")
-    fun searchCourseByTitle(@Param("title") title: String, page: Pageable): List<SearchCourseTransporter>
-
+    fun findAllByTitleContainsOrderByYearDescSemesterDescRatingDescTitleDesc(title: String, page: Pageable): List<SearchCourseTransporter>
 
 }

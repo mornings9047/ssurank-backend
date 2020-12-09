@@ -3,7 +3,6 @@ package com.yourssu.ssurank.api.repository.model.dataAccess.ssurank
 import com.yourssu.ssurank.api.repository.model.entity.common.Page
 import com.yourssu.ssurank.api.repository.model.entity.ssurank.Course
 import com.yourssu.ssurank.api.repository.model.projection.ssurank.SearchCourseTransporter
-import kotlinx.coroutines.reactor.mono
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Repository
 import reactor.core.publisher.Flux
@@ -28,15 +27,7 @@ open class CourseDataAccessor(
 
     fun searchCourseByTitle(title: String, page: Page): Flux<SearchCourseTransporter> {
         return monoFromCallableWithScheduler {
-            repository.searchCourseByTitle(title, page)
-        }.flatMapMany {
-            Flux.fromIterable(it)
-        }
-    }
-
-    fun searchCourseByTitleAndProfessorId(title: String, id: Int, page: Page): Flux<SearchCourseTransporter>{
-        return monoFromCallableWithScheduler {
-          repository.searchCourseByTitleAndProfessorId(title, id, page)
+            repository.findAllByTitleContainsOrderByYearDescSemesterDescRatingDescTitleDesc(title, page)
         }.flatMapMany {
             Flux.fromIterable(it)
         }

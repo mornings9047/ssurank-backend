@@ -14,5 +14,5 @@ class UpdateCourseRankingFunction(
         }.flatMap {
             courseDataAccessor.save(it)
         }.collectList().map {}
-        }
+    }
 }

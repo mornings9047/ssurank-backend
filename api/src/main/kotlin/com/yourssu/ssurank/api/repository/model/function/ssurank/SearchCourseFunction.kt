@@ -14,17 +14,7 @@ class SearchCourseFunction(
         val requestedPage = if(page <= 1) Page(0, 10, "professor.name")
         else Page(page - 1, 10, "professor.name")
         return courseDataAccessor.searchCourseByTitle(title, requestedPage).map{
-            val professorName = it.professor.name
-            SearchCourseDto(it, professorName)
-        }
-    }
-
-    fun searchCourseByTitleAndProfessorId(title: String, id: Int, page: Int): Flux<SearchCourseDto>{
-        val requestedPage = if(page <= 1) Page(0, 10, "professor.name")
-        else Page(page - 1, 10, "Professor.name")
-        return courseDataAccessor.searchCourseByTitleAndProfessorId(title, id, requestedPage).map{
-            val professorName = it.professor.name
-            SearchCourseDto(it, professorName)
+            SearchCourseDto(it, it.professor.name)
         }
     }
 }
