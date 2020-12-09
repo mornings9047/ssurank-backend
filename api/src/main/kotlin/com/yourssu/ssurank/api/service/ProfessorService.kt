@@ -5,10 +5,8 @@ import com.yourssu.ssurank.api.repository.model.dataTransfer.ssurank.SearchProfe
 import com.yourssu.ssurank.api.repository.model.function.ssurank.GetHonorProfessorsFunction
 import com.yourssu.ssurank.api.repository.model.function.ssurank.SearchProfessorFunction
 import com.yourssu.ssurank.api.repository.model.projection.ssurank.ProfessorTransporter
-import com.yourssu.ssurank.api.repository.model.projection.ssurank.SearchProfessorTransporter
 import org.springframework.stereotype.Service
 import reactor.core.publisher.Flux
-import reactor.core.publisher.Mono
 
 @Service
 class ProfessorService(
