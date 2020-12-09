@@ -14,7 +14,7 @@ class UpdateProfessorRankingFunction(
             return Mono.just(professor)
         }
 
-        return courseDataAccessor.getPercentRank(professor.rating).map {
+        return courseDataAccessor.getProfessorPercentRank(professor.rating).map {
             professor.ranking = when {
                 it <= 10 -> Ranking.A1
                 it <= 20 -> Ranking.A2

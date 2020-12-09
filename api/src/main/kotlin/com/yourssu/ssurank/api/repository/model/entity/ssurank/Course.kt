@@ -43,6 +43,10 @@ data class Course(
         @Column(nullable = true)
         val target: String?,
 
-        @Column(nullable = false)
-        val rating: Float?
+        @Column(nullable = true)
+        val rating: Float = 0.0F,
+
+        @Column(length = 2, nullable = true)
+        var ranking: Ranking = Ranking.D0,
+
 ) : SuperEntity<Int>
