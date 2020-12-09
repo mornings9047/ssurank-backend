@@ -24,6 +24,6 @@ class AdminProfessorService(
     }
 
     fun updateProfessorRatingsAndGrades(): Mono<Unit> {
-        return updateProfessorRatingsAndGradesFunction.updateProfessorRatingsAndRankingsAndGrades()
+        return updateProfessorRatingsAndGradesFunction.updateProfessorRatingsAndGrades()
     }
 }

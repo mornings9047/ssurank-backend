@@ -5,16 +5,17 @@ import com.yourssu.ssurank.api.repository.model.dataAccess.ssurank.ProfessorData
 import reactor.core.publisher.Mono
 
 class UpdateProfessorRatingsAndRankingsFunction(
-        private val professorDataAccessor: ProfessorDataAccessor, courseDataAccessor: CourseDataAccessor
+        private val professorDataAccessor: ProfessorDataAccessor,
+        courseDataAccessor: CourseDataAccessor
 ) {
     private val updateProfessorRatingFunction = UpdateProfessorRatingFunction(courseDataAccessor)
-    private val updateRankingFunction = UpdateProfessorRankingFunction(courseDataAccessor)
+    private val updateProfessorRankingFunction = UpdateProfessorRankingFunction(courseDataAccessor)
 
-    fun updateProfessorRatingsAndRankingsAndGrades(): Mono<Unit> {
+    fun updateProfessorRatingsAndGrades(): Mono<Unit> {
         return professorDataAccessor.findAll().flatMap {
             updateProfessorRatingFunction.updateProfessorRating(it)
         }.flatMap {
-            updateRankingFunction.updateProfessorRanking(it)
+            updateProfessorRankingFunction.updateProfessorRanking(it)
         }.flatMap {
             professorDataAccessor.save(it)
         }.collectList().map { }

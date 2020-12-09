@@ -14,7 +14,7 @@ class SearchCourseFunction(
         val requestedPage = if(page <= 1) Page(0, 10, "professor.name")
         else Page(page - 1, 10, "professor.name")
         return courseDataAccessor.searchCourseByTitle(title, requestedPage).map{
-            SearchCourseDto(it, it.professor.name)
+            SearchCourseDto(it)
         }
     }
 }
