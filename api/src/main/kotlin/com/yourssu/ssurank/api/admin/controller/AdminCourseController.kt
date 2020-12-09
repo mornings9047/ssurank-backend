@@ -1,6 +1,7 @@
 package com.yourssu.ssurank.api.admin.controller
 
 import com.yourssu.ssurank.api.admin.service.AdminCourseService
+import com.yourssu.ssurank.api.config.baseUrl
 import com.yourssu.ssurank.api.repository.model.entity.ssurank.Course
 import org.springframework.http.HttpStatus
 import org.springframework.web.bind.annotation.GetMapping
@@ -11,7 +12,7 @@ import reactor.core.publisher.Flux
 import reactor.core.publisher.Mono
 
 @RestController
-@RequestMapping("/admin/course")
+@RequestMapping("$baseUrl/admin/course")
 class AdminCourseController(val adminCourseService: AdminCourseService) {
 
     @GetMapping("/read")
