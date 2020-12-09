@@ -27,7 +27,7 @@ open class CourseDataAccessor(
 
     fun searchCourseByTitle(title: String, page: Page): Flux<SearchCourseTransporter> {
         return monoFromCallableWithScheduler {
-            repository.findAllByTitleContainsOrderByYearDescSemesterDescRatingDescTitleDesc(title, page)
+            repository.findAllDistinctByTitleContainsOrderByYearDescSemesterDescRatingDescTitleDesc(title, page)
         }.flatMapMany {
             Flux.fromIterable(it)
         }

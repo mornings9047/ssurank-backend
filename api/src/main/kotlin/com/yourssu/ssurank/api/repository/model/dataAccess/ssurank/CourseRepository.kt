@@ -22,5 +22,5 @@ interface CourseRepository : ExtendedRepository<Int, Course> {
     @Query("select (select count(*) from courses where rating >= :rating and ranking <> 17) * 100 / count(*) AS PERCENT from courses where ranking <> 17", nativeQuery = true)
     fun getCoursePercentRank(rating: Float): Float
 
-    fun findAllByTitleContainsOrderByYearDescSemesterDescRatingDescTitleDesc(title: String, page: Pageable): List<SearchCourseTransporter>
+    fun findAllDistinctByTitleContainsOrderByYearDescSemesterDescRatingDescTitleDesc(title: String, page: Pageable): List<SearchCourseTransporter>
 }
