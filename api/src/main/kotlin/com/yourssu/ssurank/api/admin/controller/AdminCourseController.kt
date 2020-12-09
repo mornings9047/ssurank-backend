@@ -21,7 +21,7 @@ class AdminCourseController(val adminCourseService: AdminCourseService) {
 
     @GetMapping("/update")
     @ResponseStatus(HttpStatus.OK)
-    fun updateCourseRatingsAndGrades(): Mono<Unit> {
+    fun updateCourseRanking(): Mono<Unit> {
         return adminCourseService.updateCourseRanking()
     }
 }
