@@ -41,5 +41,4 @@ open class CourseDataAccessor(
     fun save(course: Course): Mono<Course> {
         return monoFromCallableWithScheduler { repository.save(course) }
     }
-
 }

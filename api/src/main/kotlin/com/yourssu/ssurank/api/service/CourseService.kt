@@ -16,4 +16,8 @@ class CourseService(
     fun searchCourseByTitle(title: String, page: Int): Flux<SearchCourseDto> {
         return searchCourseFunction.searchCourseByTitle(title, page)
     }
+
+    fun test(title: String): Flux<SearchCourseDto> {
+        return searchCourseFunction.test(title).filter { p -> p.professor == "박제원" }
+    }
 }

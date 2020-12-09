@@ -23,5 +23,4 @@ interface CourseRepository : ExtendedRepository<Int, Course> {
     fun getCoursePercentRank(rating: Float): Float
 
     fun findAllByTitleContainsOrderByYearDescSemesterDescRatingDescTitleDesc(title: String, page: Pageable): List<SearchCourseTransporter>
-
 }
