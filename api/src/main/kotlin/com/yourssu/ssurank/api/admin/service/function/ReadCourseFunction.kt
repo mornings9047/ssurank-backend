@@ -1,9 +1,11 @@
 package com.yourssu.ssurank.api.admin.service.function
 
+import com.yourssu.ssurank.api.repository.model.dataAccess.ssurank.CourseProfessorRepository
 import com.yourssu.ssurank.api.repository.model.dataAccess.ssurank.CourseRepository
 import com.yourssu.ssurank.api.repository.model.dataAccess.ssurank.ProfessorRepository
 import com.yourssu.ssurank.api.repository.model.dataTransfer.ssurank.CreateCourseDto
 import com.yourssu.ssurank.api.repository.model.entity.ssurank.Course
+import com.yourssu.ssurank.api.repository.model.entity.ssurank.CourseProfessor
 import com.yourssu.ssurank.api.repository.model.entity.ssurank.Semester
 import org.apache.poi.hssf.usermodel.HSSFRow
 import org.apache.poi.hssf.usermodel.HSSFWorkbook
@@ -11,7 +13,8 @@ import java.io.FileInputStream
 
 class ReadCourseFunction(
         private val courseRepository: CourseRepository,
-        private val professorRepository: ProfessorRepository
+        private val professorRepository: ProfessorRepository,
+        private val courseProfessorRepository: CourseProfessorRepository
 ) {
     private val getFileListFunction = GetFileListFunction()
 
@@ -64,11 +67,11 @@ class ReadCourseFunction(
     private fun saveCourse(createCourseDto: CreateCourseDto) {
         val course = courseRepository.save(Course(title = createCourseDto.title, year = createCourseDto.year, classification = createCourseDto.classification,
                 code = createCourseDto.code, semester = createCourseDto.semester, target = createCourseDto.target,
-                rating = createCourseDto.rating, major = createCourseDto.major, lectureGrade = createCourseDto.lectureGrade, professor = null))
+                rating = createCourseDto.rating, major = createCourseDto.major, lectureGrade = createCourseDto.lectureGrade))
 
         if (professorRepository.existsByNameAndCollegeAndDepartmentAndPosition(createCourseDto.professor, createCourseDto.college, createCourseDto.department, createCourseDto.position)) {
-            course.professor = professorRepository.findByNameAndCollegeAndDepartmentAndPosition(createCourseDto.professor, createCourseDto.college, createCourseDto.department, createCourseDto.position)
-            courseRepository.save(course)
+            val professor = professorRepository.findByNameAndCollegeAndDepartmentAndPosition(createCourseDto.professor, createCourseDto.college, createCourseDto.department, createCourseDto.position)
+            courseProfessorRepository.save(CourseProfessor(course = course, professor = professor))
         }
     }
 }

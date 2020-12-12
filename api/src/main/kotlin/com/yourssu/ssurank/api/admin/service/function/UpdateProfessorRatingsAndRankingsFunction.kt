@@ -11,13 +11,15 @@ class UpdateProfessorRatingsAndRankingsFunction(
     private val updateProfessorRatingFunction = UpdateProfessorRatingFunction(courseDataAccessor)
     private val updateProfessorRankingFunction = UpdateProfessorRankingFunction(courseDataAccessor)
 
+    /*
     fun updateProfessorRatingsAndGrades(): Mono<Unit> {
         return professorDataAccessor.findAll().flatMap {
             updateProfessorRatingFunction.updateProfessorRating(it)
         }.flatMap {
-            updateProfessorRankingFunction.updateProfessorRanking(it)
+            updateProfessorRankingFunction.updateProfessorRanking(it)   // Ranking 업데이트 수정 필요 
         }.flatMap {
             professorDataAccessor.save(it)
         }.collectList().map { }
     }
+     */
 }
