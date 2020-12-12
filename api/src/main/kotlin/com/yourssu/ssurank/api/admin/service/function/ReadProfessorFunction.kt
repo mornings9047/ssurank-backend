@@ -47,15 +47,7 @@ class ReadProfessorFunction(
 
     private fun saveProfessor(professorCreateDto: CreateProfessorDto) {
         if (!professorRepository.existsByNameAndCollegeAndDepartmentAndPosition(professorCreateDto.name, professorCreateDto.college, professorCreateDto.department, professorCreateDto.position)) {
-            professorRepository.save(Professor(name = professorCreateDto.name, college = professorCreateDto.college, department = professorCreateDto.department, position = professorCreateDto.position, rating = professorCreateDto.score, courses = null))
-        }
-    }
-
-    fun connectCourseAndProfessor() {
-        val professors = professorRepository.findAll()
-        for (professor in professors) {
-            professor.courses = courseRepository.findByProfessor(professor)
-            professorRepository.save(professor)
+            professorRepository.save(Professor(name = professorCreateDto.name, college = professorCreateDto.college, department = professorCreateDto.department, position = professorCreateDto.position, rating = professorCreateDto.score))
         }
     }
 }

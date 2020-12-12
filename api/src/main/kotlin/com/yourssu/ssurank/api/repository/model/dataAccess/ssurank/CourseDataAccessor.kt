@@ -12,11 +12,11 @@ import reactor.core.publisher.Mono
 open class CourseDataAccessor(
         @Autowired override var repository: CourseRepository
 ) : DataAccessorAdapterRepository<Int, Course, CourseRepository>() {
-
+    /*
     fun calculateProfessorRatings(id: Int): Mono<Float> {
         return monoFromCallableWithScheduler { repository.calculateProfessorRatings(id) }
     }
-
+    */
     fun getProfessorPercentRank(rating: Float): Mono<Float> {
         return monoFromCallableWithScheduler { repository.getProfessorPercentRank(rating) }
     }

@@ -8,8 +8,9 @@ import reactor.core.publisher.Mono
 class UpdateProfessorRankingFunction(
         private val courseDataAccessor: CourseDataAccessor
 ) {
+    /*
     fun updateProfessorRanking(professor: Professor): Mono<Professor> {
-        if (professor.courses!!.size < 5) {
+        if (professor.courses!!.size < 5) { // CourseProfessor 을 이용해야함
             professor.ranking = Ranking.U
             return Mono.just(professor)
         }
@@ -32,4 +33,5 @@ class UpdateProfessorRankingFunction(
             professor
         }
     }
+     */
 }

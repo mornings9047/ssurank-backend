@@ -11,11 +11,12 @@ import org.springframework.stereotype.Repository
 
 @Repository
 interface CourseRepository : ExtendedRepository<Int, Course> {
+    /*
     fun findByProfessor(Professor: Professor): List<Course>
 
     @Query("select avg(c.rating) from Course c where c.professor.id = :id")
     fun calculateProfessorRatings(@Param("id") id: Int): Float
-
+    */
     @Query("select (select count(*) from professors where rating >= :rating and ranking <> 17) * 100 / count(*) AS PERCENT from professors where ranking <> 17", nativeQuery = true)
     fun getProfessorPercentRank(rating: Float): Float
 

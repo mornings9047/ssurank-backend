@@ -23,7 +23,10 @@ class AdminProfessorService(
         readProfessorFunction.readExcel()
     }
 
+    /*
     fun updateProfessorRatingsAndGrades(): Mono<Unit> {
         return updateProfessorRatingsAndGradesFunction.updateProfessorRatingsAndGrades()
     }
+    랭킹 업데이트 메소드 수정 필요
+     */
 }

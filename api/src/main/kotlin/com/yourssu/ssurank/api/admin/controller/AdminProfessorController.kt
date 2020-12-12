@@ -20,9 +20,11 @@ class AdminProfessorController(
         return adminProfessorService.readProfessor()
     }
 
+    /* 랭킹 업데이트 메소드 수정 필요
     @GetMapping("/update")
     @ResponseStatus(HttpStatus.OK)
     fun updateProfessorRatingsAndGrades(): Mono<Unit> {
         return adminProfessorService.updateProfessorRatingsAndGrades()
     }
+     */
 }

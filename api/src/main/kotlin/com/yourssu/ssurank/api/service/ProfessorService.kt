@@ -15,6 +15,7 @@ class ProfessorService(
     private val searchProfessorFunction = SearchProfessorFunction(professorDataAccessor)
     private val getHonorsFunction = GetHonorProfessorsFunction(professorDataAccessor)
 
+    /*
     fun getProfessorsByDept(department: String, page: Int): Flux<SearchProfessorDto> {
         return searchProfessorFunction.getProfessorsByDept(department, page)
     }
@@ -22,7 +23,7 @@ class ProfessorService(
     fun getHonorProfessors(): Flux<ProfessorTransporter> {
         return getHonorsFunction.getHonorProfessors()
     }
-
+    */
     fun searchProfessor(name: String, page: Int): Flux<SearchProfessorDto> {
         return searchProfessorFunction.searchProfessor(name, page)
     }
