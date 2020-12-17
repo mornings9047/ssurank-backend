@@ -7,5 +7,4 @@ class SearchProfessorDto(searchProfessorTransporter: SearchProfessorTransporter)
     val department = searchProfessorTransporter.department
     val position = searchProfessorTransporter.position
     val ranking = searchProfessorTransporter.ranking
-    val courses = searchProfessorTransporter.courses!!.size
 }

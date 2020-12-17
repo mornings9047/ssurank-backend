@@ -8,5 +8,4 @@ interface SearchProfessorTransporter {
     val department: String
     val position: String
     val ranking: Ranking
-    val courses: Collection<Course>?
 }
