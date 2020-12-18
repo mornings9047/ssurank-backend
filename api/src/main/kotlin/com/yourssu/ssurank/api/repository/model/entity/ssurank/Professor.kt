@@ -23,7 +23,7 @@ data class Professor(
         val position: String,
 
         @Column(nullable = false)
-        var rating: Float,
+        var rating: Float = 0F,
 
         @Column(length = 2, nullable = true)
         var ranking: Ranking = Ranking.U
