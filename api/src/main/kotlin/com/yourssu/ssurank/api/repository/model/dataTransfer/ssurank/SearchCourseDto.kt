@@ -8,5 +8,4 @@ class SearchCourseDto(searchCourseTransporter: SearchCourseTransporter) {
     val year = searchCourseTransporter.year
     val semester = searchCourseTransporter.semester
     val ranking = searchCourseTransporter.ranking
-    val professor = searchCourseTransporter.professor.name
 }

@@ -10,9 +10,9 @@ class SearchCourseFunction(
 ) {
     fun searchCourseByTitle(title: String, page: Int): Flux<SearchCourseDto> {
         val requestedPage = if (page <= 1)
-            Page(0, 10, "professor.name")
+            Page(0, 10, "title")
         else
-            Page(page - 1, 10, "professor.name")
+            Page(page - 1, 10, "title")
         return courseDataAccessor.searchCourseByTitle(title, requestedPage).map {
             SearchCourseDto(it)
         }

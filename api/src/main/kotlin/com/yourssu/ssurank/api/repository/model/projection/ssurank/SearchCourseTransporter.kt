@@ -10,5 +10,4 @@ interface SearchCourseTransporter{
     val year: Int
     val semester: Semester
     val ranking: Ranking
-    val professor: Professor
 }
