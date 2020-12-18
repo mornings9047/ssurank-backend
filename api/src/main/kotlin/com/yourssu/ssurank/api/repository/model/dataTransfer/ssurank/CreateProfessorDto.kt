@@ -5,5 +5,5 @@ data class CreateProfessorDto(
         val college: String,
         val department: String,
         val position: String,
-        val score: Float
+        val rating: Float
 )

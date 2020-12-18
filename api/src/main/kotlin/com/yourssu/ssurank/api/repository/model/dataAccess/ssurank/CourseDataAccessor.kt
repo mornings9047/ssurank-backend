@@ -9,16 +9,15 @@ import reactor.core.publisher.Flux
 import reactor.core.publisher.Mono
 
 @Repository
-open class CourseDataAccessor(
+class CourseDataAccessor(
         @Autowired override var repository: CourseRepository
 ) : DataAccessorAdapterRepository<Int, Course, CourseRepository>() {
-    /*
-    fun calculateProfessorRatings(id: Int): Mono<Float> {
-        return monoFromCallableWithScheduler { repository.calculateProfessorRatings(id) }
+    fun calculateProfessorRatings(id: Int): Float {
+        return repository.calculateProfessorRatings(id)
     }
-    */
-    fun getProfessorPercentRank(rating: Float): Mono<Float> {
-        return monoFromCallableWithScheduler { repository.getProfessorPercentRank(rating) }
+
+    fun getProfessorPercentRank(rating: Float): Float {
+        return repository.getProfessorPercentRank(rating)
     }
 
     fun getCoursePercentRank(rating: Float): Mono<Float> {

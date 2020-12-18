@@ -8,7 +8,6 @@ import reactor.core.publisher.Flux
 class SearchProfessorFunction(
         private val professorDataAccessor: ProfessorDataAccessor
 ) {
-    /*
     fun getProfessorsByDept(department: String, page: Int): Flux<SearchProfessorDto> {
         val requestedPage = if (page < 1)
             Page(0, 10, "name")
@@ -18,7 +17,7 @@ class SearchProfessorFunction(
             SearchProfessorDto(it)
         }
     }
-    */
+
     fun searchProfessor(name: String, page: Int): Flux<SearchProfessorDto> {
         val requestedPage = if (page < 1)
             Page(0, 10, "name")
