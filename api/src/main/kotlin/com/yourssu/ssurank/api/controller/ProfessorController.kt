@@ -14,7 +14,6 @@ import reactor.core.publisher.Mono
 class ProfessorController(
         val professorService: ProfessorService
 ) {
-    /*
     @ApiOperation("학과별 랭킹 가져오기")
     @GetMapping("/department/{department}/{page}")
     @ResponseStatus(HttpStatus.OK)
@@ -27,15 +26,15 @@ class ProfessorController(
                 .map { SearchProfessorResponse(it) }
     }
 
-    @ApiOperation("명예의 전당 가져오기")
-    @GetMapping("/honor")
-    @ResponseStatus(HttpStatus.OK)
-    fun getHonorProfessors(): Mono<HonorProfessorResponse> {
-        return professorService.getHonorProfessors()
-                .collectList()
-                .map { HonorProfessorResponse(it) }
-    }
-    */
+//    @ApiOperation("명예의 전당 가져오기")
+//    @GetMapping("/honor")
+//    @ResponseStatus(HttpStatus.OK)
+//    fun getHonorProfessors(): Mono<HonorProfessorResponse> {
+//        return professorService.getHonorProfessors()
+//                .collectList()
+//                .map { HonorProfessorResponse(it) }
+//    }
+
     @ApiOperation("교수 검색하기")
     @GetMapping("/search/{name}/{page}")
     @ResponseStatus(HttpStatus.OK)

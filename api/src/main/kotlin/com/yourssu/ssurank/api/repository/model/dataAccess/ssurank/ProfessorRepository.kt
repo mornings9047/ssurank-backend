@@ -12,12 +12,14 @@ interface ProfessorRepository : ExtendedRepository<Int, Professor> {
     fun existsByNameAndCollegeAndDepartmentAndPosition(Name: String, College: String, Department: String, Position: String): Boolean
 
     fun findByNameAndCollegeAndDepartmentAndPosition(Name: String, College: String, Department: String, Position: String): Professor
-    /*
+
+    @Query("select count(*) from courses c inner join course_professor cp on c.id = cp.professor_id where cp.professor_id = :id", nativeQuery = true)
+    fun countCourse(id: Int): Int
+
     fun getProfessorsByDepartmentOrderByRankingAscRatingDesc(department: String, page: Pageable): List<SearchProfessorTransporter>
 
-    p.course.size >= 10 수정 필요
-    @Query("select p from Professor p where p.courses.size>=10 order by p.rating desc")
-    fun getProfessorsHavingCoursesOverTen(): List<ProfessorTransporter>
-    */
+//    @Query("select p from Professor p where p.courses.size>=10 order by p.rating desc")
+//    fun getProfessorsHavingCoursesOverTen(): List<ProfessorTransporter>
+
     fun findAllByNameContainsOrderByRankingAscRatingDesc(name: String, page: Pageable): List<SearchProfessorTransporter>
 }
