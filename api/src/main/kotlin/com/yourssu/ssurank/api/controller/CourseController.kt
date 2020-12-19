@@ -24,4 +24,5 @@ class CourseController(
                 .collectList()
                 .map { SearchCourseResponse(it) }
     }
+
 }

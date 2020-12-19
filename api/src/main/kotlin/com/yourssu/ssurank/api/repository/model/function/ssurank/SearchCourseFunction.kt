@@ -13,8 +13,9 @@ class SearchCourseFunction(
             Page(0, 10, "title")
         else
             Page(page - 1, 10, "title")
+
         return courseDataAccessor.searchCourseByTitle(title, requestedPage).map {
-            SearchCourseDto(it)
+            it
         }
     }
 }

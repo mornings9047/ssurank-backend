@@ -1,11 +1,14 @@
 package com.yourssu.ssurank.api.repository.model.dataTransfer.ssurank
 
-import com.yourssu.ssurank.api.repository.model.projection.ssurank.SearchCourseTransporter
+import com.yourssu.ssurank.api.repository.model.entity.ssurank.Ranking
+import com.yourssu.ssurank.api.repository.model.entity.ssurank.Semester
 
-class SearchCourseDto(searchCourseTransporter: SearchCourseTransporter) {
-    val code = searchCourseTransporter.code
-    val title = searchCourseTransporter.title
-    val year = searchCourseTransporter.year
-    val semester = searchCourseTransporter.semester
-    val ranking = searchCourseTransporter.ranking
+class SearchCourseDto(
+        var name : String,
+        var code : String,
+        var title : String,
+        var year : Int,
+        var semester : String,
+        var ranking : String
+){
 }

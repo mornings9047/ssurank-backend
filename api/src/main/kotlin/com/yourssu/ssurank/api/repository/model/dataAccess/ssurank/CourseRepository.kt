@@ -1,7 +1,7 @@
 package com.yourssu.ssurank.api.repository.model.dataAccess.ssurank
 
+import com.yourssu.ssurank.api.repository.model.dataTransfer.ssurank.SearchCourseDto
 import com.yourssu.ssurank.api.repository.model.entity.ssurank.Course
-import com.yourssu.ssurank.api.repository.model.projection.ssurank.SearchCourseTransporter
 import org.springframework.data.domain.Pageable
 import org.springframework.data.jpa.repository.Query
 import org.springframework.stereotype.Repository
@@ -17,5 +17,6 @@ interface CourseRepository : ExtendedRepository<Int, Course> {
     @Query("select (select count(*) from courses where rating >= :rating and ranking <> 16) * 100 / count(*) AS PERCENT from courses where ranking <> 16", nativeQuery = true)
     fun getCoursePercentRank(rating: Float): Float
 
-    fun findAllDistinctByTitleContainsOrderByYearDescSemesterDescRatingDescTitleDesc(title: String, page: Pageable): List<SearchCourseTransporter>
+    @Query(nativeQuery = true)
+    fun searchCourseByTitle(title: String, page: Pageable): List<SearchCourseDto>
 }

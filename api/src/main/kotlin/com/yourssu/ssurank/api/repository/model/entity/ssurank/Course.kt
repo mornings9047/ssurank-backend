@@ -1,8 +1,31 @@
 package com.yourssu.ssurank.api.repository.model.entity.ssurank
 
+import com.yourssu.ssurank.api.repository.model.dataTransfer.ssurank.SearchCourseDto
 import com.yourssu.ssurank.api.repository.model.entity.common.SuperEntity
 import org.hibernate.annotations.ColumnDefault
 import javax.persistence.*
+
+@SqlResultSetMapping(name = "SearchCourseDto",
+classes = [
+ConstructorResult(targetClass = SearchCourseDto::class,
+        columns = [
+                ColumnResult(name = "name", type = String::class),
+                ColumnResult(name = "code", type = String::class),
+                ColumnResult(name = "title", type = String::class),
+                ColumnResult(name = "year", type = Int::class),
+                ColumnResult(name = "semester", type = String::class),
+                ColumnResult(name = "ranking", type = String::class)
+        ]
+        )
+]
+)
+
+@NamedNativeQuery(
+        name = "Course.searchCourseByTitle",
+        query = "select name, code, title, year, semester, c.ranking from courses c inner join course_professor cp on c.id = cp.course_id inner join professors p on p.id = cp.professor_id where title like concat('%', :title, '%') group by p.id, year, semester order by year desc, semester desc, c.ranking desc",
+        resultSetMapping = "SearchCourseDto"
+)
+
 
 @Entity
 @Table(name = "courses")
@@ -21,6 +44,7 @@ data class Course(
         val year: Int,
 
         @Column(nullable = false)
+        @Enumerated(EnumType.STRING)
         val semester: Semester,
 
         @Column(nullable = false)
@@ -41,6 +65,7 @@ data class Course(
         val rating: Float = 0.0F,
 
         @Column(length = 2, nullable = true)
+        @Enumerated(EnumType.STRING)
         var ranking: Ranking = Ranking.D0
 
 ) : SuperEntity<Int>
