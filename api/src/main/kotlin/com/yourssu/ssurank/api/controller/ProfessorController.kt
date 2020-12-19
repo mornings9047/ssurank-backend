@@ -26,14 +26,14 @@ class ProfessorController(
                 .map { SearchProfessorResponse(it) }
     }
 
-//    @ApiOperation("명예의 전당 가져오기")
-//    @GetMapping("/honor")
-//    @ResponseStatus(HttpStatus.OK)
-//    fun getHonorProfessors(): Mono<HonorProfessorResponse> {
-//        return professorService.getHonorProfessors()
-//                .collectList()
-//                .map { HonorProfessorResponse(it) }
-//    }
+    @ApiOperation("명예의 전당 가져오기")
+    @GetMapping("/honor")
+    @ResponseStatus(HttpStatus.OK)
+    fun getHonorProfessors(): Mono<HonorProfessorResponse> {
+        return professorService.getHonorProfessors()
+                .collectList()
+                .map { HonorProfessorResponse(it) }
+    }
 
     @ApiOperation("교수 검색하기")
     @GetMapping("/search/{name}/{page}")

@@ -7,9 +7,7 @@ import reactor.core.publisher.Flux
 class GetHonorProfessorsFunction(
         private val professorDataAccessor: ProfessorDataAccessor
 ) {
-    /*
     fun getHonorProfessors(): Flux<ProfessorTransporter> {
         return professorDataAccessor.getTop10Honors()
     }
-     */
 }

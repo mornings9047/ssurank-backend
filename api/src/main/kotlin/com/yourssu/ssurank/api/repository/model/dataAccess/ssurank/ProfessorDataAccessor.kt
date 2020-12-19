@@ -1,6 +1,7 @@
 package com.yourssu.ssurank.api.repository.model.dataAccess.ssurank
 
 import com.yourssu.ssurank.api.repository.model.entity.ssurank.Professor
+import com.yourssu.ssurank.api.repository.model.projection.ssurank.ProfessorTransporter
 import com.yourssu.ssurank.api.repository.model.projection.ssurank.SearchProfessorTransporter
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.data.domain.Pageable
@@ -29,13 +30,13 @@ class ProfessorDataAccessor(
                 .flatMapMany { Flux.fromIterable(it) }
     }
 
-    //    fun getTop10Honors(): Flux<ProfessorTransporter> {
-//        return monoFromCallableWithScheduler { repository.getProfessorsHavingCoursesOverTen().subList(0, 10) }
-//                .flatMapMany { Flux.fromIterable(it) }
-//    }
+    fun getTop10Honors(): Flux<ProfessorTransporter> {
+        return monoFromCallableWithScheduler { repository.getProfessorsHavingCoursesOverTen() }
+                .flatMapMany { Flux.fromIterable(it) }
+    }
 
     fun findAllByProfessorName(name: String, page: Pageable): Flux<SearchProfessorTransporter> {
-        return monoFromCallableWithScheduler { repository.findAllByNameContainsOrderByRankingAscRatingDesc(name, page) }
+        return monoFromCallableWithScheduler { repository.findAllByName(name, page) }
                 .flatMapMany { Flux.fromIterable(it) }
     }
 }

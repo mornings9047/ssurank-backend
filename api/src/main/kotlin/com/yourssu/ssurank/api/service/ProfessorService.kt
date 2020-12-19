@@ -19,9 +19,9 @@ class ProfessorService(
         return searchProfessorFunction.getProfessorsByDept(department, page)
     }
 
-//    fun getHonorProfessors(): Flux<ProfessorTransporter> {
-//        return getHonorsFunction.getHonorProfessors()
-//    }
+    fun getHonorProfessors(): Flux<ProfessorTransporter> {
+        return getHonorsFunction.getHonorProfessors()
+    }
 
     fun searchProfessor(name: String, page: Int): Flux<SearchProfessorDto> {
         return searchProfessorFunction.searchProfessor(name, page)
