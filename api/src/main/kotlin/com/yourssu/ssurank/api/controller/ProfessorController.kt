@@ -1,6 +1,8 @@
 package com.yourssu.ssurank.api.controller
 
 import com.yourssu.ssurank.api.config.baseUrl
+import com.yourssu.ssurank.api.repository.model.projection.ssurank.DetailedProfessorCoursesTransporter
+import com.yourssu.ssurank.api.response.DetailedProfessorResponse
 import com.yourssu.ssurank.api.response.HonorProfessorResponse
 import com.yourssu.ssurank.api.response.SearchProfessorResponse
 import com.yourssu.ssurank.api.service.ProfessorService
@@ -45,5 +47,19 @@ class ProfessorController(
         return professorService.searchProfessor(name, page)
                 .collectList()
                 .map { SearchProfessorResponse(it) }
+    }
+
+    @ApiOperation("교수 상세보기")
+    @GetMapping("/detail/{name}")
+    @ResponseStatus(HttpStatus.OK)
+    fun getDetailedProfessor(@PathVariable name: String): DetailedProfessorResponse {
+        return DetailedProfessorResponse(professorService.getDetailedProfessor(name))
+    }
+
+    @ApiOperation("교수가 개설한 강의 가져오기")
+    @GetMapping("/detail/{name}/{page}")
+    @ResponseStatus(HttpStatus.OK)
+    fun getProfessorCourses(@PathVariable name: String, @PathVariable page: Int): List<DetailedProfessorCoursesTransporter> {
+        return professorService.getProfessorCourses(name, page)
     }
 }

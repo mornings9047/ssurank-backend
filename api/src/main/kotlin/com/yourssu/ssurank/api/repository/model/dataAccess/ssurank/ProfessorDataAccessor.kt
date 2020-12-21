@@ -1,12 +1,12 @@
 package com.yourssu.ssurank.api.repository.model.dataAccess.ssurank
 
 import com.yourssu.ssurank.api.repository.model.entity.ssurank.Professor
-import com.yourssu.ssurank.api.repository.model.projection.ssurank.ProfessorTransporter
-import com.yourssu.ssurank.api.repository.model.projection.ssurank.SearchProfessorTransporter
+import com.yourssu.ssurank.api.repository.model.projection.ssurank.*
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.data.domain.Pageable
 import org.springframework.stereotype.Repository
 import reactor.core.publisher.Flux
+import reactor.core.publisher.Mono
 
 @Repository
 class ProfessorDataAccessor(
@@ -38,5 +38,21 @@ class ProfessorDataAccessor(
     fun findAllByProfessorName(name: String, page: Pageable): Flux<SearchProfessorTransporter> {
         return monoFromCallableWithScheduler { repository.findAllByName(name, page) }
                 .flatMapMany { Flux.fromIterable(it) }
+    }
+
+    fun getDetailedProfessor(name: String): DetailedProfessorTransporter {
+        return repository.findDetailedProfessorByName(name)
+    }
+
+    fun getTopPercent(name: String): Int {
+        return repository.getTopPercent(name)
+    }
+
+    fun getSessions(name: String): List<SessionCourseTransporter> {
+        return repository.getSessions(name)
+    }
+
+    fun getCoursesByName(name: String, page: Pageable): List<DetailedProfessorCoursesTransporter> {
+        return repository.getCoursesByName(name, page)
     }
 }
