@@ -1,8 +1,11 @@
 package com.yourssu.ssurank.api.repository.model.dataAccess.ssurank
 
+import com.yourssu.ssurank.api.repository.model.dataTransfer.ssurank.DetailedCourseDto
+import com.yourssu.ssurank.api.repository.model.dataTransfer.ssurank.GetHistoryCourseDto
 import com.yourssu.ssurank.api.repository.model.dataTransfer.ssurank.SearchCourseDto
 import com.yourssu.ssurank.api.repository.model.entity.common.Page
 import com.yourssu.ssurank.api.repository.model.entity.ssurank.Course
+import com.yourssu.ssurank.api.repository.model.function.ssurank.GetDetailedCourseFunction
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Repository
 import reactor.core.publisher.Flux
@@ -30,6 +33,14 @@ class CourseDataAccessor(
         }.flatMapMany {
             Flux.fromIterable(it)
         }
+    }
+
+    fun findDetailedCourseById(id: Int) : DetailedCourseDto{
+        return repository.findDetailedCourseById(id)
+    }
+
+    fun getCourseHistoryByCodeAndName(code: String, name: String) : List<GetHistoryCourseDto>{
+        return repository.getCourseHistoryByCodeAndName(code, name)
     }
 
     fun findAll(): Flux<Course> {

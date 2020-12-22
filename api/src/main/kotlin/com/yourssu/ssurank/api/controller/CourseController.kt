@@ -1,6 +1,8 @@
 package com.yourssu.ssurank.api.controller
 
 import com.yourssu.ssurank.api.config.baseUrl
+import com.yourssu.ssurank.api.repository.model.dataTransfer.ssurank.DetailedCourseDto
+import com.yourssu.ssurank.api.repository.model.dataTransfer.ssurank.GetHistoryCourseDto
 import com.yourssu.ssurank.api.response.SearchCourseResponse
 import com.yourssu.ssurank.api.service.CourseService
 import io.swagger.annotations.ApiOperation
@@ -28,15 +30,18 @@ class CourseController(
     @ApiOperation("강의 상세보기")
     @GetMapping("/detail/{id}")
     @ResponseStatus(HttpStatus.OK)
-    fun getDetailedCourse(@PathVariable id: Int){
+    fun getDetailedCourse(@PathVariable id: Int): DetailedCourseDto {
         return courseService.getDetailedCourse(id)
     }
 
     @ApiOperation("학기별 강의 평가")
-    @GetMapping("/history/{id}")
+    @GetMapping("/history/{code}/{name}")
     @ResponseStatus(HttpStatus.OK)
-    fun getHistoryCourse(@PathVariable id: Int){
-
+    fun getHistoryCourse(
+            @PathVariable code: String,
+            @PathVariable name: String
+    ): List<GetHistoryCourseDto> {
+        return courseService.getCourseHistory(code, name)
     }
 
 }
