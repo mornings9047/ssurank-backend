@@ -24,4 +24,19 @@ class CourseController(
                 .collectList()
                 .map { SearchCourseResponse(it) }
     }
+
+    @ApiOperation("강의 상세보기")
+    @GetMapping("/detail/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    fun getDetailedCourse(@PathVariable id: Int){
+        return courseService.getDetailedCourse(id)
+    }
+
+    @ApiOperation("학기별 강의 평가")
+    @GetMapping("/history/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    fun getHistoryCourse(@PathVariable id: Int){
+
+    }
+
 }

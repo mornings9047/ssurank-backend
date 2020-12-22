@@ -15,4 +15,8 @@ class CourseService(
     fun searchCourseByTitle(title: String, page: Int): Flux<SearchCourseDto> {
         return searchCourseFunction.searchCourseByTitle(title, page)
     }
+
+    fun getDetailedCourse(id: Int){
+
+    }
 }

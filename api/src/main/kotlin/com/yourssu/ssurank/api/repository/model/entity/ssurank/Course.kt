@@ -4,14 +4,13 @@ import com.yourssu.ssurank.api.repository.model.dataTransfer.ssurank.SearchCours
 import com.yourssu.ssurank.api.repository.model.entity.common.SuperEntity
 import org.hibernate.annotations.ColumnDefault
 import javax.persistence.*
-
 @SqlResultSetMapping(name = "SearchCourseDto",
 classes = [
 ConstructorResult(targetClass = SearchCourseDto::class,
         columns = [
-                ColumnResult(name = "id", type = Int::class),
+                ColumnResult(name = "courseId", type = Int::class),
                 ColumnResult(name = "name", type = String::class),
-                ColumnResult(name = "code", type = String::class),
+                ColumnResult(name = "department", type = String::class),
                 ColumnResult(name = "title", type = String::class),
                 ColumnResult(name = "year", type = Int::class),
                 ColumnResult(name = "semester", type = String::class),
@@ -23,7 +22,7 @@ ConstructorResult(targetClass = SearchCourseDto::class,
 
 @NamedNativeQuery(
         name = "Course.searchCourseByTitle",
-        query = "select p.id, name, code, title, year, semester, c.ranking from courses c inner join course_professor cp on c.id = cp.course_id inner join professors p on p.id = cp.professor_id where title like concat('%', :title, '%') group by p.id, year, semester order by year desc, semester desc, c.ranking desc, title asc, name asc",
+        query = "select c.id as courseId, name, department, title, year, semester, c.ranking from courses c inner join course_professor cp on c.id = cp.course_id inner join professors p on p.id = cp.professor_id where title like concat('%', :title, '%') group by p.id, year, semester order by year desc, semester desc, c.ranking desc, title asc, name asc",
         resultSetMapping = "SearchCourseDto"
 )
 

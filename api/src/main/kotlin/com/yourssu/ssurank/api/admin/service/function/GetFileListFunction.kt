@@ -4,7 +4,7 @@ import java.io.File
 
 class GetFileListFunction {
     fun getFileList(): List<String> {
-        val path = "Evaluate_Excel/"
+        val path = "api/Evaluate_Excel/"
         val dir = File(path)
         val fileList = dir.listFiles()
         val fileNames = arrayListOf<String>()
