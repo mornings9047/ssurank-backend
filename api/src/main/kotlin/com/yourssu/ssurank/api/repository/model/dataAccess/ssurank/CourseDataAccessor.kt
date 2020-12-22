@@ -6,6 +6,7 @@ import com.yourssu.ssurank.api.repository.model.dataTransfer.ssurank.SearchCours
 import com.yourssu.ssurank.api.repository.model.entity.common.Page
 import com.yourssu.ssurank.api.repository.model.entity.ssurank.Course
 import com.yourssu.ssurank.api.repository.model.function.ssurank.GetDetailedCourseFunction
+import com.yourssu.ssurank.api.repository.model.projection.ssurank.DetailedCourseTransporter
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Repository
 import reactor.core.publisher.Flux
@@ -35,7 +36,7 @@ class CourseDataAccessor(
         }
     }
 
-    fun findDetailedCourseById(id: Int) : DetailedCourseDto{
+    fun findDetailedCourseById(id: Int) : DetailedCourseTransporter {
         return repository.findDetailedCourseById(id)
     }
 

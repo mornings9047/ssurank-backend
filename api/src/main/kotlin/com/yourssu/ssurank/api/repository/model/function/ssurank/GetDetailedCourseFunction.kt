@@ -7,6 +7,8 @@ class GetDetailedCourseFunction(
         private val courseDataAccessor: CourseDataAccessor
 ) {
     fun getDetailedCourseFunction(id: Int): DetailedCourseDto {
-        return courseDataAccessor.findDetailedCourseById(id)
+        val detailedCourseTransporter = courseDataAccessor.findDetailedCourseById(id)
+        val historyCourse = courseDataAccessor.getCourseHistoryByCodeAndName(detailedCourseTransporter.code, detailedCourseTransporter.name)
+        return DetailedCourseDto(detailedCourseTransporter = detailedCourseTransporter, historyCourses = historyCourse)
     }
 }
