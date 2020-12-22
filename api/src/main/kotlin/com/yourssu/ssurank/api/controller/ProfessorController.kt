@@ -1,7 +1,9 @@
 package com.yourssu.ssurank.api.controller
 
 import com.yourssu.ssurank.api.config.baseUrl
+import com.yourssu.ssurank.api.repository.model.projection.ssurank.DepartmentTransporter
 import com.yourssu.ssurank.api.repository.model.projection.ssurank.DetailedProfessorCoursesTransporter
+import com.yourssu.ssurank.api.response.DepartmentListResponse
 import com.yourssu.ssurank.api.response.DetailedProfessorResponse
 import com.yourssu.ssurank.api.response.HonorProfessorResponse
 import com.yourssu.ssurank.api.response.SearchProfessorResponse
@@ -16,6 +18,13 @@ import reactor.core.publisher.Mono
 class ProfessorController(
         val professorService: ProfessorService
 ) {
+    @ApiOperation("학과 목록 가져오기")
+    @GetMapping("/department/lists")
+    @ResponseStatus(HttpStatus.OK)
+    fun getDepartmentList(): DepartmentListResponse {
+        return DepartmentListResponse(professorService.getDepartmentList())
+    }
+
     @ApiOperation("학과별 랭킹 가져오기")
     @GetMapping("/department/{department}/{page}")
     @ResponseStatus(HttpStatus.OK)
