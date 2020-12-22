@@ -1,6 +1,7 @@
 package com.yourssu.ssurank.api.repository.model.entity.ssurank
 
 import com.yourssu.ssurank.api.repository.model.entity.common.SuperEntity
+import java.io.Serializable
 import javax.persistence.*
 
 @Entity

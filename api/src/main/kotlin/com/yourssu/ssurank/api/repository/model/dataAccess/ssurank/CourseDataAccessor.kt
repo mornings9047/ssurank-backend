@@ -1,8 +1,8 @@
 package com.yourssu.ssurank.api.repository.model.dataAccess.ssurank
 
+import com.yourssu.ssurank.api.repository.model.dataTransfer.ssurank.SearchCourseDto
 import com.yourssu.ssurank.api.repository.model.entity.common.Page
 import com.yourssu.ssurank.api.repository.model.entity.ssurank.Course
-import com.yourssu.ssurank.api.repository.model.projection.ssurank.SearchCourseTransporter
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Repository
 import reactor.core.publisher.Flux
@@ -24,9 +24,9 @@ class CourseDataAccessor(
         return monoFromCallableWithScheduler { repository.getCoursePercentRank(rating) }
     }
 
-    fun searchCourseByTitle(title: String, page: Page): Flux<SearchCourseTransporter> {
+    fun searchCourseByTitle(title: String, page: Page): Flux<SearchCourseDto> {
         return monoFromCallableWithScheduler {
-            repository.findAllDistinctByTitleContainsOrderByYearDescSemesterDescRatingDescTitleDesc(title, page)
+            repository.searchCourseByTitle(title, page)
         }.flatMapMany {
             Flux.fromIterable(it)
         }
