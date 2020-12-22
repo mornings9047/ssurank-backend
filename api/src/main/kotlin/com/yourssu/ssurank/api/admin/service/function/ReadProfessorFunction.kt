@@ -43,7 +43,8 @@ class ReadProfessorFunction(
     }
 
     private fun saveProfessor(professor: Professor) {
-        if (!professorRepository.existsByNameAndCollegeAndDepartmentAndPosition(professor.name, professor.college, professor.department, professor.position))
+        if (!professorRepository.existsByNameAndCollegeAndDepartmentAndPosition(professor.name, professor.college, professor.department, professor.position)) {
             professorRepository.save(professor)
+        }
     }
 }

@@ -1,6 +1,8 @@
 package com.yourssu.ssurank.api.controller
 
 import com.yourssu.ssurank.api.config.baseUrl
+import com.yourssu.ssurank.api.repository.model.projection.ssurank.DetailedProfessorCoursesTransporter
+import com.yourssu.ssurank.api.response.DetailedProfessorResponse
 import com.yourssu.ssurank.api.response.HonorProfessorResponse
 import com.yourssu.ssurank.api.response.SearchProfessorResponse
 import com.yourssu.ssurank.api.service.ProfessorService
@@ -26,14 +28,14 @@ class ProfessorController(
                 .map { SearchProfessorResponse(it) }
     }
 
-//    @ApiOperation("명예의 전당 가져오기")
-//    @GetMapping("/honor")
-//    @ResponseStatus(HttpStatus.OK)
-//    fun getHonorProfessors(): Mono<HonorProfessorResponse> {
-//        return professorService.getHonorProfessors()
-//                .collectList()
-//                .map { HonorProfessorResponse(it) }
-//    }
+    @ApiOperation("명예의 전당 가져오기")
+    @GetMapping("/honor")
+    @ResponseStatus(HttpStatus.OK)
+    fun getHonorProfessors(): Mono<HonorProfessorResponse> {
+        return professorService.getHonorProfessors()
+                .collectList()
+                .map { HonorProfessorResponse(it) }
+    }
 
     @ApiOperation("교수 검색하기")
     @GetMapping("/search/{name}/{page}")
@@ -45,5 +47,19 @@ class ProfessorController(
         return professorService.searchProfessor(name, page)
                 .collectList()
                 .map { SearchProfessorResponse(it) }
+    }
+
+    @ApiOperation("교수 상세보기")
+    @GetMapping("/detail/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    fun getDetailedProfessor(@PathVariable id: Int): DetailedProfessorResponse {
+        return DetailedProfessorResponse(professorService.getDetailedProfessor(id))
+    }
+
+    @ApiOperation("교수가 개설한 강의 가져오기")
+    @GetMapping("/detail/{id}/{page}")
+    @ResponseStatus(HttpStatus.OK)
+    fun getProfessorCourses(@PathVariable id: Int, @PathVariable page: Int): List<DetailedProfessorCoursesTransporter> {
+        return professorService.getProfessorCourses(id, page)
     }
 }

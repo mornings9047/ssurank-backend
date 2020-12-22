@@ -6,11 +6,11 @@ import org.springframework.stereotype.Repository
 import reactor.core.publisher.Mono
 
 @Repository
-open class CourseProfessorDataAccessor(
+class CourseProfessorDataAccessor(
         @Autowired override var repository: CourseProfessorRepository
-) : DataAccessorAdapterRepository<Int, CourseProfessor, CourseProfessorRepository>(){
+) : DataAccessorAdapterRepository<Int, CourseProfessor, CourseProfessorRepository>() {
 
-    fun save(courseProfessor : CourseProfessor) : Mono<CourseProfessor>{
+    fun save(courseProfessor: CourseProfessor): Mono<CourseProfessor> {
         return monoFromCallableWithScheduler { repository.save(courseProfessor) }
     }
 }
