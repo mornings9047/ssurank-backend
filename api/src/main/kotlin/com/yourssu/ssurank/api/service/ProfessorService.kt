@@ -33,11 +33,11 @@ class ProfessorService(
         return searchProfessorFunction.searchProfessor(name, page)
     }
 
-    fun getDetailedProfessor(name: String): DetailedProfessorDto {
-        return getDetailedProfessorFunction.getDetailedProfessor(name)
+    fun getDetailedProfessor(id: Int): DetailedProfessorDto {
+        return getDetailedProfessorFunction.getDetailedProfessor(id)
     }
 
-    fun getProfessorCourses(name: String, page: Int): List<DetailedProfessorCoursesTransporter> {
-        return getProfessorCoursesFunction.getProfessorCourses(name, page)
+    fun getProfessorCourses(id: Int, page: Int): List<DetailedProfessorCoursesTransporter> {
+        return getProfessorCoursesFunction.getProfessorCourses(id, page)
     }
 }

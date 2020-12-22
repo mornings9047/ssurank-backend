@@ -8,6 +8,7 @@ class DetailedProfessorDto(
         topPercent: Int,
         sessions: List<SessionCourseTransporter>
 ) {
+    val id = detailedProfessorTransporter.id
     val name = detailedProfessorTransporter.name
     val department = detailedProfessorTransporter.department
     val position = detailedProfessorTransporter.position

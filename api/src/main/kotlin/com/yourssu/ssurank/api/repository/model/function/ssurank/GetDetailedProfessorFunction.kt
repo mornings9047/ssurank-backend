@@ -8,10 +8,10 @@ import reactor.core.publisher.Mono
 class GetDetailedProfessorFunction(
         private val professorDataAccessor: ProfessorDataAccessor
 ) {
-    fun getDetailedProfessor(name: String): DetailedProfessorDto {
-        val detailedProfessorTransporter = professorDataAccessor.getDetailedProfessor(name)
-        val topPercent = professorDataAccessor.getTopPercent(name)
-        val sessions = professorDataAccessor.getSessions(name)
+    fun getDetailedProfessor(id: Int): DetailedProfessorDto {
+        val detailedProfessorTransporter = professorDataAccessor.getDetailedProfessor(id)
+        val topPercent = professorDataAccessor.getTopPercent(id)
+        val sessions = professorDataAccessor.getSessions(id)
         return DetailedProfessorDto(detailedProfessorTransporter, topPercent, sessions)
     }
 }

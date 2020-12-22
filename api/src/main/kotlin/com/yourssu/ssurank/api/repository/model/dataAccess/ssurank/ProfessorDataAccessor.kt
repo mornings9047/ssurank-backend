@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.data.domain.Pageable
 import org.springframework.stereotype.Repository
 import reactor.core.publisher.Flux
-import reactor.core.publisher.Mono
 
 @Repository
 class ProfessorDataAccessor(
@@ -40,19 +39,19 @@ class ProfessorDataAccessor(
                 .flatMapMany { Flux.fromIterable(it) }
     }
 
-    fun getDetailedProfessor(name: String): DetailedProfessorTransporter {
-        return repository.findDetailedProfessorByName(name)
+    fun getDetailedProfessor(id: Int): DetailedProfessorTransporter {
+        return repository.findDetailedProfessorById(id)
     }
 
-    fun getTopPercent(name: String): Int {
-        return repository.getTopPercent(name)
+    fun getTopPercent(id: Int): Int {
+        return repository.getTopPercent(id)
     }
 
-    fun getSessions(name: String): List<SessionCourseTransporter> {
-        return repository.getSessions(name)
+    fun getSessions(id: Int): List<SessionCourseTransporter> {
+        return repository.getSessions(id)
     }
 
-    fun getCoursesByName(name: String, page: Pageable): List<DetailedProfessorCoursesTransporter> {
-        return repository.getCoursesByName(name, page)
+    fun getCoursesById(id: Int, page: Pageable): List<DetailedProfessorCoursesTransporter> {
+        return repository.getCoursesById(id, page)
     }
 }

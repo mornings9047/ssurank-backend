@@ -50,16 +50,16 @@ class ProfessorController(
     }
 
     @ApiOperation("교수 상세보기")
-    @GetMapping("/detail/{name}")
+    @GetMapping("/detail/{id}")
     @ResponseStatus(HttpStatus.OK)
-    fun getDetailedProfessor(@PathVariable name: String): DetailedProfessorResponse {
-        return DetailedProfessorResponse(professorService.getDetailedProfessor(name))
+    fun getDetailedProfessor(@PathVariable id: Int): DetailedProfessorResponse {
+        return DetailedProfessorResponse(professorService.getDetailedProfessor(id))
     }
 
     @ApiOperation("교수가 개설한 강의 가져오기")
-    @GetMapping("/detail/{name}/{page}")
+    @GetMapping("/detail/{id}/{page}")
     @ResponseStatus(HttpStatus.OK)
-    fun getProfessorCourses(@PathVariable name: String, @PathVariable page: Int): List<DetailedProfessorCoursesTransporter> {
-        return professorService.getProfessorCourses(name, page)
+    fun getProfessorCourses(@PathVariable id: Int, @PathVariable page: Int): List<DetailedProfessorCoursesTransporter> {
+        return professorService.getProfessorCourses(id, page)
     }
 }

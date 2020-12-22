@@ -7,11 +7,11 @@ import com.yourssu.ssurank.api.repository.model.projection.ssurank.DetailedProfe
 class GetProfessorCoursesFunction(
         private val professorDataAccessor: ProfessorDataAccessor
 ) {
-    fun getProfessorCourses(name: String, page: Int): List<DetailedProfessorCoursesTransporter> {
+    fun getProfessorCourses(id: Int, page: Int): List<DetailedProfessorCoursesTransporter> {
         val requestedPage = if (page <= 1)
-            Page(0, 3, "year")
+            Page(0, 5, "year")
         else
-            Page(page - 1, 3, "year")
-        return professorDataAccessor.getCoursesByName(name, requestedPage)
+            Page(page - 1, 5, "year")
+        return professorDataAccessor.getCoursesById(id, requestedPage)
     }
 }
