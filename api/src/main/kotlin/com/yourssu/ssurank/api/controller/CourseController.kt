@@ -1,7 +1,6 @@
 package com.yourssu.ssurank.api.controller
 
 import com.yourssu.ssurank.api.config.baseUrl
-import com.yourssu.ssurank.api.response.GetCourseDetailResponse
 import com.yourssu.ssurank.api.response.SearchCourseResponse
 import com.yourssu.ssurank.api.service.CourseService
 import io.swagger.annotations.ApiOperation
