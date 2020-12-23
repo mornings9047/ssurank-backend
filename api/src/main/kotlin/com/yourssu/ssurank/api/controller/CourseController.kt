@@ -1,6 +1,7 @@
 package com.yourssu.ssurank.api.controller
 
 import com.yourssu.ssurank.api.config.baseUrl
+import com.yourssu.ssurank.api.response.DetailedCourseResponse
 import com.yourssu.ssurank.api.response.SearchCourseResponse
 import com.yourssu.ssurank.api.service.CourseService
 import io.swagger.annotations.ApiOperation
@@ -23,5 +24,12 @@ class CourseController(
         return courseService.searchCourseByTitle(title, page)
                 .collectList()
                 .map { SearchCourseResponse(it) }
+    }
+
+    @ApiOperation("강의 상세보기")
+    @GetMapping("/detail/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    fun getDetailedCourse(@PathVariable id: Int): DetailedCourseResponse {
+        return DetailedCourseResponse(courseService.getDetailedCourse(id))
     }
 }

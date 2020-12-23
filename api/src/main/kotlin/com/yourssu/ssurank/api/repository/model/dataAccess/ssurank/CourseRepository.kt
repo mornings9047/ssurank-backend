@@ -1,7 +1,10 @@
 package com.yourssu.ssurank.api.repository.model.dataAccess.ssurank
 
+import com.yourssu.ssurank.api.repository.model.dataTransfer.ssurank.DetailedCourseDto
+import com.yourssu.ssurank.api.repository.model.dataTransfer.ssurank.GetHistoryCourseDto
 import com.yourssu.ssurank.api.repository.model.dataTransfer.ssurank.SearchCourseDto
 import com.yourssu.ssurank.api.repository.model.entity.ssurank.Course
+import com.yourssu.ssurank.api.repository.model.projection.ssurank.DetailedCourseTransporter
 import org.springframework.data.domain.Pageable
 import org.springframework.data.jpa.repository.Query
 import org.springframework.stereotype.Repository
@@ -19,4 +22,10 @@ interface CourseRepository : ExtendedRepository<Int, Course> {
 
     @Query(nativeQuery = true)
     fun searchCourseByTitle(title: String, page: Pageable): List<SearchCourseDto>
+
+    @Query(nativeQuery = true)
+    fun findDetailedCourseById(id: Int): DetailedCourseTransporter
+
+    @Query(nativeQuery = true)
+    fun getCourseHistoryByCodeAndName(code: String, name: String): List<GetHistoryCourseDto>
 }

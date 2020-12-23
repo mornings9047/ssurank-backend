@@ -1,30 +1,68 @@
 package com.yourssu.ssurank.api.repository.model.entity.ssurank
 
+import com.yourssu.ssurank.api.repository.model.dataTransfer.ssurank.GetHistoryCourseDto
 import com.yourssu.ssurank.api.repository.model.dataTransfer.ssurank.SearchCourseDto
 import com.yourssu.ssurank.api.repository.model.entity.common.SuperEntity
+import com.yourssu.ssurank.api.repository.model.projection.ssurank.DetailedCourseTransporter
 import org.hibernate.annotations.ColumnDefault
 import javax.persistence.*
 
-@SqlResultSetMapping(name = "SearchCourseDto",
-classes = [
-ConstructorResult(targetClass = SearchCourseDto::class,
-        columns = [
-                ColumnResult(name = "id", type = Int::class),
-                ColumnResult(name = "name", type = String::class),
-                ColumnResult(name = "code", type = String::class),
-                ColumnResult(name = "title", type = String::class),
-                ColumnResult(name = "year", type = Int::class),
-                ColumnResult(name = "semester", type = String::class),
-                ColumnResult(name = "ranking", type = String::class)
+@SqlResultSetMappings(SqlResultSetMapping(name = "SearchCourseDto",
+        classes = [
+            ConstructorResult(targetClass = SearchCourseDto::class,
+                    columns = [
+                        ColumnResult(name = "courseId", type = Int::class),
+                        ColumnResult(name = "name", type = String::class),
+                        ColumnResult(name = "department", type = String::class),
+                        ColumnResult(name = "title", type = String::class),
+                        ColumnResult(name = "year", type = Int::class),
+                        ColumnResult(name = "semester", type = String::class),
+                        ColumnResult(name = "ranking", type = String::class)
+                    ]
+            )
         ]
-        )
-]
+),
+        SqlResultSetMapping(name = "DetailedCourseTransporter",
+                classes = [
+                    ConstructorResult(targetClass = DetailedCourseTransporter::class,
+                            columns = [
+                                ColumnResult(name = "professorId", type = Int::class),
+                                ColumnResult(name = "code", type = String::class),
+                                ColumnResult(name = "name", type = String::class),
+                                ColumnResult(name = "department", type = String::class),
+                                ColumnResult(name = "title", type = String::class),
+                                ColumnResult(name = "ranking", type = String::class)
+                            ]
+                    )
+                ]
+        ),
+        SqlResultSetMapping(name = "GetHistoryCourseDto",
+        classes = [
+            ConstructorResult(targetClass = GetHistoryCourseDto::class,
+                    columns = [
+                        ColumnResult(name = "year", type = Int::class),
+                        ColumnResult(name = "semester", type = String::class),
+                        ColumnResult(name = "ranking", type = String::class),
+                    ]
+            )
+        ]
+)
 )
 
-@NamedNativeQuery(
+@NamedNativeQueries(
+NamedNativeQuery(
         name = "Course.searchCourseByTitle",
-        query = "select p.id, name, code, title, year, semester, c.ranking from courses c inner join course_professor cp on c.id = cp.course_id inner join professors p on p.id = cp.professor_id where title like concat('%', :title, '%') group by p.id, year, semester order by year desc, semester desc, c.ranking desc, title asc, name asc",
+        query = "select * from (select name, c.id as courseId, department, title, year, semester, c.ranking from courses c inner join course_professor cp on c.id = cp.course_id inner join professors p on p.id = cp.professor_id where title like CONCAT('%',:title,'%') group by name, year, semester order by year desc, semester desc, c.rating desc, title asc, name asc) as result group by name",
         resultSetMapping = "SearchCourseDto"
+), NamedNativeQuery(
+        name = "Course.findDetailedCourseById",
+        query = "select p.id as professorId, code, name, department, title, c.ranking from courses c inner join course_professor cp on c.id = cp.course_id inner join professors p on p.id = cp.professor_id where c.id = :id",
+        resultSetMapping = "DetailedCourseTransporter"
+), NamedNativeQuery(
+        name = "Course.getCourseHistoryByCodeAndName",
+        query = "select year, semester, c.ranking from courses c inner join course_professor cp on c.id = cp.course_id inner join professors p on p.id = cp.professor_id where code = :code and p.name like :name group by year, semester",
+        resultSetMapping = "GetHistoryCourseDto"
+        )
 )
 
 
