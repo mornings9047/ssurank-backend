@@ -3,6 +3,7 @@ package com.yourssu.ssurank.api.controller
 import com.yourssu.ssurank.api.config.baseUrl
 import com.yourssu.ssurank.api.repository.model.projection.ssurank.DetailedProfessorCoursesTransporter
 import com.yourssu.ssurank.api.request.ProfessorEvaluationRequest
+import com.yourssu.ssurank.api.request.ReportRequest
 import com.yourssu.ssurank.api.response.*
 import com.yourssu.ssurank.api.service.ProfessorService
 import io.swagger.annotations.ApiOperation
@@ -101,5 +102,14 @@ class ProfessorController(
             @PathVariable page: Int
     ): ProfessorEvaluationResponse {
         return ProfessorEvaluationResponse(professorService.getRecommendedProfessorEvaluations(professorId, page))
+    }
+
+    @ApiOperation("교수 한줄평 신고하기")
+    @PostMapping("/evaluation/report/{evaluationId}")
+    @ResponseStatus(HttpStatus.CREATED)
+    fun reportEvaluation(
+            @RequestBody reportRequest: ReportRequest
+    ) {
+
     }
 }
