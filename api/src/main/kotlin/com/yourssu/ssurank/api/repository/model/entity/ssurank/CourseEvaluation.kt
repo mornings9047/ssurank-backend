@@ -1,6 +1,7 @@
 package com.yourssu.ssurank.api.repository.model.entity.ssurank
 
 import com.yourssu.ssurank.api.repository.model.entity.common.SuperEntity
+import java.io.Serializable
 import java.util.*
 import javax.persistence.*
 
@@ -14,7 +15,7 @@ data class CourseEvaluation(
         val email: String,
 
         @Column(nullable = false)
-        val type: Int,
+        val studentType: StudentType,
 
         @Column(nullable = false)
         val year: Int,
@@ -37,3 +38,4 @@ data class CourseEvaluation(
         @Column(nullable = false)
         val isDeleted: Boolean? = null
 ) : SuperEntity<Int>
+
