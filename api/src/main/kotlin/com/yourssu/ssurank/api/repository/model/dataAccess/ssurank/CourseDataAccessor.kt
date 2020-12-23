@@ -50,4 +50,8 @@ class CourseDataAccessor(
     fun save(course: Course): Mono<Course> {
         return monoFromCallableWithScheduler { repository.save(course) }
     }
+
+    fun findByCourseId(id: Int): Course{
+        return repository.findCourseById(id)
+    }
 }

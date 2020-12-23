@@ -4,18 +4,16 @@ import com.yourssu.ssurank.api.repository.model.entity.common.SuperEntity
 import javax.persistence.*
 
 @Entity
-@Table(name = "departments")
-data class Department(
+data class CourseEvaluationList(
         @field:Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)
         override val id: Int? = null,
 
-        @Column(length = 7)
-        val college: String,
+        @ManyToOne
+        @JoinColumn(name = "courseId")
+        val course: Course,
 
-        @Column(length = 20)
-        val original_name: String,
-
-        @Column(length = 6)
-        val shortened_name: String
+        @ManyToOne
+        @JoinColumn(name = "courseEvaluationId")
+        val courseEvaluation: CourseEvaluation
 ) : SuperEntity<Int>
