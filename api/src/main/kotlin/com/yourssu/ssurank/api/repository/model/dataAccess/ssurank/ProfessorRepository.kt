@@ -53,4 +53,6 @@ interface ProfessorRepository : ExtendedRepository<Int, Professor> {
             "group by title " +
             "order by c.rating desc", nativeQuery = true)
     fun getCoursesById(id: Int, page: Pageable): List<DetailedProfessorCoursesTransporter>
+
+    fun findProfessorById(id: Int): Professor
 }
