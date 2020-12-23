@@ -7,5 +7,5 @@ class SearchCourseDto(
         val title : String,
         val year : Int,
         val semester : String,
-        val ranking : String
+        val ranking : Int
 )

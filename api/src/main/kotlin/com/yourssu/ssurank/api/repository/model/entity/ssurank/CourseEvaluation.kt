@@ -1,11 +1,11 @@
 package com.yourssu.ssurank.api.repository.model.entity.ssurank
 
 import com.yourssu.ssurank.api.repository.model.entity.common.SuperEntity
-import java.io.Serializable
-import java.util.*
+import java.time.LocalDateTime
 import javax.persistence.*
 
-@Table(name = "Course_Evaluation")
+@Entity
+@Table(name = "Course_Evaluations")
 data class CourseEvaluation(
         @field:Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,15 +27,15 @@ data class CourseEvaluation(
         val content: String,
 
         @Column(nullable = false)
-        val thumbs_up : Int,
+        val thumbs_up : Int = 0,
 
         @Column(nullable = false)
-        val thumbs_down : Int,
+        val thumbs_down : Int = 0,
+
+        @Column(nullable = true)
+        val createAt: LocalDateTime = LocalDateTime.now(),
 
         @Column(nullable = false)
-        val createAt: Date,
-
-        @Column(nullable = false)
-        val isDeleted: Boolean? = null
+        val isDeleted: Boolean? = false
 ) : SuperEntity<Int>
 

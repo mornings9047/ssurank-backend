@@ -4,7 +4,7 @@ import java.io.Serializable
 import javax.persistence.*
 
 @Entity
-@Table(name = "courseEvaluation_list")
+@Table(name = "course_evaluation_list")
 data class CourseEvaluationList(
         @field:Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -15,6 +15,6 @@ data class CourseEvaluationList(
         val course: Course?,
 
         @ManyToOne
-        @JoinColumn(name = "courseevaluationId")
+        @JoinColumn(name = "courseEvaluationId")
         val courseEvaluation: CourseEvaluation?
 ) : SuperEntity<Int>
