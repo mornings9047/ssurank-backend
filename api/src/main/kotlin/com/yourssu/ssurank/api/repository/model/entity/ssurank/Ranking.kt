@@ -1,7 +1,5 @@
 package com.yourssu.ssurank.api.repository.model.entity.ssurank
 
-import java.io.Serializable
-
 enum class Ranking {
     A0, //  A
     A1, //  A+
@@ -21,6 +19,3 @@ enum class Ranking {
     D3, //  D-
     U   // Unranked
 }
-
-
-

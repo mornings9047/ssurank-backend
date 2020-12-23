@@ -1,11 +1,9 @@
 package com.yourssu.ssurank.api.repository.model.dataAccess.ssurank
 
-import com.yourssu.ssurank.api.repository.model.dataTransfer.ssurank.DetailedCourseDto
 import com.yourssu.ssurank.api.repository.model.dataTransfer.ssurank.GetHistoryCourseDto
 import com.yourssu.ssurank.api.repository.model.dataTransfer.ssurank.SearchCourseDto
 import com.yourssu.ssurank.api.repository.model.entity.common.Page
 import com.yourssu.ssurank.api.repository.model.entity.ssurank.Course
-import com.yourssu.ssurank.api.repository.model.function.ssurank.GetDetailedCourseFunction
 import com.yourssu.ssurank.api.repository.model.projection.ssurank.DetailedCourseTransporter
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Repository

@@ -1,6 +1,5 @@
 package com.yourssu.ssurank.api.repository.model.dataAccess.ssurank
 
-import com.yourssu.ssurank.api.repository.model.dataTransfer.ssurank.DetailedCourseDto
 import com.yourssu.ssurank.api.repository.model.dataTransfer.ssurank.GetHistoryCourseDto
 import com.yourssu.ssurank.api.repository.model.dataTransfer.ssurank.SearchCourseDto
 import com.yourssu.ssurank.api.repository.model.entity.ssurank.Course

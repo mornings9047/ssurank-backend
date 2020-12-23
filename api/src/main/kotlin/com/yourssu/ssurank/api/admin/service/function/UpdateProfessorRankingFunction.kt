@@ -4,7 +4,6 @@ import com.yourssu.ssurank.api.repository.model.dataAccess.ssurank.CourseDataAcc
 import com.yourssu.ssurank.api.repository.model.dataAccess.ssurank.ProfessorDataAccessor
 import com.yourssu.ssurank.api.repository.model.entity.ssurank.Professor
 import com.yourssu.ssurank.api.repository.model.entity.ssurank.Ranking
-import reactor.core.publisher.Mono
 
 class UpdateProfessorRankingFunction(
         private val courseDataAccessor: CourseDataAccessor,

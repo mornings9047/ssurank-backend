@@ -1,7 +1,6 @@
 package com.yourssu.ssurank.api.repository.model.entity.ssurank
 
 import com.yourssu.ssurank.api.repository.model.entity.common.SuperEntity
-import java.io.Serializable
 import javax.persistence.*
 
 @Entity
@@ -27,6 +26,7 @@ data class Professor(
         var rating: Float = 0F,
 
         @Column(length = 2, nullable = true)
+        @Enumerated(EnumType.STRING)
         var ranking: Ranking = Ranking.U
 
 ) : SuperEntity<Int>

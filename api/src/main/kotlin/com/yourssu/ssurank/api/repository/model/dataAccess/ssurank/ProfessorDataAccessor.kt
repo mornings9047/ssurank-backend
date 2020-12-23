@@ -54,4 +54,8 @@ class ProfessorDataAccessor(
     fun getCoursesById(id: Int, page: Pageable): List<DetailedProfessorCoursesTransporter> {
         return repository.getCoursesById(id, page)
     }
+
+    fun findByProfessorId(id: Int): Professor{
+        return repository.findProfessorById(id)
+    }
 }
