@@ -9,14 +9,17 @@ import org.springframework.stereotype.Repository
 @Repository
 class CourseEvaluationDataAccessor(
         @Autowired override var repository: CourseEvaluationRepository
-) : DataAccessorAdapterRepository<Int, CourseEvaluation, CourseEvaluationRepository>(){
+) : DataAccessorAdapterRepository<Int, CourseEvaluation, CourseEvaluationRepository>() {
 
-    fun save(courseEvaluation: CourseEvaluation) : CourseEvaluation{
+    fun save(courseEvaluation: CourseEvaluation): CourseEvaluation {
         return repository.save(courseEvaluation)
     }
 
-    fun getCourseEvaluations(id: Int, page: Pageable): List<CourseEvaluationTransporter>{
+    fun getCourseEvaluations(id: Int, page: Pageable): List<CourseEvaluationTransporter> {
         return repository.findAllByCourseId(id, page)
     }
 
+    fun getCourseEvaluation(id: Int): CourseEvaluation {
+        return repository.findById(id).get()
+    }
 }

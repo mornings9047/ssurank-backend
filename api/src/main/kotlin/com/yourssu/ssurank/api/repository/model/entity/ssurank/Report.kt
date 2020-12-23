@@ -11,11 +11,20 @@ data class Report(
         @GeneratedValue(strategy = GenerationType.IDENTITY)
         override val id: Int? = null,
 
-        @ManyToOne
-        val professorEvaluation: ProfessorEvaluation,
+        @Column
+        val reportType: ReportType,
+
+        @Column
+        @Enumerated(EnumType.STRING)
+        val reportCategory: ReportCategory,
 
         @ManyToOne
-        val courseEvaluation: CourseEvaluation,
+        @JoinColumn(name = "professorEvaluationId")
+        val professorEvaluation: ProfessorEvaluation?,
+
+        @ManyToOne
+        @JoinColumn(name = "courseEvaluationId")
+        val courseEvaluation: CourseEvaluation?,
 
         @Column(columnDefinition = "TEXT")
         val content: String,

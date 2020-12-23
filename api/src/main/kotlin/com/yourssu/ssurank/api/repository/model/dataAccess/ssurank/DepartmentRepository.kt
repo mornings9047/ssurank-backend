@@ -7,6 +7,6 @@ import org.springframework.stereotype.Repository
 
 @Repository
 interface DepartmentRepository : ExtendedRepository<Int, Department> {
-    @Query("select original_name, shortened_name from departments where college = :college", nativeQuery = true)
+    @Query("select original_name as originalName, shortened_name as shortenedName from departments where college = :college", nativeQuery = true)
     fun findDepartmentsByCollege(college: String): List<DepartmentTransporter>
 }

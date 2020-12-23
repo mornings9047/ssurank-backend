@@ -17,4 +17,8 @@ class ProfessorEvaluationDataAccessor(
     fun getProfessorEvaluations(id: Int, page: Pageable): List<ProfessorEvaluationTransporter> {
         return repository.findAllByProfessorId(id, page)
     }
+
+    fun getProfessorEvaluation(id: Int): ProfessorEvaluation {
+        return repository.findById(id).get()
+    }
 }

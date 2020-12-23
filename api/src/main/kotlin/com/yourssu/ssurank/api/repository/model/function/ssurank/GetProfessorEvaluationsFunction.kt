@@ -8,12 +8,18 @@ class GetProfessorEvaluationsFunction(
         private val professorEvaluationDataAccessor: ProfessorEvaluationDataAccessor
 ) {
     fun getRecentProfessorEvaluations(id: Int, page: Int): List<ProfessorEvaluationTransporter> {
-        val requestedPage = Page(page, 10, "id")
+        val requestedPage = if (page <= 1)
+            Page(0, 10, "id")
+        else
+            Page(page - 1, 10, "id")
         return professorEvaluationDataAccessor.getProfessorEvaluations(id, requestedPage)
     }
 
     fun getRecommendedProfessorEvaluations(id: Int, page: Int): List<ProfessorEvaluationTransporter> {
-        val requestedPage = Page(page, 10, "thumbsUp")
+        val requestedPage = if (page <= 1)
+            Page(0, 10, "thumbsUp")
+        else
+            Page(page - 1, 10, "thumbsUp")
         return professorEvaluationDataAccessor.getProfessorEvaluations(id, requestedPage)
     }
 }

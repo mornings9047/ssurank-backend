@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository
 interface ProfessorEvaluationRepository : ExtendedRepository<Int, ProfessorEvaluation> {
     fun save(professorEvaluation: ProfessorEvaluation): ProfessorEvaluation
 
-    @Query("select student_type as type, created_at as createdAt, content,thumbs_up as thumbsUp, thumbs_down as thumbsDown from Professor_Evaluation pe " +
+    @Query("select pe.id as id, student_type as type, created_at as createdAt, content,thumbs_up as thumbsUp, thumbs_down as thumbsDown from Professor_Evaluation pe " +
             "inner join professor_evaluation_list pel on pe.id = pel.professor_evaluation_id " +
             "where pel.professor_id = :id", nativeQuery = true)
     fun findAllByProfessorId(id: Int, page: Pageable): List<ProfessorEvaluationTransporter>

@@ -4,6 +4,7 @@ import com.yourssu.ssurank.api.repository.model.entity.ssurank.StudentType
 import java.util.*
 
 interface CourseEvaluationTransporter {
+    val id: Int
     val type: StudentType
     val createdAt: Date
     val content: String
