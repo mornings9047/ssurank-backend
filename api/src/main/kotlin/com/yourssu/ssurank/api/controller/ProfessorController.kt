@@ -2,7 +2,6 @@ package com.yourssu.ssurank.api.controller
 
 import com.yourssu.ssurank.api.config.baseUrl
 import com.yourssu.ssurank.api.repository.model.projection.ssurank.DetailedProfessorCoursesTransporter
-import com.yourssu.ssurank.api.repository.model.projection.ssurank.ProfessorEvaluationTransporter
 import com.yourssu.ssurank.api.request.ProfessorEvaluationRequest
 import com.yourssu.ssurank.api.response.*
 import com.yourssu.ssurank.api.service.ProfessorService
