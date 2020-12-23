@@ -1,6 +1,8 @@
 package com.yourssu.ssurank.api.controller
 
 import com.yourssu.ssurank.api.config.baseUrl
+import com.yourssu.ssurank.api.request.CourseEvaluationRequest
+import com.yourssu.ssurank.api.response.CourseEvaluationResponse
 import com.yourssu.ssurank.api.response.DetailedCourseResponse
 import com.yourssu.ssurank.api.response.SearchCourseResponse
 import com.yourssu.ssurank.api.service.CourseService
@@ -32,4 +34,34 @@ class CourseController(
     fun getDetailedCourse(@PathVariable id: Int): DetailedCourseResponse {
         return DetailedCourseResponse(courseService.getDetailedCourse(id))
     }
+
+    @ApiOperation("강의 한줄평 작성하기")
+    @PostMapping("/evaluation")
+    @ResponseStatus(HttpStatus.CREATED)
+    fun evaluationCourse(
+            @RequestBody courseEvaluationRequest: CourseEvaluationRequest
+    ){
+        return courseService.evaluateCourse(courseEvaluationRequest)
+    }
+
+    @ApiOperation("강의 한줄평 최신순 가져오기")
+    @GetMapping("/evaluation/recent/{courseId}/{page}")
+    @ResponseStatus(HttpStatus.OK)
+    fun getRecentCourseEvaluations(
+            @PathVariable courseId: Int,
+            @PathVariable page: Int
+    ) : CourseEvaluationResponse{
+        return CourseEvaluationResponse(courseService.getRecentCourseEvaluations(courseId, page))
+    }
+
+    @ApiOperation("강의 한줄평 추천순 가져오기")
+    @GetMapping("/evaluation/recommendation/{courseId}/{page}")
+    @ResponseStatus(HttpStatus.OK)
+    fun getRecommendedCourseEvaluations(
+            @PathVariable courseId: Int,
+            @PathVariable page: Int
+    ) : CourseEvaluationResponse{
+        return CourseEvaluationResponse(courseService.getRecommendedCourseEvaluations(courseId, page))
+    }
+
 }
