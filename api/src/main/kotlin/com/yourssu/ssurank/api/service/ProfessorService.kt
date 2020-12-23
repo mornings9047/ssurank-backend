@@ -1,12 +1,11 @@
 package com.yourssu.ssurank.api.service
 
+import com.yourssu.ssurank.api.repository.model.dataAccess.ssurank.DepartmentDataAccessor
 import com.yourssu.ssurank.api.repository.model.dataAccess.ssurank.ProfessorDataAccessor
 import com.yourssu.ssurank.api.repository.model.dataTransfer.ssurank.DetailedProfessorDto
 import com.yourssu.ssurank.api.repository.model.dataTransfer.ssurank.SearchProfessorDto
-import com.yourssu.ssurank.api.repository.model.function.ssurank.GetDetailedProfessorFunction
-import com.yourssu.ssurank.api.repository.model.function.ssurank.GetHonorProfessorsFunction
-import com.yourssu.ssurank.api.repository.model.function.ssurank.GetProfessorCoursesFunction
-import com.yourssu.ssurank.api.repository.model.function.ssurank.SearchProfessorFunction
+import com.yourssu.ssurank.api.repository.model.function.ssurank.*
+import com.yourssu.ssurank.api.repository.model.projection.ssurank.DepartmentTransporter
 import com.yourssu.ssurank.api.repository.model.projection.ssurank.DetailedProfessorCoursesTransporter
 import com.yourssu.ssurank.api.repository.model.projection.ssurank.ProfessorTransporter
 import org.springframework.stereotype.Service
@@ -14,12 +13,18 @@ import reactor.core.publisher.Flux
 
 @Service
 class ProfessorService(
-        professorDataAccessor: ProfessorDataAccessor
+        professorDataAccessor: ProfessorDataAccessor,
+        departmentDataAccessor: DepartmentDataAccessor
 ) {
     private val searchProfessorFunction = SearchProfessorFunction(professorDataAccessor)
     private val getHonorsFunction = GetHonorProfessorsFunction(professorDataAccessor)
     private val getDetailedProfessorFunction = GetDetailedProfessorFunction(professorDataAccessor)
     private val getProfessorCoursesFunction = GetProfessorCoursesFunction(professorDataAccessor)
+    private val getDepartmentListFunction = GetDepartmentListFunction(departmentDataAccessor)
+
+    fun getDepartmentList(): Map<String, List<DepartmentTransporter>> {
+        return getDepartmentListFunction.getDepartmentList()
+    }
 
     fun getProfessorsByDept(department: String, page: Int): Flux<SearchProfessorDto> {
         return searchProfessorFunction.getProfessorsByDept(department, page)
