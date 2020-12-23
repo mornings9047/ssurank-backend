@@ -1,8 +1,6 @@
 package com.yourssu.ssurank.api.controller
 
 import com.yourssu.ssurank.api.config.baseUrl
-import com.yourssu.ssurank.api.repository.model.dataTransfer.ssurank.DetailedCourseDto
-import com.yourssu.ssurank.api.repository.model.dataTransfer.ssurank.GetHistoryCourseDto
 import com.yourssu.ssurank.api.response.DetailedCourseResponse
 import com.yourssu.ssurank.api.response.SearchCourseResponse
 import com.yourssu.ssurank.api.service.CourseService
