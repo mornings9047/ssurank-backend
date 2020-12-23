@@ -1,11 +1,12 @@
 package com.yourssu.ssurank.api.repository.model.entity.ssurank
 
 import com.yourssu.ssurank.api.repository.model.entity.common.SuperEntity
-import java.time.LocalDateTime
+import org.hibernate.annotations.Where
+import java.util.*
 import javax.persistence.*
 
 @Entity
-@Table(name = "Course_Evaluations")
+@Where(clause = "is_deleted = false")
 data class CourseEvaluation(
         @field:Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -15,6 +16,7 @@ data class CourseEvaluation(
         val email: String,
 
         @Column(nullable = false)
+        @Enumerated(EnumType.STRING)
         val studentType: StudentType,
 
         @Column(nullable = false)
@@ -23,7 +25,7 @@ data class CourseEvaluation(
         @Column(nullable = false)
         val semester: Semester,
 
-        @Column(nullable = false)
+        @Column(columnDefinition = "TEXT")
         val content: String,
 
         @Column(nullable = false)
@@ -33,7 +35,7 @@ data class CourseEvaluation(
         val thumbs_down : Int = 0,
 
         @Column(nullable = true)
-        val createAt: LocalDateTime = LocalDateTime.now(),
+        val createAt: Date = Date(),
 
         @Column(nullable = false)
         val isDeleted: Boolean? = false

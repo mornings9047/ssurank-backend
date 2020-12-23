@@ -1,10 +1,9 @@
 package com.yourssu.ssurank.api.repository.model.entity.ssurank
+
 import com.yourssu.ssurank.api.repository.model.entity.common.SuperEntity
-import java.io.Serializable
 import javax.persistence.*
 
 @Entity
-@Table(name = "course_evaluation_list")
 data class CourseEvaluationList(
         @field:Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -12,9 +11,9 @@ data class CourseEvaluationList(
 
         @ManyToOne
         @JoinColumn(name = "courseId")
-        val course: Course?,
+        val course: Course,
 
         @ManyToOne
         @JoinColumn(name = "courseEvaluationId")
-        val courseEvaluation: CourseEvaluation?
+        val courseEvaluation: CourseEvaluation
 ) : SuperEntity<Int>
