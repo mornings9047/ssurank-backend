@@ -5,5 +5,4 @@ import com.yourssu.ssurank.api.repository.model.entity.ssurank.CourseEvaluationL
 import org.springframework.stereotype.Repository
 
 @Repository
-interface CourseEvaluationListRepository : ExtendedRepository<Int, CourseEvaluationList> {
-}
+interface CourseEvaluationListRepository : ExtendedRepository<Int, CourseEvaluationList>

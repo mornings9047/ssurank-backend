@@ -22,11 +22,11 @@ class InsertCourseEvaluationFunction(
                     "주전공" -> StudentType.주전공
                     "부전공" -> StudentType.부전공
                     "타전공" -> StudentType.타전공
-                    else -> StudentType.타전공
+                    else -> StudentType.복수전공
                 },
                 content = courseEvaluationRequest.content,
                 year = courseEvaluationRequest.year,
-                semester = if (courseEvaluationRequest.semester == 0) Semester.FIRST
+                semester = if (courseEvaluationRequest.semester == 1) Semester.FIRST
                 else Semester.SECOND
         ))
         val courseEvaluationList = CourseEvaluationList(course = course, courseEvaluation = courseEvaluation)
