@@ -9,10 +9,10 @@ import org.springframework.stereotype.Service
 class AdminReportService(
         professorEvaluationDataAccessor: ProfessorEvaluationDataAccessor,
         courseEvaluationDataAccessor: CourseEvaluationDataAccessor
-){
+) {
     val deleteEvaluationFunction = DeleteEvaluationFunction(courseEvaluationDataAccessor, professorEvaluationDataAccessor)
 
-    fun deleteEvaluation(evaluateId: Int, reportType: String){
+    fun deleteEvaluation(evaluateId: Int, reportType: String) {
         return deleteEvaluationFunction.deleteCourseEvaluation(evaluateId, reportType)
     }
 }
