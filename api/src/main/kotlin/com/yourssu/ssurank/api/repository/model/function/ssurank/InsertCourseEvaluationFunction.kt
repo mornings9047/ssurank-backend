@@ -26,7 +26,7 @@ class InsertCourseEvaluationFunction(
                 },
                 content = courseEvaluationRequest.content,
                 year = courseEvaluationRequest.year,
-                semester = if (courseEvaluationRequest.semester == 0) Semester.FIRST
+                semester = if (courseEvaluationRequest.semester == 1) Semester.FIRST
                 else Semester.SECOND
         ))
         val courseEvaluationList = CourseEvaluationList(course = course, courseEvaluation = courseEvaluation)
