@@ -29,15 +29,15 @@ data class CourseEvaluation(
         val content: String,
 
         @Column(nullable = false)
-        val thumbs_up : Int = 0,
+        var thumbs_up : Int = 0,
 
         @Column(nullable = false)
-        val thumbs_down : Int = 0,
+        var thumbs_down : Int = 0,
 
         @Column(nullable = true)
         val createAt: Date = Date(),
 
         @Column(nullable = false)
-        val isDeleted: Boolean? = false
+        var isDeleted: Boolean? = false
 ) : SuperEntity<Int>
 

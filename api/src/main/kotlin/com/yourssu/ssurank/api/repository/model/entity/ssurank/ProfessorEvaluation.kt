@@ -24,14 +24,14 @@ data class ProfessorEvaluation(
         val content: String,
 
         @Column
-        val thumbsUp: Int = 0,
+        var thumbsUp: Int = 0,
 
         @Column
-        val thumbsDown: Int = 0,
+        var thumbsDown: Int = 0,
 
         @Column
         val createdAt: Date = Date(),
 
         @Column
-        val isDeleted: Boolean = false
+        var isDeleted: Boolean = false
 ) : SuperEntity<Int>

@@ -13,12 +13,12 @@ class InsertCourseEvaluationFunction(
         private val courseDataAccessor: CourseDataAccessor,
         private val courseEvaluationDataAccessor: CourseEvaluationDataAccessor,
         private val courseEvaluationListDataAccessor: CourseEvaluationListDataAccessor
-){
-    fun insertCourseEvaluation(courseEvaluationRequest: CourseEvaluationRequest){
+) {
+    fun insertCourseEvaluation(courseEvaluationRequest: CourseEvaluationRequest) {
         val course = courseDataAccessor.findByCourseId(courseEvaluationRequest.courseId)
         val courseEvaluation = courseEvaluationDataAccessor.save(CourseEvaluation(
                 email = courseEvaluationRequest.email,
-                studentType = when(courseEvaluationRequest.type){
+                studentType = when (courseEvaluationRequest.type) {
                     "주전공" -> StudentType.주전공
                     "부전공" -> StudentType.부전공
                     "타전공" -> StudentType.타전공
@@ -26,12 +26,8 @@ class InsertCourseEvaluationFunction(
                 },
                 content = courseEvaluationRequest.content,
                 year = courseEvaluationRequest.year,
-                semester = when(courseEvaluationRequest.semester){
-                    1 -> Semester.FIRST
-                    2 -> Semester.FIRST
-                    3 -> Semester.SECOND
-                    else -> Semester.WINTER
-                }
+                semester = if (courseEvaluationRequest.semester == 0) Semester.FIRST
+                else Semester.SECOND
         ))
         val courseEvaluationList = CourseEvaluationList(course = course, courseEvaluation = courseEvaluation)
         courseEvaluationListDataAccessor.save(courseEvaluationList)
