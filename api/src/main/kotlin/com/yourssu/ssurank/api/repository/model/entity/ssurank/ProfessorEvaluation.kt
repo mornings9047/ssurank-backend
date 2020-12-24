@@ -7,6 +7,7 @@ import java.util.*
 import javax.persistence.*
 
 @Entity
+@Table(name = "professor_evaluations")
 @Where(clause = "is_deleted = false")
 data class ProfessorEvaluation(
         @field:Id

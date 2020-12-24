@@ -18,13 +18,26 @@ interface ProfessorRepository : ExtendedRepository<Int, Professor> {
     @Query("select p.id as id, name, department, position, ranking, count(cp.course_id) as courseCnt from professors p inner join course_professor cp on p.id = cp.professor_id  where department = :department group by p.id order by ranking asc, rating desc", nativeQuery = true)
     fun getProfessorsByDepartment(department: String, page: Pageable): List<SearchProfessorTransporter>
 
-    @Query("select p.id as id, name, department, position, ranking from professors p inner join course_professor cp on p.id = cp.professor_id group by name, college, department, position having count(cp.course_id) >= 10 order by rating desc limit 10", nativeQuery = true)
+    @Query("select p.id as id, name, department, position, ranking from professors p " +
+            "inner join course_professor cp on p.id = cp.professor_id " +
+            "where ranking <> 'U'" +
+            "group by name, college, department, position " +
+            "having count(cp.course_id) >= 10 " +
+            "order by rating desc limit 10", nativeQuery = true)
     fun getProfessorsHavingCoursesOverTen(): List<ProfessorTransporter>
 
-    @Query("select distinct p.id as id, name, department, position, ranking, count(cp.course_id) as courseCnt from professors p inner join course_professor cp on p.id = cp.professor_id where name like %:name% group by id order by rating desc", nativeQuery = true)
+    @Query("select distinct p.id as id, name, department, position, ranking, count(cp.course_id) as courseCnt " +
+            "from professors p " +
+            "inner join course_professor cp on p.id = cp.professor_id " +
+            "where name COLLATE UTF8_GENERAL_CI like %:name% " +
+            "group by id " +
+            "order by rating desc", nativeQuery = true)
     fun findAllByName(name: String, page: Pageable): List<SearchProfessorTransporter>
 
-    @Query("select p.id as id, name, department, position, ranking, count(cp.course_id) as courseCnt from professors p inner join course_professor cp on p.id = cp.professor_id  where p.id = :id", nativeQuery = true)
+    @Query("select p.id as id, name, department, position, ranking, count(cp.course_id) as courseCnt " +
+            "from professors p " +
+            "inner join course_professor cp on p.id = cp.professor_id " +
+            "where p.id = :id", nativeQuery = true)
     fun findDetailedProfessorById(id: Int): DetailedProfessorTransporter
 
     @Query("select ceiling(\n" +
@@ -46,12 +59,16 @@ interface ProfessorRepository : ExtendedRepository<Int, Professor> {
     fun getSessions(id: Int): List<SessionCourseTransporter>
 
 
-    @Query("select distinct c.ranking, name, department, title, year, semester from courses c " +
+    @Query("select courseId, ranking, name, department, title, year, semester from (" +
+            "select c.rating as rating, c.id as courseId, c.ranking, name, department, title, year, semester " +
+            "from courses c " +
             "inner join course_professor cp on c.id = cp.course_id " +
             "inner join professors p on p.id = cp.professor_id " +
             "where p.id = :id " +
+            "group by title, code, year, semester " +
+            "order by year desc, semester desc) as courses " +
             "group by title " +
-            "order by c.rating desc", nativeQuery = true)
+            "order by rating desc", nativeQuery = true)
     fun getCoursesById(id: Int, page: Pageable): List<DetailedProfessorCoursesTransporter>
 
     fun findProfessorById(id: Int): Professor

@@ -4,6 +4,7 @@ import com.yourssu.ssurank.api.repository.model.entity.common.SuperEntity
 import javax.persistence.*
 
 @Entity
+@Table(name = "course_evaluation_list")
 data class CourseEvaluationList(
         @field:Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)
