@@ -6,6 +6,7 @@ import java.util.*
 import javax.persistence.*
 
 @Entity
+@Table(name = "course_evaluations")
 @Where(clause = "is_deleted = false")
 data class CourseEvaluation(
         @field:Id
@@ -29,10 +30,10 @@ data class CourseEvaluation(
         val content: String,
 
         @Column(nullable = false)
-        var thumbs_up : Int = 0,
+        var thumbs_up: Int = 0,
 
         @Column(nullable = false)
-        var thumbs_down : Int = 0,
+        var thumbs_down: Int = 0,
 
         @Column(nullable = true)
         val createAt: Date = Date(),
