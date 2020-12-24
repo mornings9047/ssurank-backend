@@ -1,10 +1,13 @@
 package com.yourssu.ssurank.api.controller
 
 import com.yourssu.ssurank.api.config.baseUrl
+import com.yourssu.ssurank.api.repository.model.entity.ssurank.ReportType
 import com.yourssu.ssurank.api.repository.model.projection.ssurank.DetailedProfessorCoursesTransporter
 import com.yourssu.ssurank.api.request.ProfessorEvaluationRequest
+import com.yourssu.ssurank.api.request.ReportRequest
 import com.yourssu.ssurank.api.response.*
 import com.yourssu.ssurank.api.service.ProfessorService
+import com.yourssu.ssurank.api.service.ReportService
 import io.swagger.annotations.ApiOperation
 import org.springframework.http.HttpStatus
 import org.springframework.web.bind.annotation.*
@@ -13,7 +16,8 @@ import reactor.core.publisher.Mono
 @RestController
 @RequestMapping("$baseUrl/professor")
 class ProfessorController(
-        val professorService: ProfessorService
+        val professorService: ProfessorService,
+        val reportService: ReportService
 ) {
     @ApiOperation("학과 목록 가져오기")
     @GetMapping("/department/lists")
@@ -101,5 +105,14 @@ class ProfessorController(
             @PathVariable page: Int
     ): ProfessorEvaluationResponse {
         return ProfessorEvaluationResponse(professorService.getRecommendedProfessorEvaluations(professorId, page))
+    }
+
+    @ApiOperation("교수 한줄평 신고하기")
+    @PostMapping("/evaluation/report")
+    @ResponseStatus(HttpStatus.CREATED)
+    fun reportEvaluation(
+            @RequestBody reportRequest: ReportRequest
+    ) {
+        reportService.reportEvaluation(reportRequest, ReportType.PROFESSOR)
     }
 }
