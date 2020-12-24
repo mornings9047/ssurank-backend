@@ -22,7 +22,7 @@ class InsertCourseEvaluationFunction(
                     "주전공" -> StudentType.주전공
                     "부전공" -> StudentType.부전공
                     "타전공" -> StudentType.타전공
-                    else -> StudentType.타전공
+                    else -> StudentType.복수전공
                 },
                 content = courseEvaluationRequest.content,
                 year = courseEvaluationRequest.year,

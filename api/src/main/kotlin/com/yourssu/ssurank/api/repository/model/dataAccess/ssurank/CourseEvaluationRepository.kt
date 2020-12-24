@@ -15,5 +15,4 @@ interface CourseEvaluationRepository : ExtendedRepository<Int, CourseEvaluation>
             "where cel.course_id = :id " +
             "order by id desc", nativeQuery = true)
     fun findAllByCourseId(id: Int, page: Pageable): List<CourseEvaluationTransporter>
-
 }

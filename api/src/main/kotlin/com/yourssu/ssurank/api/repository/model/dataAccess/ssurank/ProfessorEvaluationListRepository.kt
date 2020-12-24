@@ -4,6 +4,4 @@ import com.yourssu.ssurank.api.repository.model.entity.ssurank.ProfessorEvaluati
 import org.springframework.stereotype.Repository
 
 @Repository
-interface ProfessorEvaluationListRepository : ExtendedRepository<Int, ProfessorEvaluationList> {
-
-}
+interface ProfessorEvaluationListRepository : ExtendedRepository<Int, ProfessorEvaluationList>
