@@ -9,9 +9,9 @@ class GetProfessorCoursesFunction(
 ) {
     fun getProfessorCourses(id: Int, page: Int): List<DetailedProfessorCoursesTransporter> {
         val requestedPage = if (page <= 1)
-            Page(0, 5, "year")
+            Page(0, 5, "rating")
         else
-            Page(page - 1, 5, "year")
+            Page(page - 1, 5, "rating")
         return professorDataAccessor.getCoursesById(id, requestedPage)
     }
 }
