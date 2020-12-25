@@ -79,7 +79,7 @@ class ProfessorController(
     }
 
     @ApiOperation("교수 한줄평 작성하기")
-    @PostMapping("/evaluation")
+    @PostMapping(value = ["/evaluation"], consumes = ["application/json"], produces = ["application/json"])
     @ResponseStatus(HttpStatus.CREATED)
     fun evaluateProfessor(
             @RequestBody professorEvaluationRequest: ProfessorEvaluationRequest
@@ -108,7 +108,7 @@ class ProfessorController(
     }
 
     @ApiOperation("교수 한줄평 신고하기")
-    @PostMapping("/evaluation/report")
+    @PostMapping(value = ["/evaluation/report"], consumes = ["application/json"], produces = ["application/json"])
     @ResponseStatus(HttpStatus.CREATED)
     fun reportEvaluation(
             @RequestBody reportRequest: ReportRequest
