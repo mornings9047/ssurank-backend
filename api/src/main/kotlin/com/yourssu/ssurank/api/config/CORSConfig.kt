@@ -8,7 +8,7 @@ import org.springframework.web.reactive.config.WebFluxConfigurer
 class CORSConfig : WebFluxConfigurer {
     override fun addCorsMappings(registry: CorsRegistry) {
         registry.addMapping("/**")
-                .allowedOrigins("https://ssurank.netlify.app/")
+                .allowedOrigins("*")     //https://ssurank.netlify.app/
                 .allowedMethods("*")
                 .allowedHeaders("*")
                 .allowCredentials(false)

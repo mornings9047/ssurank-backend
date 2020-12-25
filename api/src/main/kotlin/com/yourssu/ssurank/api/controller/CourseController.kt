@@ -40,7 +40,7 @@ class CourseController(
     }
 
     @ApiOperation("강의 한줄평 작성하기")
-    @PostMapping("/evaluation")
+    @PostMapping(value = ["/evaluation"], produces = ["application/json"])
     @ResponseStatus(HttpStatus.CREATED)
     fun evaluationCourse(
             @RequestBody courseEvaluationRequest: CourseEvaluationRequest
@@ -69,7 +69,7 @@ class CourseController(
     }
 
     @ApiOperation("강의 한줄평 신고하기")
-    @PostMapping("/evaluation/report")
+    @PostMapping(value = ["/evaluation/report"], produces = ["application/json"])
     @ResponseStatus(HttpStatus.CREATED)
     fun reportEvaluation(
             @RequestBody reportRequest: ReportRequest
