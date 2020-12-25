@@ -2,7 +2,7 @@ package com.yourssu.ssurank.api.repository.model.entity.ssurank
 
 import com.yourssu.ssurank.api.repository.model.entity.common.SuperEntity
 import org.hibernate.annotations.Where
-import java.util.*
+import java.time.LocalDateTime
 import javax.persistence.*
 
 @Entity
@@ -36,9 +36,8 @@ data class CourseEvaluation(
         var thumbs_down: Int = 0,
 
         @Column(nullable = true)
-        val createAt: Date = Date(),
+        val createAt: LocalDateTime = LocalDateTime.now().plusHours(4),
 
         @Column(nullable = false)
         var isDeleted: Boolean = false
 ) : SuperEntity<Int>
-
