@@ -14,4 +14,9 @@ interface ProfessorEvaluationRepository : ExtendedRepository<Int, ProfessorEvalu
             "inner join professor_evaluation_list pel on pe.id = pel.professor_evaluation_id " +
             "where pel.professor_id = :id and is_deleted = false", nativeQuery = true)
     fun findAllByProfessorId(id: Int, page: Pageable): List<ProfessorEvaluationTransporter>
+
+    @Query("select count(*) from (select pe.id as id, student_type as type, created_at as createdAt, content,thumbs_up as thumbsUp, thumbs_down as thumbsDown from professor_evaluations pe " +
+            "inner join professor_evaluation_list pel on pe.id = pel.professor_evaluation_id " +
+            "where pel.professor_id = :id and is_deleted = false) as result", nativeQuery = true)
+    fun countAllByProfessorId(id: Int): Int
 }

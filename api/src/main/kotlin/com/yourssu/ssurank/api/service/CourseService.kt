@@ -44,4 +44,12 @@ class CourseService(
     fun getRecommendedCourseEvaluations(id: Int, page: Int) : List<CourseEvaluationTransporter>{
         return getCourseEvaluationsFunction.getRecommendedCourseEvaluations(id, page)
     }
+
+    fun countCourseByTitle(title: String) : Int{
+        return searchCourseFunction.countCourseByTitle(title)
+    }
+
+    fun countCourseEvaluations(id: Int): Int{
+        return getCourseEvaluationsFunction.countCourseEvaluations(id)
+    }
 }

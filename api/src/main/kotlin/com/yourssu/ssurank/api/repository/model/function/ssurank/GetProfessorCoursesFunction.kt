@@ -14,4 +14,8 @@ class GetProfessorCoursesFunction(
             Page(page - 1, 5, "rating")
         return professorDataAccessor.getCoursesById(id, requestedPage)
     }
+
+    fun countProfessorCourses(id: Int): Int{
+        return professorDataAccessor.countProfessorCourses(id)
+    }
 }

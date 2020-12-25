@@ -52,7 +52,7 @@ import javax.persistence.*
 @NamedNativeQueries(
 NamedNativeQuery(
         name = "Course.searchCourseByTitle",
-        query = "select * from (select name, c.id as courseId, department, title, year, semester, c.ranking from courses c inner join course_professor cp on c.id = cp.course_id inner join professors p on p.id = cp.professor_id where title COLLATE UTF8_GENERAL_CI like CONCAT('%',:title,'%') group by name, year, semester order by year desc, semester desc, c.rating desc, title asc, name asc) as result group by name",
+        query = "select * from (select name, c.id as courseId, department, title, year, semester, c.ranking from courses c inner join course_professor cp on c.id = cp.course_id inner join professors p on p.id = cp.professor_id where title like CONCAT('%',UPPER(:title),'%') group by name, year, semester order by year desc, semester desc, c.rating desc, title asc, name asc) as result group by name",
         resultSetMapping = "SearchCourseDto"
 ), NamedNativeQuery(
         name = "Course.findDetailedCourseById",
@@ -62,7 +62,7 @@ NamedNativeQuery(
         name = "Course.getCourseHistoryByCodeAndName",
         query = "select year, semester, c.ranking from courses c inner join course_professor cp on c.id = cp.course_id inner join professors p on p.id = cp.professor_id where code = :code and p.name like :name group by year, semester",
         resultSetMapping = "GetHistoryCourseDto"
-        )
+)
 )
 
 

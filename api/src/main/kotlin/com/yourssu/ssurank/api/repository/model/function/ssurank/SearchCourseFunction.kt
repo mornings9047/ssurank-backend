@@ -16,4 +16,8 @@ class SearchCourseFunction(
 
         return courseDataAccessor.searchCourseByTitle(title, requestedPage)
     }
+
+    fun countCourseByTitle(title: String): Int{
+        return courseDataAccessor.countCourseByTitle(title)
+    }
 }

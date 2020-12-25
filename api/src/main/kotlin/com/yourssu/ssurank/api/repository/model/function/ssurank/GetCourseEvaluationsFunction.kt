@@ -22,4 +22,8 @@ class GetCourseEvaluationsFunction(
             Page(page - 1, 10, "thumbsUp")
         return courseEvaluationDataAccessor.getCourseEvaluations(id, requestedPage)
     }
+
+    fun countCourseEvaluations(id: Int): Int{
+        return courseEvaluationDataAccessor.countCourseEvaluations(id)
+    }
 }
