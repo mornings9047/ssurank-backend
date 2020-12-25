@@ -12,7 +12,7 @@ class AdminReportService(
 ) {
     val deleteEvaluationFunction = DeleteEvaluationFunction(courseEvaluationDataAccessor, professorEvaluationDataAccessor)
 
-    fun deleteEvaluation(evaluateId: Int, reportType: String) {
-        return deleteEvaluationFunction.deleteCourseEvaluation(evaluateId, reportType)
+    fun deleteEvaluation(reportType: String, evaluateId: Int) {
+        return deleteEvaluationFunction.deleteCourseEvaluation(reportType, evaluateId)
     }
 }
