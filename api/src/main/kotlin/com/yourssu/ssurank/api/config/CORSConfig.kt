@@ -11,6 +11,6 @@ class CORSConfig : WebFluxConfigurer {
                 .allowedOrigins("https://ssurank.herokuapp.com")
                 .allowedMethods("*")
                 .allowedHeaders("*")
-                .allowCredentials(true)
+                .allowCredentials(false)
     }
 }
