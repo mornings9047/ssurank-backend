@@ -30,5 +30,5 @@ data class Report(
         val content: String,
 
         @Column
-        val reportedAt: LocalDateTime = LocalDateTime.now().plusHours(4),
+        val reportedAt: LocalDateTime = LocalDateTime.now()
 ) : SuperEntity<Int>

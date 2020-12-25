@@ -36,7 +36,7 @@ data class CourseEvaluation(
         var thumbs_down: Int = 0,
 
         @Column(nullable = true)
-        val createAt: LocalDateTime = LocalDateTime.now().plusHours(4),
+        val createAt: LocalDateTime = LocalDateTime.now(),
 
         @Column(nullable = false)
         var isDeleted: Boolean = false

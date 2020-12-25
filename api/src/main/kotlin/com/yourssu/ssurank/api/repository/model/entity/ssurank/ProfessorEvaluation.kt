@@ -30,7 +30,7 @@ data class ProfessorEvaluation(
         var thumbsDown: Int = 0,
 
         @Column
-        val createdAt: LocalDateTime = LocalDateTime.now().plusHours(4),
+        val createdAt: LocalDateTime = LocalDateTime.now(),
 
         @Column
         var isDeleted: Boolean = false
