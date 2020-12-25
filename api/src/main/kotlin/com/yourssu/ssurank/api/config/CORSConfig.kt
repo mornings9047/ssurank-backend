@@ -8,9 +8,9 @@ import org.springframework.web.reactive.config.WebFluxConfigurer
 class CORSConfig : WebFluxConfigurer {
     override fun addCorsMappings(registry: CorsRegistry) {
         registry.addMapping("/**")
-                .allowedOrigins("*")
+                .allowedOrigins("https://ssurank.herokuapp.com")
                 .allowedMethods("*")
                 .allowedHeaders("*")
-                .allowCredentials(false)
+                .allowCredentials(true)
     }
 }
