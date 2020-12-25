@@ -8,14 +8,12 @@ class DeleteEvaluationFunction(
         private val courseEvaluationDataAccessor: CourseEvaluationDataAccessor,
         private val professorEvaluationDataAccessor: ProfessorEvaluationDataAccessor
 ) {
-    fun deleteCourseEvaluation(evaluateId: Int, reportType: String) {
+    fun deleteCourseEvaluation(reportType: String, evaluateId: Int) {
         if (ReportType.COURSE.toString() == reportType) {
             val courseEvaluation = courseEvaluationDataAccessor.getCourseEvaluation(evaluateId)
             courseEvaluation.isDeleted = true
             courseEvaluationDataAccessor.save(courseEvaluation)
-        }
-
-        else{
+        } else {
             val professorEvaluation = professorEvaluationDataAccessor.getProfessorEvaluation(evaluateId)
             professorEvaluation.isDeleted = true
             professorEvaluationDataAccessor.save(professorEvaluation)

@@ -10,13 +10,13 @@ import org.springframework.web.bind.annotation.*
 class AdminReportController(
         val adminReportService: AdminReportService
 ) {
-    @GetMapping("/delete/{reportType}/{evaluateId}")
+    @DeleteMapping("/delete/{reportType}/{evaluateId}")
     @ResponseStatus(HttpStatus.OK)
     fun deleteEvaluation(
-            @PathVariable evaluateId: Int,
-            @PathVariable reportType: String
+            @PathVariable reportType: String,
+            @PathVariable evaluateId: Int
     ) {
-        return adminReportService.deleteEvaluation(evaluateId, reportType)
+        return adminReportService.deleteEvaluation(reportType, evaluateId)
     }
 }
 
