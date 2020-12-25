@@ -8,7 +8,7 @@ import javax.persistence.*
 
 @Entity
 @Table(name = "professor_evaluations")
-@Where(clause = "is_deleted = false")
+@Where(clause = "is_deleted = 0")
 data class ProfessorEvaluation(
         @field:Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)
