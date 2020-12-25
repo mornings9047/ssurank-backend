@@ -7,7 +7,7 @@ import javax.persistence.*
 
 @Entity
 @Table(name = "course_evaluations")
-@Where(clause = "is_deleted = false")
+@Where(clause = "is_deleted = 0")
 data class CourseEvaluation(
         @field:Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -39,6 +39,6 @@ data class CourseEvaluation(
         val createAt: Date = Date(),
 
         @Column(nullable = false)
-        var isDeleted: Boolean? = false
+        var isDeleted: Boolean = false
 ) : SuperEntity<Int>
 
