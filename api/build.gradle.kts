@@ -33,6 +33,10 @@ dependencies {
     testImplementation("io.projectreactor:reactor-test")
 
     implementation("io.springfox:springfox-boot-starter:3.0.0")
+
+    implementation("com.fasterxml.jackson.core:jackson-core:2.11.3")
+    implementation("com.fasterxml.jackson.core:jackson-databind:2.11.3")
+    implementation("com.fasterxml.jackson.core:jackson-annotations:2.11.3")
 }
 
 tasks.withType<Test> {

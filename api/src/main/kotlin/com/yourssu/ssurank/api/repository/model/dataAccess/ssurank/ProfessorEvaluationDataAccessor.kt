@@ -1,6 +1,7 @@
 package com.yourssu.ssurank.api.repository.model.dataAccess.ssurank
 
 import com.yourssu.ssurank.api.repository.model.entity.ssurank.ProfessorEvaluation
+import com.yourssu.ssurank.api.repository.model.projection.ssurank.MainProfessorEvaluationTransporter
 import com.yourssu.ssurank.api.repository.model.projection.ssurank.ProfessorEvaluationTransporter
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.data.domain.Pageable
@@ -12,6 +13,10 @@ class ProfessorEvaluationDataAccessor(
 ) : DataAccessorAdapterRepository<Int, ProfessorEvaluation, ProfessorEvaluationRepository>() {
     fun save(professorEvaluation: ProfessorEvaluation): ProfessorEvaluation {
         return repository.save(professorEvaluation)
+    }
+
+    fun getMainProfessorEvaluations(page: Pageable): List<MainProfessorEvaluationTransporter> {
+        return repository.findMainCourseEvaluations(page)
     }
 
     fun getProfessorEvaluations(id: Int, page: Pageable): List<ProfessorEvaluationTransporter> {

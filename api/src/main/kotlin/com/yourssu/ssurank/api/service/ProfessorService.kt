@@ -7,10 +7,7 @@ import com.yourssu.ssurank.api.repository.model.dataAccess.ssurank.ProfessorEval
 import com.yourssu.ssurank.api.repository.model.dataTransfer.ssurank.DetailedProfessorDto
 import com.yourssu.ssurank.api.repository.model.dataTransfer.ssurank.SearchProfessorDto
 import com.yourssu.ssurank.api.repository.model.function.ssurank.*
-import com.yourssu.ssurank.api.repository.model.projection.ssurank.DepartmentTransporter
-import com.yourssu.ssurank.api.repository.model.projection.ssurank.DetailedProfessorCoursesTransporter
-import com.yourssu.ssurank.api.repository.model.projection.ssurank.ProfessorEvaluationTransporter
-import com.yourssu.ssurank.api.repository.model.projection.ssurank.ProfessorTransporter
+import com.yourssu.ssurank.api.repository.model.projection.ssurank.*
 import com.yourssu.ssurank.api.request.ProfessorEvaluationRequest
 import org.springframework.stereotype.Service
 import reactor.core.publisher.Flux
@@ -56,6 +53,10 @@ class ProfessorService(
 
     fun evaluateProfessor(professorEvaluationRequest: ProfessorEvaluationRequest) {
         return insertProfessorEvaluationFunction.insertProfessorEvaluation(professorEvaluationRequest)
+    }
+
+    fun getMainCourseEvaluations(): List<MainProfessorEvaluationTransporter> {
+        return getProfessorEvaluationsFunction.getMainCourseEvaluations()
     }
 
     fun getRecentProfessorEvaluations(id: Int, page: Int): List<ProfessorEvaluationTransporter> {
