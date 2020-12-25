@@ -10,6 +10,7 @@ class CORSConfig : WebFluxConfigurer {
         registry.addMapping("/**")
                 .allowedOrigins("*")
                 .allowedMethods("*")
+                .allowedHeaders("*")
                 .allowCredentials(false)
     }
 }
