@@ -30,10 +30,8 @@ interface CourseRepository : ExtendedRepository<Int, Course> {
     @Query(nativeQuery = true)
     fun getCourseHistoryByCodeAndName(code: String, name: String): List<GetHistoryCourseDto>
 
-    @Query("select count(*) from(select * from (select name, c.id as courseId, department, title, year, " +
-            "semester, c.ranking from courses c inner join course_professor cp on c.id = cp.course_id inner join " +
-            "professors p on p.id = cp.professor_id where title COLLATE UTF8_GENERAL_CI like %:title% " +
-            "group by name, year, semester order by year desc, semester desc, c.rating desc, title asc, name asc) " +
-            "as result group by name) as count", nativeQuery = true)
+    @Query("select count(*) from (select * from (select name, code, c.id as courseId, department, title, year, semester, c.ranking from courses c inner join course_professor\n" +
+            "cp on c.id = cp.course_id inner join professors p on p.id = cp.professor_id where title COLLATE UTF8_GENERAL_CI like %:title% group by name, " +
+            "year, semester order by year desc, semester desc, c.rating desc, title asc, name asc) as result group by name, code) as count", nativeQuery = true)
     fun countCourseByTitle(title: String): Int
 }

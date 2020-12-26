@@ -84,5 +84,5 @@ interface ProfessorRepository : ExtendedRepository<Int, Professor> {
             "order by year desc, semester desc) as courses " +
             "group by title " +
             "order by rating desc) as result", nativeQuery = true)
-    fun countProfessorCourses(id: Int) : Int
+    fun countProfessorCourses(id: Int): Int
 }
