@@ -43,7 +43,7 @@ interface ProfessorRepository : ExtendedRepository<Int, Professor> {
     @Query("select ceiling( " +
             "((select count(*) from course_professor) " +
             "- (select count(*) from (select count(course_id) from course_professor " +
-            "group by professor_id having count(course_id) = (select count(*) from course_professor where professor_id = :id)) as a)) " +
+            "group by professor_id having count(course_id) < (select count(*) from course_professor where professor_id = :id)) as a)) " +
             "/ (select count(*) from course_professor) * 100) as percent", nativeQuery = true)
     fun getTopPercent(id: Int): Int
 
