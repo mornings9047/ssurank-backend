@@ -101,10 +101,9 @@ data class Course(
         val target: String?,
 
         @Column(nullable = true)
-        val rating: Float = 0.0F,
+        val rating: Float = 0F,
 
         @Column(length = 2, nullable = true)
         @Enumerated(EnumType.STRING)
         var ranking: Ranking = Ranking.D0
-
 ) : SuperEntity<Int>

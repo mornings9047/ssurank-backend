@@ -30,7 +30,7 @@ class ProfessorDataAccessor(
     }
 
     fun getTop10Honors(): Flux<ProfessorTransporter> {
-        return monoFromCallableWithScheduler { repository.getProfessorsHavingCoursesOverTen() }
+        return monoFromCallableWithScheduler { repository.getTop10Honors() }
                 .flatMapMany { Flux.fromIterable(it) }
     }
 

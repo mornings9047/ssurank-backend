@@ -3,7 +3,6 @@ package com.yourssu.ssurank.api.repository.model.entity.ssurank
 import com.yourssu.ssurank.api.repository.model.entity.common.SuperEntity
 import org.hibernate.annotations.Where
 import java.time.LocalDateTime
-import java.util.*
 import javax.persistence.*
 
 @Entity
@@ -31,7 +30,7 @@ data class ProfessorEvaluation(
         var thumbsDown: Int = 0,
 
         @Column
-        val createdAt: Date = Date(),
+        val createdAt: LocalDateTime = LocalDateTime.now(),
 
         @Column
         var isDeleted: Boolean = false

@@ -10,6 +10,7 @@ import com.yourssu.ssurank.api.repository.model.function.ssurank.GetDetailedCour
 import com.yourssu.ssurank.api.repository.model.function.ssurank.InsertCourseEvaluationFunction
 import com.yourssu.ssurank.api.repository.model.function.ssurank.SearchCourseFunction
 import com.yourssu.ssurank.api.repository.model.projection.ssurank.CourseEvaluationTransporter
+import com.yourssu.ssurank.api.repository.model.projection.ssurank.MainCourseEvaluationTransporter
 import com.yourssu.ssurank.api.request.CourseEvaluationRequest
 import org.springframework.stereotype.Service
 import reactor.core.publisher.Flux
@@ -35,6 +36,10 @@ class CourseService(
 
     fun evaluateCourse(courseEvaluationRequest: CourseEvaluationRequest) {
         return insertCourseEvaluationFunction.insertCourseEvaluation(courseEvaluationRequest)
+    }
+
+    fun getMainCourseEvaluations(): List<MainCourseEvaluationTransporter> {
+        return getCourseEvaluationsFunction.getMainCourseEvaluations()
     }
 
     fun getRecentCourseEvaluations(id: Int, page: Int): List<CourseEvaluationTransporter> {

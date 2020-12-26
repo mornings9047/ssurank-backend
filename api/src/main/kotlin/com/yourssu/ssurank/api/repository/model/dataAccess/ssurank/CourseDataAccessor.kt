@@ -34,11 +34,11 @@ class CourseDataAccessor(
         }
     }
 
-    fun findDetailedCourseById(id: Int) : DetailedCourseTransporter {
+    fun findDetailedCourseById(id: Int): DetailedCourseTransporter {
         return repository.findDetailedCourseById(id)
     }
 
-    fun getCourseHistoryByCodeAndName(code: String, name: String) : List<GetHistoryCourseDto>{
+    fun getCourseHistoryByCodeAndName(code: String, name: String): List<GetHistoryCourseDto> {
         return repository.getCourseHistoryByCodeAndName(code, name)
     }
 
@@ -51,11 +51,11 @@ class CourseDataAccessor(
         return monoFromCallableWithScheduler { repository.save(course) }
     }
 
-    fun findByCourseId(id: Int): Course{
+    fun findByCourseId(id: Int): Course {
         return repository.findCourseById(id)
     }
 
-    fun countCourseByTitle(title: String): Int{
+    fun countCourseByTitle(title: String): Int {
         return repository.countCourseByTitle(title)
     }
 }

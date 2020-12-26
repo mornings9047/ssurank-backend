@@ -114,6 +114,13 @@ class ProfessorController(
         return professorService.evaluateProfessor(professorEvaluationRequest)
     }
 
+    @ApiOperation("교수 한줄평 메인 가져오기")
+    @GetMapping("/evaluation/main")
+    @ResponseStatus(HttpStatus.OK)
+    fun getRecentCourseEvaluations(): MainProfessorEvaluationResponse {
+        return MainProfessorEvaluationResponse(professorService.getMainCourseEvaluations())
+    }
+
     @ApiOperation("교수 한줄평 수 가져오기")
     @GetMapping("/evaluation/{professorId}")
     @ResponseStatus(HttpStatus.OK)

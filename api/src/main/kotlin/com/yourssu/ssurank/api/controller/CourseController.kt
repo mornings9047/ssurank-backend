@@ -6,6 +6,7 @@ import com.yourssu.ssurank.api.request.CourseEvaluationRequest
 import com.yourssu.ssurank.api.request.ReportRequest
 import com.yourssu.ssurank.api.response.CourseEvaluationResponse
 import com.yourssu.ssurank.api.response.DetailedCourseResponse
+import com.yourssu.ssurank.api.response.MainCourseEvaluationResponse
 import com.yourssu.ssurank.api.response.SearchCourseResponse
 import com.yourssu.ssurank.api.service.CourseService
 import com.yourssu.ssurank.api.service.ReportService
@@ -49,12 +50,19 @@ class CourseController(
     }
 
     @ApiOperation("강의 한줄평 작성하기")
-    @PostMapping(value = ["/evaluation"], consumes = ["application/json"], produces = ["application/json"])
+    @PostMapping(value = ["/evaluation"], consumes = ["application/json"])
     @ResponseStatus(HttpStatus.CREATED)
     fun evaluationCourse(
             @RequestBody courseEvaluationRequest: CourseEvaluationRequest
     ) {
         return courseService.evaluateCourse(courseEvaluationRequest)
+    }
+
+    @ApiOperation("강의 한줄평 메인 가져오기")
+    @GetMapping("/evaluation/main")
+    @ResponseStatus(HttpStatus.OK)
+    fun getRecentCourseEvaluations(): MainCourseEvaluationResponse {
+        return MainCourseEvaluationResponse(courseService.getMainCourseEvaluations())
     }
 
     @ApiOperation("강의 한줄평 수 가져오기")

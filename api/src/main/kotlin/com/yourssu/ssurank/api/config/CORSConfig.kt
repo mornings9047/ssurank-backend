@@ -10,7 +10,6 @@ class CORSConfig : WebFluxConfigurer {
         registry.addMapping("/**")
                 .allowedOrigins("*")     //https://ssurank.netlify.app/
                 .allowedMethods("*")
-                .allowedHeaders("*")
                 .allowCredentials(false)
     }
 }
