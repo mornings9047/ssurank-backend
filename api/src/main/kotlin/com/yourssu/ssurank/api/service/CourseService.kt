@@ -37,19 +37,19 @@ class CourseService(
         return insertCourseEvaluationFunction.insertCourseEvaluation(courseEvaluationRequest)
     }
 
-    fun getRecentCourseEvaluations(id: Int, page: Int) : List<CourseEvaluationTransporter>{
+    fun getRecentCourseEvaluations(id: Int, page: Int): List<CourseEvaluationTransporter> {
         return getCourseEvaluationsFunction.getRecentCourseEvaluations(id, page)
     }
 
-    fun getRecommendedCourseEvaluations(id: Int, page: Int) : List<CourseEvaluationTransporter>{
+    fun getRecommendedCourseEvaluations(id: Int, page: Int): List<CourseEvaluationTransporter> {
         return getCourseEvaluationsFunction.getRecommendedCourseEvaluations(id, page)
     }
 
-    fun countCourseByTitle(title: String) : Int{
+    fun countCourseByTitle(title: String): Int {
         return searchCourseFunction.countCourseByTitle(title)
     }
 
-    fun countCourseEvaluations(id: Int): Int{
+    fun countCourseEvaluations(id: Int): Int {
         return getCourseEvaluationsFunction.countCourseEvaluations(id)
     }
 }

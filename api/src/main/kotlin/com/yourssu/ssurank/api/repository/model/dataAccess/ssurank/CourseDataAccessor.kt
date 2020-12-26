@@ -56,6 +56,6 @@ class CourseDataAccessor(
     }
 
     fun countCourseByTitle(title: String): Int{
-        return repository.countCourseBytitle(title)
+        return repository.countCourseByTitle(title)
     }
 }

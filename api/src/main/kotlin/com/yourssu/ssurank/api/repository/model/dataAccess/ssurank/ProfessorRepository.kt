@@ -73,14 +73,10 @@ interface ProfessorRepository : ExtendedRepository<Int, Professor> {
 
     fun findProfessorById(id: Int): Professor
 
-    @Query("select count(*) from (select distinct p.id as id, name, department, position, ranking, count(cp.course_id) as courseCnt from " +
-            "professors p inner join course_professor cp on p.id = cp.professor_id " +
-            "where name COLLATE UTF8_GENERAL_CI like %:name% group by id) as result", nativeQuery = true)
+    @Query("select count(*) from professors where name COLLATE UTF8_GENERAL_CI like %:name%", nativeQuery = true)
     fun countProfessorAllByName(name: String): Int
 
-    @Query("select count(*) from (select p.id as id, name, department, position, ranking, count(cp.course_id) as courseCnt " +
-            "from professors p inner join course_professor cp on p.id = cp.professor_id  where department = :department " +
-            "group by p.id) as result", nativeQuery = true)
+    @Query("select count(*) from professors where department = :department", nativeQuery = true)
     fun countDepartment(department: String): Int
 
     @Query("select count(*) from(select courseId, ranking, name, department, title, year, semester from (" +

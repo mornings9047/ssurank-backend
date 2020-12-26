@@ -26,7 +26,7 @@ class ProfessorController(
         return DepartmentListResponse(professorService.getDepartmentList())
     }
 
-    @ApiOperation("학과별 랭킹 수 가져오기")
+    @ApiOperation("학과별 교수 인원 수 가져오기")
     @GetMapping("/department/{department}")
     @ResponseStatus(HttpStatus.OK)
     fun countDepartment(
