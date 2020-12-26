@@ -22,9 +22,9 @@ interface ProfessorRepository : ExtendedRepository<Int, Professor> {
             "inner join course_professor cp on p.id = cp.professor_id " +
             "where ranking <> 'U' " +
             "group by name, college, department, position " +
-            "having count(cp.course_id) >= 10 " +
+            "having count(cp.course_id) >= 15 " +
             "order by rating desc limit 10", nativeQuery = true)
-    fun getProfessorsHavingCoursesOverTen(): List<ProfessorTransporter>
+    fun getTop10Honors(): List<ProfessorTransporter>
 
     @Query("select distinct p.id as id, name, department, position, ranking, count(cp.course_id) as courseCnt " +
             "from professors p " +
