@@ -65,4 +65,20 @@ class ProfessorService(
     fun getRecommendedProfessorEvaluations(id: Int, page: Int): List<ProfessorEvaluationTransporter> {
         return getProfessorEvaluationsFunction.getRecommendedProfessorEvaluations(id, page)
     }
+
+    fun countDepartment(department: String): Int{
+        return searchProfessorFunction.countDepartment(department)
+    }
+
+    fun countProfessor(name: String): Int{
+        return searchProfessorFunction.countProfessor(name)
+    }
+
+    fun countProfessorCourses(id: Int): Int{
+        return getProfessorCoursesFunction.countProfessorCourses(id)
+    }
+
+    fun countProfessorEvaluations(id: Int): Int{
+        return getProfessorEvaluationsFunction.countProfessorEvaluations(id)
+    }
 }

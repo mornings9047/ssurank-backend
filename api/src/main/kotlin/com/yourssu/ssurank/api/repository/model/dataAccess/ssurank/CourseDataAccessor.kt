@@ -54,4 +54,8 @@ class CourseDataAccessor(
     fun findByCourseId(id: Int): Course{
         return repository.findCourseById(id)
     }
+
+    fun countCourseByTitle(title: String): Int{
+        return repository.countCourseByTitle(title)
+    }
 }

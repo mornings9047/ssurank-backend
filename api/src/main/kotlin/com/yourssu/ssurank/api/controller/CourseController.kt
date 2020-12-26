@@ -32,6 +32,15 @@ class CourseController(
                 .map { SearchCourseResponse(it) }
     }
 
+    @ApiOperation("강의 검색결과 수 가져오기")
+    @GetMapping("/search/{title}")
+    @ResponseStatus(HttpStatus.OK)
+    fun countCourseByTitle(
+            @PathVariable title: String
+    ): Int {
+        return courseService.countCourseByTitle(title)
+    }
+
     @ApiOperation("강의 상세보기")
     @GetMapping("/detail/{id}")
     @ResponseStatus(HttpStatus.OK)
@@ -46,6 +55,15 @@ class CourseController(
             @RequestBody courseEvaluationRequest: CourseEvaluationRequest
     ) {
         return courseService.evaluateCourse(courseEvaluationRequest)
+    }
+
+    @ApiOperation("강의 한줄평 수 가져오기")
+    @GetMapping("/evaluation/{courseId}")
+    @ResponseStatus(HttpStatus.OK)
+    fun countCourseEvaluations(
+            @PathVariable courseId: Int
+    ): Int {
+        return courseService.countCourseEvaluations(courseId)
     }
 
     @ApiOperation("강의 한줄평 최신순 가져오기")

@@ -62,7 +62,7 @@ NamedNativeQuery(
         name = "Course.getCourseHistoryByCodeAndName",
         query = "select year, semester, c.ranking from courses c inner join course_professor cp on c.id = cp.course_id inner join professors p on p.id = cp.professor_id where code = :code and p.name like :name group by year, semester",
         resultSetMapping = "GetHistoryCourseDto"
-        )
+)
 )
 
 
