@@ -17,5 +17,5 @@ enum class Ranking {
     D1, //  D+
     D2, //  D0
     D3, //  D-
-    U   // Unranked
+    U0   // Unranked
 }

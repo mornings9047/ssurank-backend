@@ -27,5 +27,5 @@ data class Professor(
 
         @Column(length = 2, nullable = true)
         @Enumerated(EnumType.STRING)
-        var ranking: Ranking = Ranking.U
+        var ranking: Ranking = Ranking.U0
 ) : SuperEntity<Int>

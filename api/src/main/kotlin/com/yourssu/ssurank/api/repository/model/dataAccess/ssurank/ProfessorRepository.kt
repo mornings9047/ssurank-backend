@@ -20,7 +20,7 @@ interface ProfessorRepository : ExtendedRepository<Int, Professor> {
 
     @Query("select p.id as id, name, department, position, ranking from professors p " +
             "inner join course_professor cp on p.id = cp.professor_id " +
-            "where ranking <> 'U' " +
+            "where ranking <> 'U0' " +
             "group by name, college, department, position " +
             "having count(cp.course_id) >= 15 " +
             "order by rating desc limit 10", nativeQuery = true)
