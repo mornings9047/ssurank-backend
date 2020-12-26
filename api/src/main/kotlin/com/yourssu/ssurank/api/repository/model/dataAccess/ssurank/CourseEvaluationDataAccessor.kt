@@ -27,4 +27,8 @@ class CourseEvaluationDataAccessor(
     fun getCourseEvaluation(id: Int): CourseEvaluation {
         return repository.findById(id).get()
     }
+
+    fun countCourseEvaluations(id: Int): Int{
+        return repository.countAllByCourseId(id)
+    }
 }

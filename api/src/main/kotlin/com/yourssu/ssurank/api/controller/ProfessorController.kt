@@ -26,6 +26,15 @@ class ProfessorController(
         return DepartmentListResponse(professorService.getDepartmentList())
     }
 
+    @ApiOperation("학과별 교수 인원 수 가져오기")
+    @GetMapping("/department/{department}")
+    @ResponseStatus(HttpStatus.OK)
+    fun countDepartment(
+            @PathVariable department: String
+    ): Int {
+        return professorService.countDepartment(department)
+    }
+
     @ApiOperation("학과별 랭킹 가져오기")
     @GetMapping("/department/{department}/{page}")
     @ResponseStatus(HttpStatus.OK)
@@ -45,6 +54,15 @@ class ProfessorController(
         return professorService.getHonorProfessors()
                 .collectList()
                 .map { HonorProfessorResponse(it) }
+    }
+
+    @ApiOperation("교수 검색 결과 수 가져오기")
+    @GetMapping("/search/{name}")
+    @ResponseStatus(HttpStatus.OK)
+    fun countProfessor(
+            @PathVariable name: String
+    ): Int {
+        return professorService.countProfessor(name)
     }
 
     @ApiOperation("교수 검색하기")
@@ -68,14 +86,23 @@ class ProfessorController(
         return DetailedProfessorResponse(professorService.getDetailedProfessor(id))
     }
 
+    @ApiOperation("교수가 개설한 강의 수 가져오기")
+    @GetMapping("/courses/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    fun countProfessorCourses(
+            @PathVariable id: Int
+    ): Int {
+        return professorService.countProfessorCourses(id)
+    }
+
     @ApiOperation("교수가 개설한 강의 가져오기")
     @GetMapping("/detail/{id}/{page}")
     @ResponseStatus(HttpStatus.OK)
     fun getProfessorCourses(
             @PathVariable id: Int,
             @PathVariable page: Int
-    ): List<DetailedProfessorCoursesTransporter> {
-        return professorService.getProfessorCourses(id, page)
+    ): DetailedProfessorCoursesResponse {
+        return DetailedProfessorCoursesResponse(professorService.getProfessorCourses(id, page))
     }
 
     @ApiOperation("교수 한줄평 작성하기")
@@ -92,6 +119,15 @@ class ProfessorController(
     @ResponseStatus(HttpStatus.OK)
     fun getRecentCourseEvaluations(): MainProfessorEvaluationResponse {
         return MainProfessorEvaluationResponse(professorService.getMainCourseEvaluations())
+    }
+
+    @ApiOperation("교수 한줄평 수 가져오기")
+    @GetMapping("/evaluation/{professorId}")
+    @ResponseStatus(HttpStatus.OK)
+    fun countProfessorEvaluations(
+            @PathVariable professorId: Int
+    ): Int {
+        return professorService.countProfessorEvaluations(professorId)
     }
 
     @ApiOperation("교수 한줄평 최신순 가져오기")

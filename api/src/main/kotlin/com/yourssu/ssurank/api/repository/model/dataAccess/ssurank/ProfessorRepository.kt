@@ -67,4 +67,22 @@ interface ProfessorRepository : ExtendedRepository<Int, Professor> {
     fun getCoursesById(id: Int, page: Pageable): List<DetailedProfessorCoursesTransporter>
 
     fun findProfessorById(id: Int): Professor
+
+    @Query("select count(*) from professors where name COLLATE UTF8_GENERAL_CI like %:name%", nativeQuery = true)
+    fun countProfessorAllByName(name: String): Int
+
+    @Query("select count(*) from professors where department = :department", nativeQuery = true)
+    fun countDepartment(department: String): Int
+
+    @Query("select count(*) from(select courseId, ranking, name, department, title, year, semester from (" +
+            "select c.rating as rating, c.id as courseId, c.ranking, name, department, title, year, semester " +
+            "from courses c " +
+            "inner join course_professor cp on c.id = cp.course_id " +
+            "inner join professors p on p.id = cp.professor_id " +
+            "where p.id = :id " +
+            "group by title, code, year, semester " +
+            "order by year desc, semester desc) as courses " +
+            "group by title " +
+            "order by rating desc) as result", nativeQuery = true)
+    fun countProfessorCourses(id: Int) : Int
 }

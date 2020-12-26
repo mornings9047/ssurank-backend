@@ -13,7 +13,10 @@ class SearchCourseFunction(
             Page(0, 10, "name")
         else
             Page(page - 1, 10, "name")
-
         return courseDataAccessor.searchCourseByTitle(title, requestedPage)
+    }
+
+    fun countCourseByTitle(title: String): Int {
+        return courseDataAccessor.countCourseByTitle(title)
     }
 }

@@ -25,4 +25,9 @@ interface CourseEvaluationRepository : ExtendedRepository<Int, CourseEvaluation>
             "inner join course_evaluation_list cel on ce.id = cel.course_evaluation_id " +
             "where cel.course_id = :id and is_deleted = false", nativeQuery = true)
     fun findAllByCourseId(id: Int, page: Pageable): List<CourseEvaluationTransporter>
+
+    @Query("select count(*) from course_evaluations ce\n" +
+            "inner join course_evaluation_list cel on ce.id = cel.course_evaluation_id\n" +
+            "where cel.course_id = :id and is_deleted = false", nativeQuery = true)
+    fun countAllByCourseId(id: Int): Int
 }

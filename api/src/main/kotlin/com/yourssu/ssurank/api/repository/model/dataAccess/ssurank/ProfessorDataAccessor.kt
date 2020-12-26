@@ -58,4 +58,16 @@ class ProfessorDataAccessor(
     fun findByProfessorId(id: Int): Professor{
         return repository.findProfessorById(id)
     }
+
+    fun countProfessorAllByName(name: String): Int{
+        return repository.countProfessorAllByName(name)
+    }
+
+    fun countDepartment(department: String): Int{
+        return repository.countDepartment(department)
+    }
+
+    fun countProfessorCourses(id: Int): Int{
+        return repository.countProfessorCourses(id)
+    }
 }

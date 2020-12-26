@@ -27,4 +27,13 @@ class SearchProfessorFunction(
             SearchProfessorDto(it)
         }
     }
+
+    fun countDepartment(department: String): Int{
+        return professorDataAccessor.countDepartment(department)
+    }
+
+
+    fun countProfessor(name: String): Int{
+        return professorDataAccessor.countProfessorAllByName(name)
+    }
 }

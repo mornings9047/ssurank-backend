@@ -28,4 +28,8 @@ class GetProfessorEvaluationsFunction(
             Page(page - 1, 10, "thumbsUp")
         return professorEvaluationDataAccessor.getProfessorEvaluations(id, requestedPage)
     }
+
+    fun countProfessorEvaluations(id: Int): Int{
+        return professorEvaluationDataAccessor.countProfessorEvaluations(id)
+    }
 }
