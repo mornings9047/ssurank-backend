@@ -13,6 +13,7 @@ import javax.persistence.*
                     columns = [
                         ColumnResult(name = "courseId", type = Int::class),
                         ColumnResult(name = "name", type = String::class),
+                        ColumnResult(name = "code", type = String::class),
                         ColumnResult(name = "department", type = String::class),
                         ColumnResult(name = "title", type = String::class),
                         ColumnResult(name = "year", type = Int::class),
@@ -37,30 +38,34 @@ import javax.persistence.*
                 ]
         ),
         SqlResultSetMapping(name = "GetHistoryCourseDto",
-        classes = [
-            ConstructorResult(targetClass = GetHistoryCourseDto::class,
-                    columns = [
-                        ColumnResult(name = "year", type = Int::class),
-                        ColumnResult(name = "semester", type = String::class),
-                        ColumnResult(name = "ranking", type = String::class),
-                    ]
-            )
-        ]
-)
+                classes = [
+                    ConstructorResult(targetClass = GetHistoryCourseDto::class,
+                            columns = [
+                                ColumnResult(name = "year", type = Int::class),
+                                ColumnResult(name = "semester", type = String::class),
+                                ColumnResult(name = "ranking", type = String::class),
+                            ]
+                    )
+                ]
+        )
 )
 
 @NamedNativeQueries(
-NamedNativeQuery(
-        name = "Course.searchCourseByTitle",
-        query = "select * from (select name, c.id as courseId, department, title, year, semester, c.ranking from courses c inner join course_professor cp on c.id = cp.course_id inner join professors p on p.id = cp.professor_id where title COLLATE UTF8_GENERAL_CI like CONCAT('%',:title,'%') group by name, year, semester order by year desc, semester desc, c.rating desc, title asc, name asc) as result group by name",
-        resultSetMapping = "SearchCourseDto"
-), NamedNativeQuery(
+        NamedNativeQuery(
+                name = "Course.searchCourseByTitle",
+                query = "select * from (select name, c.id as courseId, department, code, title, year, semester, c.ranking from courses c inner join course_professor " +
+                        "cp on c.id = cp.course_id inner join professors p on p.id = cp.professor_id where title COLLATE UTF8_GENERAL_CI like CONCAT('%',:title,'%') " +
+                        "group by name, year, semester order by year desc, semester desc, c.rating desc, title asc, name asc) as result group by name, code",
+                resultSetMapping = "SearchCourseDto"
+        ), NamedNativeQuery(
         name = "Course.findDetailedCourseById",
-        query = "select p.id as professorId, code, name, department, title, c.ranking from courses c inner join course_professor cp on c.id = cp.course_id inner join professors p on p.id = cp.professor_id where c.id = :id",
+        query = "select p.id as professorId, code, name, department, title, c.ranking from courses c inner join course_professor cp on c.id = cp.course_id " +
+                "inner join professors p on p.id = cp.professor_id where c.id = :id",
         resultSetMapping = "DetailedCourseTransporter"
 ), NamedNativeQuery(
         name = "Course.getCourseHistoryByCodeAndName",
-        query = "select year, semester, c.ranking from courses c inner join course_professor cp on c.id = cp.course_id inner join professors p on p.id = cp.professor_id where code = :code and p.name like :name group by year, semester",
+        query = "select year, semester, c.ranking from courses c inner join course_professor cp on c.id = cp.course_id inner join professors p " +
+                "on p.id = cp.professor_id where code = :code and p.name like :name group by year, semester",
         resultSetMapping = "GetHistoryCourseDto"
 )
 )
