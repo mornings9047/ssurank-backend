@@ -19,14 +19,14 @@ class CourseEvaluationController(
         val reportService: ReportService
 ) {
     @ApiOperation("강의 한줄평 메인 가져오기")
-    @GetMapping("/evaluation/main")
+    @GetMapping("/main")
     @ResponseStatus(HttpStatus.OK)
     fun getRecentCourseEvaluations(): MainCourseEvaluationResponse {
         return MainCourseEvaluationResponse(courseService.getMainCourseEvaluations())
     }
 
     @ApiOperation("강의 한줄평 작성하기")
-    @PostMapping(value = ["/evaluation"], consumes = ["application/json"])
+    @PostMapping(consumes = ["application/json"])
     @ResponseStatus(HttpStatus.CREATED)
     fun evaluationCourse(
             @RequestBody courseEvaluationRequest: CourseEvaluationRequest
@@ -35,7 +35,7 @@ class CourseEvaluationController(
     }
 
     @ApiOperation("강의 한줄평 최신순 가져오기")
-    @GetMapping("/evaluation/recent/{courseId}/{page}")
+    @GetMapping("/recent/{courseId}/{page}")
     @ResponseStatus(HttpStatus.OK)
     fun getRecentCourseEvaluations(
             @PathVariable courseId: Int,
@@ -45,7 +45,7 @@ class CourseEvaluationController(
     }
 
     @ApiOperation("강의 한줄평 추천순 가져오기")
-    @GetMapping("/evaluation/recommendation/{courseId}/{page}")
+    @GetMapping("/recommendation/{courseId}/{page}")
     @ResponseStatus(HttpStatus.OK)
     fun getRecommendedCourseEvaluations(
             @PathVariable courseId: Int,
@@ -55,7 +55,7 @@ class CourseEvaluationController(
     }
 
     @ApiOperation("강의 한줄평 수 가져오기")
-    @GetMapping("/evaluation/{courseId}")
+    @GetMapping("/{courseId}")
     @ResponseStatus(HttpStatus.OK)
     fun countCourseEvaluations(
             @PathVariable courseId: Int
@@ -64,7 +64,7 @@ class CourseEvaluationController(
     }
 
     @ApiOperation("강의 한줄평 신고하기")
-    @PostMapping(value = ["/evaluation/report"], consumes = ["application/json"], produces = ["application/json"])
+    @PostMapping(value = ["/report"], consumes = ["application/json"], produces = ["application/json"])
     @ResponseStatus(HttpStatus.CREATED)
     fun reportEvaluation(
             @RequestBody reportRequest: ReportRequest

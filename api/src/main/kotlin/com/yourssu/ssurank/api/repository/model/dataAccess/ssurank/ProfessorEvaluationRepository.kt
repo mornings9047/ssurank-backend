@@ -11,9 +11,10 @@ import org.springframework.stereotype.Repository
 interface ProfessorEvaluationRepository : ExtendedRepository<Int, ProfessorEvaluation> {
     fun save(professorEvaluation: ProfessorEvaluation): ProfessorEvaluation
 
-    @Query("select pe.id, name, department, content from professor_evaluations pe " +
+    @Query("select pe.id, name, original_name as department, content from professor_evaluations pe " +
             "inner join professor_evaluation_list pel on pe.id = pel.professor_evaluation_id " +
             "inner join professors p on p.id = pel.professor_id " +
+            "inner join departments d on p.department_id = d.id " +
             "where is_deleted = 0 " +
             "order by pe.id desc", nativeQuery = true)
     fun findMainCourseEvaluations(page: Pageable): List<MainProfessorEvaluationTransporter>
@@ -23,8 +24,8 @@ interface ProfessorEvaluationRepository : ExtendedRepository<Int, ProfessorEvalu
             "where pel.professor_id = :id and is_deleted = false", nativeQuery = true)
     fun findAllByProfessorId(id: Int, page: Pageable): List<ProfessorEvaluationTransporter>
 
-    @Query("select count(*) from professor_evaluations pe\n" +
-            "inner join professor_evaluation_list pel on pe.id = pel.professor_evaluation_id\n" +
+    @Query("select count(*) from professor_evaluations pe " +
+            "inner join professor_evaluation_list pel on pe.id = pel.professor_evaluation_id " +
             "where pel.professor_id = :id and is_deleted = false", nativeQuery = true)
     fun countAllByProfessorId(id: Int): Int
 }

@@ -21,13 +21,14 @@ interface CourseEvaluationRepository : ExtendedRepository<Int, CourseEvaluation>
             "order by id desc", nativeQuery = true)
     fun findMainCourseEvaluations(page: Pageable): List<MainCourseEvaluationTransporter>
 
-    @Query("select ce.id as id, student_type as type, create_at as createdAt, content, thumbs_up as thumbsUp, thumbs_down as thumbsDown from course_evaluations ce " +
+    @Query("select ce.id as id, student_type as type, create_at as createdAt, content, thumbs_up as thumbsUp, thumbs_down as thumbsDown " +
+            "from course_evaluations ce " +
             "inner join course_evaluation_list cel on ce.id = cel.course_evaluation_id " +
             "where cel.course_id = :id and is_deleted = false", nativeQuery = true)
     fun findAllByCourseId(id: Int, page: Pageable): List<CourseEvaluationTransporter>
 
-    @Query("select count(*) from course_evaluations ce\n" +
-            "inner join course_evaluation_list cel on ce.id = cel.course_evaluation_id\n" +
+    @Query("select count(*) from course_evaluations ce " +
+            "inner join course_evaluation_list cel on ce.id = cel.course_evaluation_id " +
             "where cel.course_id = :id and is_deleted = false", nativeQuery = true)
     fun countAllByCourseId(id: Int): Int
 }

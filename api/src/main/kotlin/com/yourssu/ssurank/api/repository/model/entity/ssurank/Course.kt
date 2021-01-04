@@ -53,14 +53,24 @@ import javax.persistence.*
 @NamedNativeQueries(
         NamedNativeQuery(
                 name = "Course.searchCourseByTitle",
-                query = "select * from (select name, c.id as courseId, department, code, title, year, semester, c.ranking from courses c inner join course_professor " +
-                        "cp on c.id = cp.course_id inner join professors p on p.id = cp.professor_id where title COLLATE UTF8_GENERAL_CI like CONCAT('%',:title,'%') " +
-                        "group by name, year, semester order by year desc, semester desc, c.rating desc, title asc, name asc) as result group by name, code",
+                query = "select * from " +
+                        "(select name, c.id as courseId, original_name as department, code, title, year, semester, c.ranking " +
+                        "from courses c " +
+                        "inner join course_professor cp on c.id = cp.course_id " +
+                        "inner join professors p on p.id = cp.professor_id " +
+                        "inner join departments d on p.department_id = d.id " +
+                        "where title COLLATE UTF8_GENERAL_CI like CONCAT('%',:title,'%') " +
+                        "group by name, year, semester " +
+                        "order by year desc, semester desc, c.rating desc, title asc, name asc) as result group by name, code",
                 resultSetMapping = "SearchCourseDto"
         ), NamedNativeQuery(
         name = "Course.findDetailedCourseById",
-        query = "select p.id as professorId, code, name, department, title, c.ranking from courses c inner join course_professor cp on c.id = cp.course_id " +
-                "inner join professors p on p.id = cp.professor_id where c.id = :id",
+        query = "select p.id as professorId, code, name, original_name as department, title, c.ranking " +
+                "from courses c " +
+                "inner join course_professor cp on c.id = cp.course_id " +
+                "inner join professors p on p.id = cp.professor_id " +
+                "inner join departments d on p.department_id = d.id " +
+                "where c.id = :id",
         resultSetMapping = "DetailedCourseTransporter"
 ), NamedNativeQuery(
         name = "Course.getCourseHistoryByCodeAndName",
