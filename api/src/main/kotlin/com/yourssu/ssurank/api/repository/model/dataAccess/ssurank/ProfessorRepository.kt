@@ -20,7 +20,7 @@ interface ProfessorRepository : ExtendedRepository<Int, Professor> {
 
     @Query("select p.id as id, name, department, position, ranking from professors p " +
             "inner join course_professor cp on p.id = cp.professor_id " +
-            "where ranking <> 'U' " +
+            "where ranking <> 'U0' " +
             "group by name, college, department, position " +
             "having count(cp.course_id) >= 15 " +
             "order by rating desc limit 10", nativeQuery = true)
@@ -41,10 +41,10 @@ interface ProfessorRepository : ExtendedRepository<Int, Professor> {
     fun findDetailedProfessorById(id: Int): DetailedProfessorTransporter
 
     @Query("select ceiling( " +
-            "((select count(*) from course_professor) " +
+            "((select count(*) from professors) " +
             "- (select count(*) from (select count(course_id) from course_professor " +
-            "group by professor_id having count(course_id) = (select count(*) from course_professor where professor_id = :id)) as a)) " +
-            "/ (select count(*) from course_professor) * 100) as percent", nativeQuery = true)
+            "group by professor_id having count(course_id) < (select count(*) from course_professor where professor_id = :id)) as a)) " +
+            "/ (select count(*) from professors) * 100) as percent", nativeQuery = true)
     fun getTopPercent(id: Int): Int
 
     @Query("select distinct year, semester from courses c " +

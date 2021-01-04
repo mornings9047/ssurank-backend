@@ -18,7 +18,7 @@ interface CourseRepository : ExtendedRepository<Int, Course> {
     @Query("select (select count(*) from professors where rating >= :rating having count(*) >= 5) * 100 / count(*) AS PERCENT from professors having count(*) >= 5", nativeQuery = true)
     fun getProfessorPercentRank(rating: Float): Float
 
-    @Query("select (select count(*) from courses where rating >= :rating and ranking <> 'U') * 100 / count(*) AS PERCENT from courses where ranking <> 'U'", nativeQuery = true)
+    @Query("select (select count(*) from courses where rating >= :rating and ranking <> 'U0') * 100 / count(*) AS PERCENT from courses where ranking <> 'U0'", nativeQuery = true)
     fun getCoursePercentRank(rating: Float): Float
 
     @Query(nativeQuery = true)
