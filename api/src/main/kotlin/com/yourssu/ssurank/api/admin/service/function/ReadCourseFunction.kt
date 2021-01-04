@@ -2,6 +2,7 @@ package com.yourssu.ssurank.api.admin.service.function
 
 import com.yourssu.ssurank.api.repository.model.dataAccess.ssurank.CourseProfessorRepository
 import com.yourssu.ssurank.api.repository.model.dataAccess.ssurank.CourseRepository
+import com.yourssu.ssurank.api.repository.model.dataAccess.ssurank.DepartmentDataAccessor
 import com.yourssu.ssurank.api.repository.model.dataAccess.ssurank.ProfessorRepository
 import com.yourssu.ssurank.api.repository.model.dataTransfer.ssurank.CreateCourseDto
 import com.yourssu.ssurank.api.repository.model.entity.ssurank.Course
@@ -12,6 +13,7 @@ import org.apache.poi.hssf.usermodel.HSSFWorkbook
 import java.io.FileInputStream
 
 class ReadCourseFunction(
+        private val departmentDataAccessor: DepartmentDataAccessor,
         private val courseRepository: CourseRepository,
         private val professorRepository: ProfessorRepository,
         private val courseProfessorRepository: CourseProfessorRepository
@@ -45,13 +47,17 @@ class ReadCourseFunction(
             val lectureGrade = row.getCell(5).numericCellValue.toInt()
             val professor = row.getCell(6).stringCellValue.toString()
             val college = row.getCell(7).stringCellValue.toString()
-            val department = row.getCell(8).stringCellValue.toString()
+            val departmentName = row.getCell(8).stringCellValue.toString()
+            val department = departmentDataAccessor.findByOriginalName(departmentName)
+            if (!department.isPresent)
+                continue
+
             val position = row.getCell(9).stringCellValue.toString()
             val rating = row.getCell(10).numericCellValue.toFloat()
 
             val createCourseDto = CreateCourseDto(code = code, year = year, semester = parseSemester(semester),
                     title = title, lectureGrade = lectureGrade, professor = professor, college = college,
-                    department = department, position = position, rating = rating, classification = null, major = null, target = null)
+                    department = department.get(), position = position, rating = rating, classification = null, major = null, target = null)
             courses.add(createCourseDto)
         }
 

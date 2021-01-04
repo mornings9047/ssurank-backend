@@ -1,5 +1,6 @@
 package com.yourssu.ssurank.api.admin.service.function
 
+import com.yourssu.ssurank.api.repository.model.dataAccess.ssurank.DepartmentDataAccessor
 import com.yourssu.ssurank.api.repository.model.dataAccess.ssurank.ProfessorRepository
 import com.yourssu.ssurank.api.repository.model.entity.ssurank.Professor
 import org.apache.poi.hssf.usermodel.HSSFRow
@@ -7,7 +8,8 @@ import org.apache.poi.hssf.usermodel.HSSFWorkbook
 import java.io.FileInputStream
 
 class ReadProfessorFunction(
-        private val professorRepository: ProfessorRepository
+        private val departmentDataAccessor: DepartmentDataAccessor,
+        private val professorRepository: ProfessorRepository,
 ) {
     private val getFileListFunction = GetFileListFunction()
 
@@ -33,9 +35,14 @@ class ReadProfessorFunction(
             val row: HSSFRow = sheet.getRow(rowIndex)
             val name = row.getCell(6).stringCellValue.toString()
             val college = row.getCell(7).stringCellValue.toString()
-            val department = row.getCell(8).stringCellValue.toString()
+            var departmentName = row.getCell(8).stringCellValue.toString()
+            if (departmentName == "베어드학부대학")
+                departmentName = "베어드교양대학"
+            val department = departmentDataAccessor.findByOriginalName(departmentName)
+            if (!department.isPresent)
+                continue
             val position = row.getCell(9).stringCellValue.toString()
-            val professor = Professor(name = name, college = college, department = department, position = position)
+            val professor = Professor(name = name, college = college, department = department.get(), position = position)
             professors.add(professor)
         }
         for (professor in professors)

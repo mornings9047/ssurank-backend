@@ -4,9 +4,12 @@ import com.yourssu.ssurank.api.repository.model.entity.ssurank.Department
 import com.yourssu.ssurank.api.repository.model.projection.ssurank.DepartmentTransporter
 import org.springframework.data.jpa.repository.Query
 import org.springframework.stereotype.Repository
+import java.util.*
 
 @Repository
 interface DepartmentRepository : ExtendedRepository<Int, Department> {
+    fun findByOriginalName(originalName: String): Optional<Department>
+
     @Query("select original_name as originalName, shortened_name as shortenedName from departments where college = :college", nativeQuery = true)
     fun findDepartmentsByCollege(college: String): List<DepartmentTransporter>
 }

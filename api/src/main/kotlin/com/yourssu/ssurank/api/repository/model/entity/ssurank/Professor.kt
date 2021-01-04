@@ -16,8 +16,9 @@ data class Professor(
         @Column(length = 20, nullable = true)
         val college: String,
 
-        @Column(length = 15, nullable = true)
-        val department: String,
+        @OneToOne(cascade = [CascadeType.REFRESH, CascadeType.REMOVE, CascadeType.DETACH])
+        @JoinColumn(name = "department_id")
+        val department: Department,
 
         @Column(length = 20, nullable = true)
         val position: String,

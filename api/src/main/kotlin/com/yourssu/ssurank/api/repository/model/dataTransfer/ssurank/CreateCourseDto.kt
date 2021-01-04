@@ -1,5 +1,6 @@
 package com.yourssu.ssurank.api.repository.model.dataTransfer.ssurank
 
+import com.yourssu.ssurank.api.repository.model.entity.ssurank.Department
 import com.yourssu.ssurank.api.repository.model.entity.ssurank.Semester
 
 data class CreateCourseDto(
@@ -10,7 +11,7 @@ data class CreateCourseDto(
         val lectureGrade: Int,
         val professor: String,
         val college: String,
-        val department: String,
+        val department: Department,
         val position: String,
         val rating: Float,
 
