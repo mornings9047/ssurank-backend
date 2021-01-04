@@ -16,28 +16,35 @@ interface ProfessorRepository : ExtendedRepository<Int, Professor> {
     @Query("select count(*) from courses c inner join course_professor cp on c.id = cp.professor_id where cp.professor_id = :id", nativeQuery = true)
     fun countCourse(id: Int): Int
 
-    @Query("select p.id as id, name, department, position, ranking, count(cp.course_id) as courseCnt from professors p inner join course_professor cp on p.id = cp.professor_id  where department = :department group by p.id order by ranking asc, rating desc", nativeQuery = true)
+    @Query("select p.id as id, name, original_name as department, position, ranking, count(cp.course_id) as courseCnt " +
+            "from professors p " +
+            "inner join course_professor cp on p.id = cp.professor_id " +
+            "inner join departments d on p.department_id = d.id " +
+            "where original_name = :department group by p.id order by ranking asc, rating desc", nativeQuery = true)
     fun getProfessorsByDepartment(department: String, page: Pageable): List<SearchProfessorTransporter>
 
-    @Query("select p.id as id, name, department, position, ranking from professors p " +
+    @Query("select p.id as id, name, original_name as department, position, ranking from professors p " +
             "inner join course_professor cp on p.id = cp.professor_id " +
+            "inner join departments d on p.department_id = d.id " +
             "where ranking <> 'U0' " +
-            "group by name, college, department, position " +
+            "group by name, p.college, department, position " +
             "having count(cp.course_id) >= 15 " +
             "order by rating desc limit 10", nativeQuery = true)
     fun getTop10Honors(): List<ProfessorTransporter>
 
-    @Query("select distinct p.id as id, name, department, position, ranking, count(cp.course_id) as courseCnt " +
+    @Query("select distinct p.id as id, name, original_name as department, position, ranking, count(cp.course_id) as courseCnt " +
             "from professors p " +
             "inner join course_professor cp on p.id = cp.professor_id " +
+            "inner join departments d on p.department_id = d.id " +
             "where name COLLATE UTF8_GENERAL_CI like %:name% " +
             "group by id " +
             "order by rating desc", nativeQuery = true)
     fun findAllByName(name: String, page: Pageable): List<SearchProfessorTransporter>
 
-    @Query("select p.id as id, name, department, position, ranking, count(cp.course_id) as courseCnt " +
+    @Query("select p.id as id, name, original_name as department, position, ranking, count(cp.course_id) as courseCnt " +
             "from professors p " +
             "inner join course_professor cp on p.id = cp.professor_id " +
+            "inner join departments d on p.department_id = d.id " +
             "where p.id = :id", nativeQuery = true)
     fun findDetailedProfessorById(id: Int): DetailedProfessorTransporter
 
@@ -56,10 +63,11 @@ interface ProfessorRepository : ExtendedRepository<Int, Professor> {
 
 
     @Query("select courseId, ranking, name, department, title, year, semester from (" +
-            "select c.rating as rating, c.id as courseId, c.ranking, name, department, title, year, semester " +
+            "select c.rating as rating, c.id as courseId, c.ranking, name, original_name as department, title, year, semester " +
             "from courses c " +
             "inner join course_professor cp on c.id = cp.course_id " +
             "inner join professors p on p.id = cp.professor_id " +
+            "inner join departments d on p.department_id = d.id " +
             "where p.id = :id " +
             "group by title, code, year, semester " +
             "order by year desc, semester desc) as courses " +
@@ -70,16 +78,19 @@ interface ProfessorRepository : ExtendedRepository<Int, Professor> {
     fun findProfessorById(id: Int): Professor
 
     @Query("select count(*) from professors where name COLLATE UTF8_GENERAL_CI like %:name%", nativeQuery = true)
-    fun countProfessorAllByName(name: String): Int
+    fun countAllProfessorsByName(name: String): Int
 
-    @Query("select count(*) from professors where department = :department", nativeQuery = true)
+    @Query("select count(*) from professors p " +
+            "inner join departments d on p.department_id = d.id " +
+            "where original_name = :department", nativeQuery = true)
     fun countDepartment(department: String): Int
 
     @Query("select count(*) from(select courseId, ranking, name, department, title, year, semester from (" +
-            "select c.rating as rating, c.id as courseId, c.ranking, name, department, title, year, semester " +
+            "select c.rating as rating, c.id as courseId, c.ranking, name, original_name as department, title, year, semester " +
             "from courses c " +
             "inner join course_professor cp on c.id = cp.course_id " +
             "inner join professors p on p.id = cp.professor_id " +
+            "inner join departments d on p.department_id = d.id " +
             "where p.id = :id " +
             "group by title, code, year, semester " +
             "order by year desc, semester desc) as courses " +

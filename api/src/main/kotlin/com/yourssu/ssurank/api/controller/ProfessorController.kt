@@ -93,7 +93,7 @@ class ProfessorController(
     }
 
     @ApiOperation("교수가 개설한 강의 수 가져오기")
-    @GetMapping("/courses/{professorId}")
+    @GetMapping("/{professorId}/courses")
     @ResponseStatus(HttpStatus.OK)
     fun countProfessorCourses(
             @PathVariable professorId: Int
