@@ -27,11 +27,8 @@ class CourseDataAccessor(
     }
 
     fun searchCourseByTitle(title: String, page: Page): Flux<SearchCourseDto> {
-        return monoFromCallableWithScheduler {
-            repository.searchCourseByTitle(title, page)
-        }.flatMapMany {
-            Flux.fromIterable(it)
-        }
+        return monoFromCallableWithScheduler { repository.searchCourseByTitle(title, page)
+        }.flatMapMany { Flux.fromIterable(it) }
     }
 
     fun findDetailedCourseById(id: Int): DetailedCourseTransporter {
