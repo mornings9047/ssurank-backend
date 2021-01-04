@@ -10,6 +10,10 @@ class DepartmentDataAccessor(
         @Autowired override var repository: DepartmentRepository
 ) : DataAccessorAdapterRepository<Int, Department, DepartmentRepository>() {
 
+    fun save(department: Department) {
+        repository.save(department)
+    }
+
     fun getDepartmentsByCollege(college: String): List<DepartmentTransporter> {
         return repository.findDepartmentsByCollege(college)
     }

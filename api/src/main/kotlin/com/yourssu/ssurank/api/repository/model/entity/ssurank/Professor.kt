@@ -16,7 +16,7 @@ data class Professor(
         @Column(length = 20, nullable = true)
         val college: String,
 
-        @Column(length = 20, nullable = true)
+        @Column(length = 15, nullable = true)
         val department: String,
 
         @Column(length = 20, nullable = true)

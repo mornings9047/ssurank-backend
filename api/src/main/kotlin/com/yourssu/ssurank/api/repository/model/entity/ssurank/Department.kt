@@ -13,9 +13,9 @@ data class Department(
         @Column(length = 7)
         val college: String,
 
-        @Column(length = 20)
-        val original_name: String,
+        @Column(length = 15)
+        val originalName: String,
 
         @Column(length = 6)
-        val shortened_name: String
+        val shortenedName: String
 ) : SuperEntity<Int>
