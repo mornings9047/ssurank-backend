@@ -17,10 +17,8 @@ class ReadDepartmentFunction(
         var college = ""
 
         for (l in lines) {
-            if (l == "\n") {
-                println("개행")
+            if (l == "\n")
                 continue
-            }
             if (!l.startsWith("'", true)) {
                 college = l
                 continue
