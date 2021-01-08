@@ -11,11 +11,11 @@ import org.springframework.web.bind.annotation.RestController
 @RestController
 @RequestMapping("/$baseUrl/admin/department")
 class AdminDepartmentController(
-        val adminDepartmentService: AdminDepartmentService
+    val adminDepartmentService: AdminDepartmentService
 ) {
-    @GetMapping("/read")
+    @GetMapping("/update")
     @ResponseStatus(HttpStatus.OK)
-    fun readProfessor() {
-        return adminDepartmentService.readDepartment()
+    fun updateDepartment() {
+        return adminDepartmentService.updateDepartment()
     }
 }

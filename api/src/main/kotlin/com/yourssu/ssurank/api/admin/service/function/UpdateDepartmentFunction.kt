@@ -4,8 +4,8 @@ import com.yourssu.ssurank.api.repository.model.dataAccess.ssurank.DepartmentDat
 import com.yourssu.ssurank.api.repository.model.entity.ssurank.Department
 import java.io.File
 
-class ReadDepartmentFunction(
-        private val departmentDataAccessor: DepartmentDataAccessor
+class UpdateDepartmentFunction(
+    private val departmentDataAccessor: DepartmentDataAccessor
 ) {
     private val path = "Department/departments.txt"
 
@@ -26,10 +26,14 @@ class ReadDepartmentFunction(
             val names = l.replace("'", "").split(',')
             val originalName = names[0]
             val shortenedName = names[1]
-            val department = Department(originalName = originalName, shortenedName = shortenedName, college = college)
+            val department = Department(college = college, originalName = originalName, shortenedName = shortenedName)
             departments.add(department)
         }
+        updateShortenedNames(departments)
+    }
+
+    private fun updateShortenedNames(departments: List<Department>) {
         for (department in departments)
-            departmentDataAccessor.save(department)
+            departmentDataAccessor.updateShortenedNames(department)
     }
 }

@@ -12,8 +12,8 @@ import reactor.core.publisher.Mono
 @RestController
 @RequestMapping("$baseUrl/professor")
 class ProfessorController(
-        val professorService: ProfessorService,
-        val reportService: ReportService
+    val professorService: ProfessorService,
+    val reportService: ReportService
 ) {
     @ApiOperation("학과 목록 가져오기")
     @GetMapping("/department/list")
@@ -26,19 +26,19 @@ class ProfessorController(
     @GetMapping("/department/{department}/{page}")
     @ResponseStatus(HttpStatus.OK)
     fun getProfessorsByDept(
-            @PathVariable department: String,
-            @PathVariable page: Int
+        @PathVariable department: String,
+        @PathVariable page: Int
     ): Mono<SearchProfessorResponse> {
         return professorService.getProfessorsByDept(department, page)
-                .collectList()
-                .map { SearchProfessorResponse(it) }
+            .collectList()
+            .map { SearchProfessorResponse(it) }
     }
 
     @ApiOperation("학과별 교수 인원 수 가져오기")
     @GetMapping("/department/{department}")
     @ResponseStatus(HttpStatus.OK)
     fun countDepartment(
-            @PathVariable department: String
+        @PathVariable department: String
     ): Int {
         return professorService.countDepartment(department)
     }
@@ -48,27 +48,27 @@ class ProfessorController(
     @ResponseStatus(HttpStatus.OK)
     fun getHonorProfessors(): Mono<HonorProfessorResponse> {
         return professorService.getHonorProfessors()
-                .collectList()
-                .map { HonorProfessorResponse(it) }
+            .collectList()
+            .map { HonorProfessorResponse(it) }
     }
 
     @ApiOperation("교수 검색하기")
     @GetMapping("/search/{name}/{page}")
     @ResponseStatus(HttpStatus.OK)
     fun searchProfessor(
-            @PathVariable name: String,
-            @PathVariable page: Int
+        @PathVariable name: String,
+        @PathVariable page: Int
     ): Mono<SearchProfessorResponse> {
         return professorService.searchProfessor(name, page)
-                .collectList()
-                .map { SearchProfessorResponse(it) }
+            .collectList()
+            .map { SearchProfessorResponse(it) }
     }
 
     @ApiOperation("교수 검색 결과 수 가져오기")
     @GetMapping("/search/{name}")
     @ResponseStatus(HttpStatus.OK)
     fun countProfessor(
-            @PathVariable name: String
+        @PathVariable name: String
     ): Int {
         return professorService.countProfessor(name)
     }
@@ -77,7 +77,7 @@ class ProfessorController(
     @GetMapping("/detail/{professorId}")
     @ResponseStatus(HttpStatus.OK)
     fun getDetailedProfessor(
-            @PathVariable professorId: Int
+        @PathVariable professorId: Int
     ): DetailedProfessorResponse {
         return DetailedProfessorResponse(professorService.getDetailedProfessor(professorId))
     }
@@ -86,8 +86,8 @@ class ProfessorController(
     @GetMapping("/detail/{professorId}/{page}")
     @ResponseStatus(HttpStatus.OK)
     fun getProfessorCourses(
-            @PathVariable professorId: Int,
-            @PathVariable page: Int
+        @PathVariable professorId: Int,
+        @PathVariable page: Int
     ): DetailedProfessorCoursesResponse {
         return DetailedProfessorCoursesResponse(professorService.getProfessorCourses(professorId, page))
     }
@@ -96,7 +96,7 @@ class ProfessorController(
     @GetMapping("/{professorId}/courses")
     @ResponseStatus(HttpStatus.OK)
     fun countProfessorCourses(
-            @PathVariable professorId: Int
+        @PathVariable professorId: Int
     ): Int {
         return professorService.countProfessorCourses(professorId)
     }

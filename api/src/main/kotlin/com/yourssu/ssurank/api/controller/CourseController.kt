@@ -13,26 +13,26 @@ import reactor.core.publisher.Mono
 @RestController
 @RequestMapping("$baseUrl/course")
 class CourseController(
-        val courseService: CourseService,
-        val reportService: ReportService
+    val courseService: CourseService,
+    val reportService: ReportService
 ) {
     @ApiOperation("강의 검색하기")
     @GetMapping("/search/{title}/{page}")
     @ResponseStatus(HttpStatus.OK)
     fun searchCourseByTitle(
-            @PathVariable title: String,
-            @PathVariable page: Int
+        @PathVariable title: String,
+        @PathVariable page: Int
     ): Mono<SearchCourseResponse> {
         return courseService.searchCourseByTitle(title, page)
-                .collectList()
-                .map { SearchCourseResponse(it) }
+            .collectList()
+            .map { SearchCourseResponse(it) }
     }
 
     @ApiOperation("강의 검색결과 수 가져오기")
     @GetMapping("/search/{title}")
     @ResponseStatus(HttpStatus.OK)
     fun countCourseByTitle(
-            @PathVariable title: String
+        @PathVariable title: String
     ): Int {
         return courseService.countCourseByTitle(title)
     }

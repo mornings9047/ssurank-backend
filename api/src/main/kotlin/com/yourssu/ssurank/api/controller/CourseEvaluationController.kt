@@ -15,8 +15,8 @@ import org.springframework.web.bind.annotation.*
 @RestController
 @RequestMapping("$baseUrl/course/evaluation")
 class CourseEvaluationController(
-        val courseService: CourseService,
-        val reportService: ReportService
+    val courseService: CourseService,
+    val reportService: ReportService
 ) {
     @ApiOperation("강의 한줄평 메인 가져오기")
     @GetMapping("/main")
@@ -29,7 +29,7 @@ class CourseEvaluationController(
     @PostMapping(consumes = ["application/json"])
     @ResponseStatus(HttpStatus.CREATED)
     fun evaluationCourse(
-            @RequestBody courseEvaluationRequest: CourseEvaluationRequest
+        @RequestBody courseEvaluationRequest: CourseEvaluationRequest
     ) {
         return courseService.evaluateCourse(courseEvaluationRequest)
     }
@@ -38,8 +38,8 @@ class CourseEvaluationController(
     @GetMapping("/recent/{courseId}/{page}")
     @ResponseStatus(HttpStatus.OK)
     fun getRecentCourseEvaluations(
-            @PathVariable courseId: Int,
-            @PathVariable page: Int
+        @PathVariable courseId: Int,
+        @PathVariable page: Int
     ): CourseEvaluationResponse {
         return CourseEvaluationResponse(courseService.getRecentCourseEvaluations(courseId, page))
     }
@@ -48,8 +48,8 @@ class CourseEvaluationController(
     @GetMapping("/recommendation/{courseId}/{page}")
     @ResponseStatus(HttpStatus.OK)
     fun getRecommendedCourseEvaluations(
-            @PathVariable courseId: Int,
-            @PathVariable page: Int
+        @PathVariable courseId: Int,
+        @PathVariable page: Int
     ): CourseEvaluationResponse {
         return CourseEvaluationResponse(courseService.getRecommendedCourseEvaluations(courseId, page))
     }
@@ -58,7 +58,7 @@ class CourseEvaluationController(
     @GetMapping("/{courseId}")
     @ResponseStatus(HttpStatus.OK)
     fun countCourseEvaluations(
-            @PathVariable courseId: Int
+        @PathVariable courseId: Int
     ): Int {
         return courseService.countCourseEvaluations(courseId)
     }
@@ -67,7 +67,7 @@ class CourseEvaluationController(
     @PostMapping(value = ["/report"], consumes = ["application/json"], produces = ["application/json"])
     @ResponseStatus(HttpStatus.CREATED)
     fun reportEvaluation(
-            @RequestBody reportRequest: ReportRequest
+        @RequestBody reportRequest: ReportRequest
     ) {
         reportService.reportEvaluation(reportRequest, ReportType.COURSE)
     }

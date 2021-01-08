@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController
 @RestController
 @RequestMapping("$baseUrl/admin/professor")
 class AdminProfessorController(
-        val adminProfessorService: AdminProfessorService
+    val adminProfessorService: AdminProfessorService
 ) {
     @GetMapping("/read")
     @ResponseStatus(HttpStatus.OK)

@@ -8,15 +8,19 @@ import java.util.*
 
 @Repository
 class DepartmentDataAccessor(
-        @Autowired override var repository: DepartmentRepository
+    @Autowired override var repository: DepartmentRepository
 ) : DataAccessorAdapterRepository<Int, Department, DepartmentRepository>() {
 
-    fun save(department: Department) {
-        repository.save(department)
+    fun save(department: Department): Department {
+        return repository.save(department)
     }
 
-    fun findByOriginalName(originalName: String): Optional<Department> {
-        return repository.findByOriginalName(originalName)
+    fun findByCollegeAndOriginalName(college: String, originalName: String): Optional<Department> {
+        return repository.findByCollegeAndOriginalName(college, originalName)
+    }
+
+    fun updateShortenedNames(department: Department) {
+        return repository.updateShortenedNames(department.college, department.originalName, department.shortenedName!!)
     }
 
     fun getDepartmentsByCollege(college: String): List<DepartmentTransporter> {

@@ -13,10 +13,10 @@ import org.apache.poi.hssf.usermodel.HSSFWorkbook
 import java.io.FileInputStream
 
 class ReadCourseFunction(
-        private val departmentDataAccessor: DepartmentDataAccessor,
-        private val courseRepository: CourseRepository,
-        private val professorRepository: ProfessorRepository,
-        private val courseProfessorRepository: CourseProfessorRepository
+    private val departmentDataAccessor: DepartmentDataAccessor,
+    private val courseRepository: CourseRepository,
+    private val professorRepository: ProfessorRepository,
+    private val courseProfessorRepository: CourseProfessorRepository
 ) {
     private val getFileListFunction = GetFileListFunction()
 
@@ -48,19 +48,24 @@ class ReadCourseFunction(
             val professor = row.getCell(6).stringCellValue.toString()
             val college = row.getCell(7).stringCellValue.toString()
             val departmentName = row.getCell(8).stringCellValue.toString()
-            val department = departmentDataAccessor.findByOriginalName(departmentName)
-            if (!department.isPresent)
-                continue
-
+            val department = departmentDataAccessor.findByCollegeAndOriginalName(college, departmentName)
             val position = row.getCell(9).stringCellValue.toString()
             val rating = row.getCell(10).numericCellValue.toFloat()
 
-            val createCourseDto = CreateCourseDto(code = code, year = year, semester = parseSemester(semester),
-                    title = title, lectureGrade = lectureGrade, professor = professor, college = college,
-                    department = department.get(), position = position, rating = rating, classification = null, major = null, target = null)
+            val createCourseDto = CreateCourseDto(
+                code = code,
+                year = year,
+                semester = parseSemester(semester),
+                title = title,
+                lectureGrade = lectureGrade,
+                professor = professor,
+                college = college,
+                department = department.get(),
+                position = position,
+                rating = rating
+            )
             courses.add(createCourseDto)
         }
-
         for (course in courses)
             saveCourse(course)
     }
@@ -71,12 +76,33 @@ class ReadCourseFunction(
     }
 
     private fun saveCourse(createCourseDto: CreateCourseDto) {
-        val course = courseRepository.save(Course(title = createCourseDto.title, year = createCourseDto.year, classification = createCourseDto.classification,
-                code = createCourseDto.code, semester = createCourseDto.semester, target = createCourseDto.target,
-                rating = createCourseDto.rating, major = createCourseDto.major, lectureGrade = createCourseDto.lectureGrade))
+        val course = courseRepository.save(
+            Course(
+                title = createCourseDto.title,
+                year = createCourseDto.year,
+                classification = createCourseDto.classification,
+                code = createCourseDto.code,
+                semester = createCourseDto.semester,
+                target = createCourseDto.target,
+                rating = createCourseDto.rating,
+                major = createCourseDto.major,
+                lectureGrade = createCourseDto.lectureGrade
+            )
+        )
 
-        if (professorRepository.existsByNameAndCollegeAndDepartmentAndPosition(createCourseDto.professor, createCourseDto.college, createCourseDto.department, createCourseDto.position)) {
-            val professor = professorRepository.findByNameAndCollegeAndDepartmentAndPosition(createCourseDto.professor, createCourseDto.college, createCourseDto.department, createCourseDto.position)
+        if (professorRepository.existsByNameAndCollegeAndDepartmentAndPosition(
+                createCourseDto.professor,
+                createCourseDto.college,
+                createCourseDto.department,
+                createCourseDto.position
+            )
+        ) {
+            val professor = professorRepository.findByNameAndCollegeAndDepartmentAndPosition(
+                createCourseDto.professor,
+                createCourseDto.college,
+                createCourseDto.department,
+                createCourseDto.position
+            )
             courseProfessorRepository.save(CourseProfessor(course = course, professor = professor))
         }
     }
