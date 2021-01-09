@@ -34,6 +34,6 @@ class SearchProfessorFunction(
 
 
     fun countProfessor(name: String): Int{
-        return professorDataAccessor.countProfessorAllByName(name)
+        return professorDataAccessor.countAllProfessorsByName(name)
     }
 }

@@ -15,59 +15,59 @@ import org.springframework.web.bind.annotation.*
 @RestController
 @RequestMapping("$baseUrl/course/evaluation")
 class CourseEvaluationController(
-        val courseService: CourseService,
-        val reportService: ReportService
+    val courseService: CourseService,
+    val reportService: ReportService
 ) {
     @ApiOperation("강의 한줄평 메인 가져오기")
-    @GetMapping("/evaluation/main")
+    @GetMapping("/main")
     @ResponseStatus(HttpStatus.OK)
     fun getRecentCourseEvaluations(): MainCourseEvaluationResponse {
         return MainCourseEvaluationResponse(courseService.getMainCourseEvaluations())
     }
 
     @ApiOperation("강의 한줄평 작성하기")
-    @PostMapping(value = ["/evaluation"], consumes = ["application/json"])
+    @PostMapping(consumes = ["application/json"])
     @ResponseStatus(HttpStatus.CREATED)
     fun evaluationCourse(
-            @RequestBody courseEvaluationRequest: CourseEvaluationRequest
+        @RequestBody courseEvaluationRequest: CourseEvaluationRequest
     ) {
         return courseService.evaluateCourse(courseEvaluationRequest)
     }
 
     @ApiOperation("강의 한줄평 최신순 가져오기")
-    @GetMapping("/evaluation/recent/{courseId}/{page}")
+    @GetMapping("/recent/{courseId}/{page}")
     @ResponseStatus(HttpStatus.OK)
     fun getRecentCourseEvaluations(
-            @PathVariable courseId: Int,
-            @PathVariable page: Int
+        @PathVariable courseId: Int,
+        @PathVariable page: Int
     ): CourseEvaluationResponse {
         return CourseEvaluationResponse(courseService.getRecentCourseEvaluations(courseId, page))
     }
 
     @ApiOperation("강의 한줄평 추천순 가져오기")
-    @GetMapping("/evaluation/recommendation/{courseId}/{page}")
+    @GetMapping("/recommendation/{courseId}/{page}")
     @ResponseStatus(HttpStatus.OK)
     fun getRecommendedCourseEvaluations(
-            @PathVariable courseId: Int,
-            @PathVariable page: Int
+        @PathVariable courseId: Int,
+        @PathVariable page: Int
     ): CourseEvaluationResponse {
         return CourseEvaluationResponse(courseService.getRecommendedCourseEvaluations(courseId, page))
     }
 
     @ApiOperation("강의 한줄평 수 가져오기")
-    @GetMapping("/evaluation/{courseId}")
+    @GetMapping("/{courseId}")
     @ResponseStatus(HttpStatus.OK)
     fun countCourseEvaluations(
-            @PathVariable courseId: Int
+        @PathVariable courseId: Int
     ): Int {
         return courseService.countCourseEvaluations(courseId)
     }
 
     @ApiOperation("강의 한줄평 신고하기")
-    @PostMapping(value = ["/evaluation/report"], consumes = ["application/json"], produces = ["application/json"])
+    @PostMapping(value = ["/report"], consumes = ["application/json"], produces = ["application/json"])
     @ResponseStatus(HttpStatus.CREATED)
     fun reportEvaluation(
-            @RequestBody reportRequest: ReportRequest
+        @RequestBody reportRequest: ReportRequest
     ) {
         reportService.reportEvaluation(reportRequest, ReportType.COURSE)
     }
